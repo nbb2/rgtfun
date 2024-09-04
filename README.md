@@ -1,1 +1,1 @@
-This code calculates transport quanteties of species in a rarified gas. ABCDEFGHU
+This code calculates transport quantities of species in a rarified gas. ABCDEFGHU

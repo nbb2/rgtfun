@@ -21,7 +21,7 @@ classdef TestAnalyticalPotentials < matlab.unittest.TestCase
         function testCoulomb(testCase)
             addpath('../test')
             actSolution = my_coulomb(15,2,0.1:0.1:10); 
-            expSolution = load('testdata.mat').testdata;
+            expSolution = load('Coulombpotentialtestdata.mat').testdata;
             testCase.verifyEqual(actSolution,expSolution,AbsTol=sqrt(eps));
         end
     end

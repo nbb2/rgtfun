@@ -43,6 +43,22 @@ classdef TestAnalyticalPotentials < matlab.unittest.TestCase
             expSolution = readmatrix("coulomb_testdata.csv");
             testCase.verifyEqual(actSolution,expSolution,AbsTol=sqrt(eps));
         end
+        function testrun_fitpotential(testCase)
+            addpath('../test')
+            model = run_fitpotential('../test');
+            run('fitinputfile.m');
+            if strcmp(Potential_Type,"Coulomb")
+                actSolution = model.z2;
+                expSolution = load('fittingtestdata.mat').y.z2;
+            end
+            testCase.verifyEqual(actSolution,expSolution,AbsTol=sqrt(eps));
+        end
+        function testmy_coulombchar(testCase)
+            addpath('../test')
+            actSolution = my_coulombchar(2); 
+            expSolution = load('testcoulombchar.mat').testchar;
+            testCase.verifyEqual(actSolution,expSolution,AbsTol=sqrt(eps));
+        end
     end
 
 end

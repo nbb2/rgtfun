@@ -6,7 +6,7 @@ function y = my_coulomb(z1,z2,r)
 %
 %   -- Z1 must be the integer atomic number of species 1.
 %   -- Z2 must be the integer atomic number of species 2.
-%   -- R must be the numerica array containing r values in units of 
+%   -- R must be the numerical array containing r values in units of 
 %   Angstrom.
 %
 %   See also RUN_CALCPOTENTIAL

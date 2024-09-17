@@ -59,6 +59,18 @@ classdef TestAnalyticalPotentials < matlab.unittest.TestCase
             expSolution = load('testcoulombchar.mat').testchar;
             testCase.verifyEqual(actSolution,expSolution,AbsTol=sqrt(eps));
         end
+        function testmy_lj(testCase)
+            addpath('../test')
+            actSolution = my_lj(2,4,3:0.01:20); 
+            expSolution = load('ljtestdata.mat').dat;
+            testCase.verifyEqual(actSolution,expSolution,AbsTol=sqrt(eps));
+        end
+        function testmy_doca(testCase)
+            addpath('../test')
+            actSolution = my_distclose(2,15,my_impact(15,2,0:0.1:pi,100),100); 
+            expSolution = load('docatestdata.mat').doca;
+            testCase.verifyEqual(actSolution,expSolution,AbsTol=sqrt(eps));
+        end
     end
 
 end

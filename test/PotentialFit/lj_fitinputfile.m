@@ -1,0 +1,10 @@
+Potential_Type = "Lennard-Jones";
+minR = 1.000000;
+maxR = 10.000000;
+tol = 1.000000e-12;
+min_eps = 0.000000;
+max_eps = 10.000000;
+min_sigma = 0.000000;
+max_sigma = 10.000000;
+eps_start = 2.000000;
+sigma_start = 2.000000;

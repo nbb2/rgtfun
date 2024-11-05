@@ -1,0 +1,10 @@
+inttype = "Numerical";
+minE = 1.000000;
+maxE = 100.000000;
+Estep = 50.000000;
+fitfile = "/Users/JackG/Desktop/project/rgtfun/test/ScatteringQuantities/zbl_fitoutputfile.m";
+bmin = 0.100000; 
+bmax = 10.000000; 
+bstep = 1.000000; 
+minroot = 1.000000; 
+maxroot = 100.000000; 

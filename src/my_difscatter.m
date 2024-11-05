@@ -12,7 +12,6 @@ function y = my_difscatter(z1,z2,theta,E)
 %   -- E must be the incident energy as numeric char in units of eV.
 %
 %   See also MY_IMPACT
-
     eps_naught = 0.005526349406; %e^2 * eV^-1 * Angstrom^-1
     Ke = 4*pi*eps_naught;
     y = (z1*z2./(4*Ke*E.*sin(theta/2).^2)).^2;

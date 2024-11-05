@@ -1,19 +1,30 @@
-function y = run_fitpotential(directory)
+function y = run_fitpotential(filepath,datapath)
 %RUN_FITPOTENTIAL    Reads fitting input file and generates cfit object.
-%   RUN_FITPOTENTIAL(DIRECTORY) reads the user-specified fitting parameters
-%   from the fitting input file, creates a fittype based off of those
-%   parameters using the MY_COULOMBCHAR function or LJ string, and then creates a fit
-%   object using the FIT function.
+%   RUN_FITPOTENTIAL(FILEPATH,DATAFILEPATH) reads the user-specified 
+%   fitting parameters from the fitting input file, creates a fittype based
+%   off of those parameters using the appropriate character function or 
+%   LJ string, and then creates a fit object using the FIT function.
 %
-%   -- DIRECTORY must specify the path to where potential data file is.
+%   -- FILEPATH must specify the path to where input file is.
+%   -- DATAFILEPATH must specify where to save the potential data.
 %
-%   See also MY_COULOMBCHAR FIT FITTYPE
-    run([directory '/fitinputfile.m']);
+%   See also MY_COULOMBCHAR MY_ZBLCHAR
+    run(filepath);
     if strcmp(Potential_Type,"Coulomb")
         ft = fittype(my_coulombchar(Z1),dependent="y",independent="x",...
         coefficients="z2");
-        datalocation = [directory '/data.csv'];
-        t = readmatrix(datalocation);
+        t = readmatrix(datapath);
+        excludex = ((t(:,1) < minR) | (t(:,1) > maxR));
+        xvals = t(:,1);
+        yvals = t(:,2);
+        xvals(excludex) = [];
+        yvals(excludex) = [];
+        y = fit(xvals,yvals,ft,'Exclude',(xvals<minR)&(xvals>maxR),...
+            'TolFun',tol,'Lower',minZ2,'Upper',maxZ2);
+    elseif strcmp(Potential_Type,"ZBL")
+        ft = fittype(my_zblchar(Z1),dependent="y",independent="x",...
+        coefficients="z2");
+        t = readmatrix(datapath);
         excludex = ((t(:,1) < minR) | (t(:,1) > maxR));
         xvals = t(:,1);
         yvals = t(:,2);
@@ -23,8 +34,7 @@ function y = run_fitpotential(directory)
             'TolFun',tol,'Lower',minZ2,'Upper',maxZ2);
     
     elseif strcmp(Potential_Type,"Lennard-Jones")
-        datalocation = [directory '/data.csv'];
-        t = readmatrix(datalocation);
+        t = readmatrix(datapath);
         excludex = ((t(:,1) < minR) | (t(:,1) > maxR));
         xvals = t(:,1);
         yvals = t(:,2);
@@ -36,5 +46,19 @@ function y = run_fitpotential(directory)
                     'TolFun',tol,'Lower',[min_eps min_sigma],...
                     'Upper',[max_eps max_sigma],'StartPoint',[eps_start sigma_start]);
         %Exclude',(xvals<minR)|(xvals>maxR),
+    elseif strcmp(Potential_Type,"Power Law")
+        t = readmatrix(datapath);
+        excludex = ((t(:,1) < minR) | (t(:,1) > maxR));
+        xvals = t(:,1);
+        yvals = t(:,2);
+        xvals(excludex) = [];
+        yvals(excludex) = [];
+        ft = fittype("a*x.^(-k)",dependent="y",...
+                    independent="x",coefficients=["a" "k"]);
+        y = fit(xvals,yvals,ft,...
+                    'TolFun',tol,'Lower',[min_a min_k],...
+                    'Upper',[max_a max_k],'StartPoint',[a_start k_start]);
     end
 end
+
+

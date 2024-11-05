@@ -1,5 +1,5 @@
 function y = my_lj(eps_well,sigma,r)
-%MY_COULOMB    Outputs Coulomb  potential data.
+%MY_LJ    Outputs Lennard Jones potential data.
 %   Y=MY_LJ(EPS_WELL,SIGMA,R) generates a float array containing
 %   a potential energy value for each r value using the 12-6 Lennard Jones
 %   potential. Units of potential energy are eV.

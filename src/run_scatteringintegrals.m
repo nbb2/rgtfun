@@ -12,7 +12,13 @@ function y = run_scatteringintegrals(filepath,datafilepath)
 %   See also MY_IMPACT MY_DIFSCATTER MY_DISTCLOSE MY_DOCAROOT MY_GMQUADSCATTERINGANGLE
     y = datafilepath;
     run(filepath);
-    Evals = minE:Estep:maxE;
+    if logspace_on == 1
+        minElog = log10(minE);
+        maxElog = log10(maxE);
+        Evals = logspace(minElog,maxElog,100);
+    elseif logspace_on == 0
+        Evals = minE:Estep:maxE;
+    end
     cd(sprintf('%s',y))
     mkdir docadata
     if strcmp(inttype,'Exact Coulomb')

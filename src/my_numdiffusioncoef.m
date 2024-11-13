@@ -21,7 +21,6 @@ Evals = csdata(:,1); %eV
 csvals = csdata(:,2); %A^2
 PD = 157081.8*(3/8)*((2*pi/mred)^(0.5))*((kb*Tvals).^(3/2)).*(1./(reddifquad(Tvals,Evals,csvals)));
 y = 10000*PD/press; %outputs Diffusion coef in cm^2/s
-plot(Tvals,PD)
 end
 
 function y = reddifquad(Tvals,Evals,csvals)

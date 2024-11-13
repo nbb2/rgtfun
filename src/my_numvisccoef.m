@@ -17,7 +17,6 @@ csdata = readmatrix(csdatafile);
 Evals = csdata(:,1); %eV
 csvals = csdata(:,2); %A^2
 y = (1E6)*0.001629989*(5/4)*((2*pi*mred)^(0.5))*((kb*Tvals).^(1/2)).*(1./(redviscquad(Tvals,Evals,csvals))); %microPa s
-plot(Tvals,y)
 end
 
 function y = redviscquad(Tvals,Evals,csvals)

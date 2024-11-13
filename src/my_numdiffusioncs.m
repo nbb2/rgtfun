@@ -1,4 +1,4 @@
-function y = my_numdiffusioncs(scatterdatafile)
+mfunction y = my_numdiffusioncs(scatterdatafile)
 %MY_DIFFUSIONCS    Outputs float array with diffusion cross-section values.
 %   Y=MY_DIFFUSIONCS(BETA) generates a float array containing diffusion 
 %   cros-section value for each value of the scattering parameter beta

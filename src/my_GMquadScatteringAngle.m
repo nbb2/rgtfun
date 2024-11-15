@@ -1,7 +1,7 @@
 function th = my_GMquadScatteringAngle(V,Ec,b,rm,n)
 %MY_GMQUADSCATTERINGANGLE    Outputs float scattering angle.
 %   Y=MY_GMQUADSCATTERINGANGLE(V,EC,B,RM,N) generates a float value for the
-%   scattering angle. 
+%   scattering angle using GM Quadrature. 
 %
 %   -- V must be the potential function handle.
 %   -- EC must be the the energy in eV.

@@ -1,12 +1,17 @@
 function y = my_VHScoef(fitT,T_sample,excludeT,vq,tol)
-%MY_NUMVISCCOEF   Outputs float array with viscosity coefficient values.
-%   Y=MY_NUMVISCCOEF(TVALS,M1,M2,CSDATAFILE) generates a float array containing viscosity 
-%   coefficient value for each value of Tvals. 
+%MY_VHSCOEF  Outputs sample visc value and VHS param.
+%   Y=MY_VHSCOEF(FITT,T_SAMPLE,EXCLUDET,VQ,TOL) outputs a reference
+%   viscosity value and VHS parameter omega by fitting the VHS model to 
+%   user-specified visocity coefficient data. 
 %
-
-%   -- DATAFILE must be location of viscosity cross section data file.
+%   -- FITT must be the interpolated temperature values in K.
+%   -- T_SAMPLE must be the reference temperature value.
+%   -- EXCLUDET must be a logical array of what temp values to use.
+%   -- VQ must be the interpolated viscosity coefficient values with the
+%   same dimension as FITT.
+%   -- TOL must be the fitting tolerance.
 %
-%   See also MY_NUMDIFFUSIONCOEF RUN_TRANSPORTCS
+%   See also RUN_DSMCCOEF
 fitcoef = vq;
 fitcoef(excludeT) = [];
 mu_sample = mean(fitcoef);

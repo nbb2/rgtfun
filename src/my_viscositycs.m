@@ -7,7 +7,7 @@ function y = my_viscositycs(beta)
 %   -- BETA must be a float array containing values for the dimensionless
 %   scattering parameter.
 %
-%   See also MY_VISCCOEF RUN_TRANSPORTCS
+%   See also MY_DIFFUSIONCS RUN_TRANSPORTCS
 fLEeta = 1;
 fHEeta = 1 - 2.229.*(beta) + 35.967.*(beta.^(2)) - 86.490.*(beta.^(3)) ...
     + 60.335.*(beta.^(4));

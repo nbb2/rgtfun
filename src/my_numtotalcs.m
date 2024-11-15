@@ -1,15 +1,14 @@
 function y = my_numtotalcs(th_max,scatterdatafile)
-%MY_DIFFUSIONCS    Outputs float array with diffusion cross-section values.
-%   Y=MY_DIFFUSIONCS(BETA) generates a float array containing diffusion 
-%   cros-section value for each value of the scattering parameter beta
-%   using a Lennard_Jones potential. 
+%MY_NUMTOTALCS    Outputs total cross-section value.
+%   Y=MY_NUMTOTALCS(SCATTERDATAFILE) generates a total cross-section value
+%   for a specific energy by finding the intersection of TH_MAX and the 
+%   scattering angle vs impact parameter curve. 
 %
-
-
-%   -- BETA must be a float array containing values for the dimensionless
-%   scattering parameter.
+%   -- TH_MAX must be the angle in radians used to determine total CS.
+%   -- SCATTERDATAFILE must be the filepath to the scattering angle vs 
+%   impact para data.
 %
-%   See also MY_DIFFUSIONCOEF RUN_TRANSPORTCS
+%   See also RUN_TRANSPORTCS 
 scatterdata = readmatrix(scatterdatafile);
 th = scatterdata(:,2);
 bvals = scatterdata(:,1);
@@ -18,7 +17,6 @@ th_p = th - th_max;
 vqth = interp1(bvals,th_p,bfine);
 bmax = max(data_zeros(bfine,vqth));
 disp(bmax)
-
 y = pi*bmax^2;
 end
 
@@ -39,4 +37,5 @@ function x0 = data_zeros(x, y)
         b = [1, x(idx1); 1, x(idx2)] \ [y(idx1); y(idx2)];
         x0(k) = -b(1) / b(2); % Solving for x at y = 0
     end
+    x0 = x0(~isnan(x0));
 end

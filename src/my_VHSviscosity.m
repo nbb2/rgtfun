@@ -1,11 +1,14 @@
 function y = my_VHSviscosity(T,omega,T_ref,mu_ref)
-%MY_NUMVISCCOEF   Outputs float array with viscosity coefficient values.
-%   Y=MY_NUMVISCCOEF(TVALS,M1,M2,CSDATAFILE) generates a float array containing viscosity 
-%   coefficient value for each value of Tvals. 
+%MY_VHSVISCOSITY  Outputs float array with viscosity coefficient values.
+%   Y=MY_VHSVISCOSITY(T,OMEGA,T_REF,MU_REF) generates a float array 
+%   containing viscosity coefficient value for each value of T using the 
+%   VHS model. 
 %
-
-%   -- DATAFILE must be location of viscosity cross section data file.
+%   -- T must be a float array of temperature values in K.
+%   -- OMEGA must be the VHS parameter.
+%   -- T_REF must be the reference temp in K.
+%   -- MU_REF must be the reference viscosity value.
 %
-%   See also MY_NUMDIFFUSIONCOEF RUN_TRANSPORTCS
+%   See also RUN_DSMCCOEF
 y = mu_ref*(T/T_ref).^omega;
 end

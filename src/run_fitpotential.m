@@ -2,11 +2,11 @@ function y = run_fitpotential(filepath,datapath)
 %RUN_FITPOTENTIAL    Reads fitting input file and generates cfit object.
 %   RUN_FITPOTENTIAL(FILEPATH,DATAFILEPATH) reads the user-specified 
 %   fitting parameters from the fitting input file, creates a fittype based
-%   off of those parameters using the appropriate character function or 
-%   LJ string, and then creates a fit object using the FIT function.
+%   off those parameters using the appropriate character function or 
+%   string, and then creates a fit object using the FIT function.
 %
 %   -- FILEPATH must specify the path to where input file is.
-%   -- DATAFILEPATH must specify where to save the potential data.
+%   -- DATAFILEPATH must specify where the potential data is saved.
 %
 %   See also MY_COULOMBCHAR MY_ZBLCHAR
     run(filepath);
@@ -32,7 +32,6 @@ function y = run_fitpotential(filepath,datapath)
         yvals(excludex) = [];
         y = fit(xvals,yvals,ft,'Exclude',(xvals<minR)&(xvals>maxR),...
             'TolFun',tol,'Lower',minZ2,'Upper',maxZ2);
-    
     elseif strcmp(Potential_Type,"Lennard-Jones")
         t = readmatrix(datapath);
         excludex = ((t(:,1) < minR) | (t(:,1) > maxR));

@@ -2,7 +2,7 @@ function r0 = my_DOCAroot(Ec,b,V,rmin,rmax)
 %MY_DOCAROOT    Outputs float value for the root of the DOCA equation.
 %   Y=MY_DOCAROOT(EC,B,V,RMIN,RMAX) generates a float value for the root
 %   of the distance of closest approach (DOCA) equation using two 
-%   iteratiosn of the CHEBFUN package. 
+%   iterations of the CHEBFUN root finding package. 
 %
 %   -- EC must be the the energy in eV.
 %   -- B must be the impact paramter in Angstrom.

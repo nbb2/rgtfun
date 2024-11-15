@@ -23,7 +23,7 @@ visccoef = visccoefdata(:,2);
 Tvals = visccoefdata(:,1);
 %Tvals2 = difcoefdata(:,1);
 Tfine = min(Tvals):0.01:max(Tvals);
-%Tfine2 = min(Tvals2):0.01:max(Tvals2);
+$Tfine2 = min(Tvals2):0.01:max(Tvals2);
 vqvisc = interp1(Tvals,visccoef,Tfine);
 %vqdif = interp1(Tvals2,difcoef,Tfine);
 delta = (max(Tvals) - min(Tvals))/N;
@@ -56,7 +56,7 @@ for i = 1:N
     viscfitdatapath = [datapath sprintf('/dsmcfitdata/viscfitdata_n=%i.csv',i)];
     %diffitdatapath = [datapath sprintf('/dsmcfitdata/diffitdata_n=%i.csv',i)];
     B1 = [fitT' viscfit'];
-    %B2 = [fitT' diffit'];
+    B2 = [fitT' diffit'];
     writematrix(B1,viscfitdatapath);
     %writematrix(B2,diffitdatapath);
     A = [A; minT maxT mu_sample T_sample omega dcollision];

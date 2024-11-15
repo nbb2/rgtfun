@@ -5,9 +5,10 @@ function y = run_transportcoefs(filepath,datafilepath)
 %   self-diffusion or viscosity coefficient.
 %
 %   -- FILEPATH must specify the path to where input file is.
-%   -- DATAFILEPATH must specify where to save the potential data.
+%   -- DATAFILEPATH must specify where to save the coef data.
 %
-%   See also MY_DIFFUSIONCOEF MY_VISCCOEF
+%   See also MY_DIFFUSIONCOEF MY_VISCCOEF MY_NUMDIFFUSIONCOEF
+%   MY_NUMVISCCOEF
     disp(filepath)
     run(filepath);
     Tvals = minT:Tstep:maxT;

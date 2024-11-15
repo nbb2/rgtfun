@@ -2,8 +2,9 @@ function y = my_diffusioncoef(well_depth,T,p,m1,m2,d,inttype,data)
 %MY_DIFFUSIONCOEF    Outputs self-diffusion coefficient.
 %   Y=MY_DIFFUSIONCOEF(WELL_DEPTH,T,P,M1,M2,D,INTTYPE,DATA) generates a float 
 %   array containing a self-diffusion coefficient value for each temperature
-%   using a Lennard_Jones potential. Units of self-diffusion coefficient are 
-%   cm^2 /s.
+%   using a Lennard_Jones potential (from "Khrapak, S.A. Accurate transport
+%   cross sections for the Lennard-Jones potential. Eur. Phys. J. D 68, 276
+%   (2014)"). Units of self-diffusion coefficient are cm^2 /s.
 %
 %   -- WELL-DEPTH must be the LJ well-depth in Kelvin.
 %   -- T must be a float array containing temperature values in units of K.
@@ -16,7 +17,7 @@ function y = my_diffusioncoef(well_depth,T,p,m1,m2,d,inttype,data)
 %   -- DATA must be a character string filepath that gives the location of 
 %   the cross section data.
 %
-%   See also MY_DIFFUSIONCS
+%   See also RUN_TRANSPORTCS
 Tjoul = T.*(1.380649e-23);
 ppascal = p*100000;
 mu = (m1*m2)/(m1+m2);

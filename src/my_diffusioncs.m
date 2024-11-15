@@ -7,7 +7,7 @@ function y = my_diffusioncs(beta)
 %   -- BETA must be a float array containing values for the dimensionless
 %   scattering parameter.
 %
-%   See also MY_DIFFUSIONCOEF RUN_TRANSPORTCS
+%   See also MY_VISCOSITYCS RUN_TRANSPORTCS
 fLEd = 1 - 0.019.*(beta.^(-1)) + 0.038.*(beta.^(-2)) - 0.049.*(beta.^(-3)) ...
     + 0.015.*(beta.^(-4));
 fHEd = 1 - 0.692.*(beta) + 9.594.*(beta.^(2)) - 8.284.*(beta.^(3)) ...

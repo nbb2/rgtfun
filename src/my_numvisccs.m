@@ -1,15 +1,13 @@
 function y = my_numvisccs(scatterdatafile)
-%MY_DIFFUSIONCS    Outputs float array with diffusion cross-section values.
-%   Y=MY_DIFFUSIONCS(BETA) generates a float array containing diffusion 
-%   cros-section value for each value of the scattering parameter beta
-%   using a Lennard_Jones potential. 
+%MY_NUMVISCCS    Outputs viscosity cross-section value.
+%   Y=MY_NUMVISCCS(SCATTERDATAFILE) generates a viscosity cross-section 
+%   value by integrating scattering angle vs impact param data for a 
+%   specific energy using TRAPZ. 
 %
-
-
-%   -- BETA must be a float array containing values for the dimensionless
-%   scattering parameter.
+%   -- SCATTERDATAFILE must be the filepath to the scattering angle vs 
+%   impact para data.
 %
-%   See also MY_DIFFUSIONCOEF RUN_TRANSPORTCS
+%   See also RUN_TRANSPORTCS 
 scatterdata = readmatrix(scatterdatafile);
 th = scatterdata(:,2);
 bvals = scatterdata(:,1);

@@ -1,16 +1,17 @@
 function run_transportCS(filepath,datafilepath)
 %RUN_TRANSPORTCS    Reads cross-section input file and calculates transport cross-sections.
 %   RUN_TRANSPORTCS(FILEPATH,DATAFILEPATH) reads the user-specified
-%   cross-section parameters from the cross-section input file and 
-%   calculates the diffusion cross-section and viscosity cross-section.
+%   cross-section (CS) parameters from the cross-section input file and 
+%   calculates the diffusion CS and viscosity CS (for the exact LJ case in 
+%   "Khrapak, S.A. Accurate transport cross sections for the Lennard-Jones 
+%   potential. Eur. Phys. J. D 68, 276 (2014)") or the diffusion CS, 
+%   viscosity CS, stopping CS, and total CS (for the general case).
 %
-
-
-
 %   -- FILEPATH must specify the path to where input file is.
-%   -- DATAFILEPATH must specify where to save the potential data.
+%   -- DATAFILEPATH must specify where to save the CS data.
 %
-%   See also MY_DIFFUSIONCS MY_VISCOSITYCS
+%   See also MY_DIFFUSIONCS MY_VISCOSITYCS MY_NUMDIFFUSIONCS MY_NUMVISCCS
+%   MY_NUMTOTALCS MY_NUMSTOPPINGCS
     run(filepath);
     if logspace_on == 1
         minElog = log10(minE);

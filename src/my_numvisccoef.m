@@ -1,7 +1,8 @@
 function y = my_numvisccoef(Tvals,m1,m2,csdatafile)
 %MY_NUMVISCCOEF   Outputs float array with viscosity coefficient values.
-%   Y=MY_NUMVISCCOEF(TVALS,M1,M2,CSDATAFILE) generates a float array containing viscosity 
-%   coefficient value for each value of Tvals. 
+%   Y=MY_NUMVISCCOEF(TVALS,M1,M2,CSDATAFILE) generates a float array 
+%   containing viscosity coefficient value for each value of Tvals by using
+%   trapezoidal integration. 
 %
 %   -- TVALS must be an array of temperatures in Kelvin.
 %   -- M1 must be mass in amu.
@@ -12,7 +13,6 @@ function y = my_numvisccoef(Tvals,m1,m2,csdatafile)
 %kb = 1.380649E-23; %J/K
 kb = 8.617333262E-5; %eV/K
 mred = m1*m2/(m1+m2);
-%mred = mredamu/(6.022E26); %kg
 csdata = readmatrix(csdatafile);
 Evals = csdata(:,1); %eV
 csvals = csdata(:,2); %A^2

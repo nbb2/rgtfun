@@ -1,20 +1,15 @@
 function y = my_numstoppingcs(E,m1,m2,diffusioncs)
-%MY_DIFFUSIONCS    Outputs float array with diffusion cross-section values.
-%   Y=MY_DIFFUSIONCS(BETA) generates a float array containing diffusion 
-%   cros-section value for each value of the scattering parameter beta
-%   using a Lennard_Jones potential. 
+%MY_NUMSTOPPINGCS    Outputs stopping cross-section value.
+%   Y=MY_NUMSTOPPINGCS(SCATTERDATAFILE) generates a stopping cross-section 
+%   value using diffusion cs value, masses, and energy. 
 %
-
-%   -- BETA must be a float array containing values for the dimensionless
-%   scattering parameter.
+%   -- E must be energy in eV.
+%   -- M1 must be the mass of species 1 in amu.
+%   -- M2 must be the mass of species 2 in amu.
+%   -- DIFFUSIONCS must be diffusion CS value for energy E.
 %
-%   See also MY_DIFFUSIONCOEF RUN_TRANSPORTCS
-
+%   See also RUN_TRANSPORTCS 
 y = 2*(m1*m2/(m1+m2)^2)*E*diffusioncs;
-
-
-
-
 end
 
 

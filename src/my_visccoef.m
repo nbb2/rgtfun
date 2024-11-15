@@ -2,8 +2,9 @@ function y = my_visccoef(well_depth,T,m1,m2,d,inttype,data)
 %MY_VISCCOEF    Outputs viscosity coefficient.
 %   Y=MY_VISCCOEF(WELL_DEPTH,T,M1,M2,D,INTTYPE,DATA) generates a float 
 %   array containing a viscosity coefficient value for each temperature
-%   using a Lennard_Jones potential. Units of viscosity coefficient are 
-%   micro-Pascal*s.
+%   using a Lennard_Jones potential (from "Khrapak, S.A. Accurate transport
+%   cross sections for the Lennard-Jones potential. Eur. Phys. J. D 68, 276
+%   (2014)"). Units of viscosity coefficient are micro-Pascal*s.
 %
 %   -- WELL-DEPTH must be the LJ well-depth in Kelvin.
 %   -- T must be a float array containing temperature values in units of K.
@@ -15,7 +16,7 @@ function y = my_visccoef(well_depth,T,m1,m2,d,inttype,data)
 %   -- DATA must be a character string filepath that gives the location of 
 %   the cross section data.
 %
-%   See also MY_VISCOSITYCS
+%   See also RUN_TRANSPORTCS
 Tjoul = T.*(1.380649e-23);
 mu = (m1*m2)/(m1+m2);
 mukg = mu*(1.66054e-27);

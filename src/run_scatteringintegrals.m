@@ -1,13 +1,13 @@
 function y = run_scatteringintegrals(filepath,datafilepath)
 %RUN_SCATTERINGINTEGRALS    Reads scattering input file and calculates scattering integrals.
 %   RUN_SCATTERINGINTEGRALS(FILEPATH,DATAFILEPATH) reads the user-specified
-%   Coulomb/scattering parameters from the scattering input file and 
-%   calculates the differential scattering cross section, impact parameter,
-%   and distance of closest approach (for the Coulomb case), or calculates
-%   the scattering angle and distance of closest approach (general) case.
+%   scattering parameters from the scattering input file and calculates the
+%   differential scattering cross section, impact parameter, and distance 
+%   of closest approach (for the Coulomb case), or calculates the 
+%   scattering angle and distance of closest approach (general) case.
 %
 %   -- FILEPATH must specify the path to where input file is.
-%   -- DATAFILEPATH must specify where to save the potential data.
+%   -- DATAFILEPATH must specify where to save the scattering integral data.
 %
 %   See also MY_IMPACT MY_DIFSCATTER MY_DISTCLOSE MY_DOCAROOT MY_GMQUADSCATTERINGANGLE
     y = datafilepath;

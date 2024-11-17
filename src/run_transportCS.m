@@ -16,7 +16,7 @@ function run_transportCS(filepath,datafilepath)
     if logspace_on == 1
         minElog = log10(minE);
         maxElog = log10(maxE);
-        Evals = logspace(minElog,maxElog,100);
+        Evals = logspace(minElog,maxElog,logstep);
     elseif logspace_on == 0
         Evals = minE:Estep:maxE;
     end

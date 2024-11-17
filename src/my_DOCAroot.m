@@ -11,7 +11,7 @@ function r0 = my_DOCAroot(Ec,b,V,rmin,rmax)
 %   -- RMAX is the upper bound of possble root values in Angstrom.
 %
 %   See also MY_GMQUADSCATTERINGANGLE RUN_SCATTERINGINTEGRALS
-    addpath('../src/chebfun');
+    %addpath('../src/chebfun');
     chebDOCA = chebfun(@(r) my_doca(r,Ec,b,V),[rmin,rmax]);
     ri = max(roots(chebDOCA));
     chebDOCA2 = chebfun(@(r) my_doca(r,Ec,b,V),[0.9*ri,1.1*ri]);

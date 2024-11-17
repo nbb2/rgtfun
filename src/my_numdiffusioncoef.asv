@@ -22,9 +22,8 @@ amu_to_kg = 1/(6.022e26);
 ev_to_j = 1.60218e-19;
 a_to_m = 1e-10;
 atomic_to_si = (amu_to_kg^(-1/2))*(ev_to_j^(3/2))*(a_to_m^(-2));
-disp(atomic_to_si)
 
-y = atomic_to_si*(3/8)*((2*pi/mred)^(0.5))*((kb*Tvals).^(3/2)).*(1./(reddifquad(Tvals,Evals,csvals))); %PD in units of Pa * m^2 / s
+y = 157377.3718*(3/8)*((2*pi/mred)^(0.5))*((kb*Tvals).^(3/2)).*(1./(reddifquad(Tvals,Evals,csvals))); %PD in units of 
 %y = 10000*PD/press; %outputs diffusion coef in cm^2/s
 end
 

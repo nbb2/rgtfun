@@ -12,7 +12,7 @@ y = datapath;
 run(inputfile);
 mr = m1*m2/(m1+m2);
 mrkg = mr/(6.022E26);
-Ppa = P*100000;
+%Ppa = P*100000;
 kb = 1.380649E-23; %J/K
 cd(sprintf('%s',y))
 mkdir dsmcfitdata

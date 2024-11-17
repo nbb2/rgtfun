@@ -35,7 +35,7 @@ function y = run_scatteringintegrals(filepath,datafilepath,progressBar)
             % Update progress bar if provided
             if nargin > 2 && isvalid(progressBar)
                 progressBar.Value = i / numSteps;
-                progressBar.Message = sprintf('Running %f eV...', E);
+                progressBar.Message = sprintf('Processing %f eV...', E);
             end
             difscatter = my_difscatter(Z1, Z2, theta, E);
             impactparam = my_impact(Z2, Z2, theta, E);
@@ -70,24 +70,33 @@ function y = run_scatteringintegrals(filepath,datafilepath,progressBar)
         numSteps = numel(Evals);
         for i = 1:numSteps
             E = Evals(i);
+
             % Update progress bar if provided
             if nargin > 2 && isvalid(progressBar)
                 progressBar.Value = i / numSteps;
-                progressBar.Message = sprintf('Running %f eV...', E);
+                progressBar.Message = sprintf('Processing %.2f eV...', E);
             end
+
             docas = zeros(1, length(bvals));
             th = zeros(1, length(bvals));
+
             for j = 1:length(bvals)
                 docas(j) = my_DOCAroot(E, bvals(j), potential, minroot, maxroot);
                 th(j) = my_GMquadScatteringAngle(potential, E, bvals(j), docas(j), 10);
             end
+
             scatterangdatapath = [datafilepath sprintf('/scatterangledata/scatterangledata_%f.csv', E)];
             docadatapath = [datafilepath sprintf('/docadata/docadata_%f.csv', E)];
+
             A = [bvals' th'];
             B = [bvals' docas'];
+
             writematrix(A, scatterangdatapath);
             writematrix(B, docadatapath);
         end
     end
-end
+
+     
+   
+    end
     

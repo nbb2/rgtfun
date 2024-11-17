@@ -29,16 +29,16 @@ function y = run_transportcoefs(filepath,datafilepath)
             disp('Something went wrong.')
         end
     elseif strcmp(inttype,'Numerical')
-            diffusioncoef = my_numdiffusioncoef(Tvals,m1,m2,diffusiondatafile);
+            diffusioncoef = my_numdiffusioncoef(Tvals,m1,m2,datafile);
             diffusioncoefdatapath  = [datafilepath '/diffusioncoefdata.csv'];
             A = [Tvals' diffusioncoef'];
             writematrix(A, diffusioncoefdatapath);
-            visccoef = my_numvisccoef(Tvals,m1,m2,viscositydatafile);
+            y = diffusioncoefdatapath;
+            visccoef = my_numvisccoef(Tvals,m1,m2,datafile);
             visccoefdatapath  = [datafilepath '/viscositycoefdata.csv'];
             B = [Tvals' visccoef'];
-            writematrix(B, visccoefdatapath);
-            coefdatapath = datafilepath;
-            y = coefdatapath;
+            writematrix(A, visccoefdatapath);
+            y = visccoefdatapath;
     end
    
 end

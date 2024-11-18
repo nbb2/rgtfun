@@ -64,7 +64,13 @@ function y = run_scatteringintegrals(filepath,datafilepath,progressBar)
         elseif strcmp(Potential_Type, 'Power Law')
             potential = @(r) my_powerlaw(a_param, k_param, r);
         end
-        bvals = bmin:bstep:bmax;
+        if blogspace_on == 1
+            minblog = log10(bmin);
+            maxblog = log10(bmax);
+            bvals = logspace(minblog,maxblog,blogstep);
+        elseif blogspace_on == 0
+            bvals = bmin:bstep:bmax;
+        end
 
         % Loop through energies
         numSteps = numel(Evals);

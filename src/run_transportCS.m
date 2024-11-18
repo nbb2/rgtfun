@@ -45,13 +45,14 @@ function run_transportCS(filepath,datafilepath)
         B = [Evals' viscositycs'];    
         C = [Evals' stoppingcs'];
         D = [Evals' totalcs'];
+        stoppingcsdatapath = [datafilepath '/stoppingcsdata.csv'];
+        totalcsdatapath = [datafilepath '/totalcsdata.csv'];
+        writematrix(C,stoppingcsdatapath);
+        writematrix(D,totalcsdatapath);
     end
     diffusioncsdatapath  = [datafilepath '/diffusioncsdata.csv'];
     viscositycsdatapath = [datafilepath '/viscositycsdata.csv'];
-    stoppingcsdatapath = [datafilepath '/stoppingcsdata.csv'];
-    totalcsdatapath = [datafilepath '/totalcsdata.csv'];
     writematrix(A, diffusioncsdatapath);
     writematrix(B,viscositycsdatapath);
-    writematrix(C,stoppingcsdatapath);
-    writematrix(D,totalcsdatapath);
+    
 end

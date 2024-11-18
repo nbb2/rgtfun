@@ -13,21 +13,15 @@ function y = run_transportcoefs(filepath,datafilepath)
     run(filepath);
     Tvals = minT:Tstep:maxT;
     if strcmp(inttype,'Exact LJ') | strcmp(inttype,'Trapezoidal LJ')
-        if strcmp(coeftype,'Self-Diffusion')
-            diffusioncoef = my_diffusioncoef(welldepth,Tvals,p,m1,m2,d,inttype,datafile);
+            diffusioncoef = my_diffusioncoef(welldepth,Tvals,m1,m2,d,inttype,diffusiondatafile);
             diffusioncoefdatapath  = [datafilepath '/diffusioncoefdata.csv'];
             A = [Tvals' diffusioncoef'];
             writematrix(A, diffusioncoefdatapath);
-            y = diffusioncoefdatapath;
-        elseif strcmp(coeftype,'Viscosity')
-            visccoef = my_visccoef(welldepth,Tvals,m1,m2,d,inttype,datafile);
+            visccoef = my_visccoef(welldepth,Tvals,m1,m2,d,inttype,viscositydatafile);
             visccoefdatapath  = [datafilepath '/viscositycoefdata.csv'];
-            A = [Tvals' visccoef'];
-            writematrix(A, visccoefdatapath);
-            y = visccoefdatapath;
-        else
-            disp('Something went wrong.')
-        end
+            B = [Tvals' visccoef'];
+            writematrix(B, visccoefdatapath);
+            y = datafilepath;
     elseif strcmp(inttype,'Numerical')
             diffusioncoef = my_numdiffusioncoef(Tvals,m1,m2,diffusiondatafile);
             diffusioncoefdatapath  = [datafilepath '/diffusioncoefdata.csv'];

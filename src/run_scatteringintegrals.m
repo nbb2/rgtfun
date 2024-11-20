@@ -85,7 +85,7 @@ function y = run_scatteringintegrals(filepath,datafilepath,progressBar)
             th = zeros(1, length(bvals));
             for j = 1:length(bvals)
                 docas(j) = my_DOCAroot(E, bvals(j), potential, minroot, maxroot);
-                th(j) = my_GMquadScatteringAngle(potential, E, bvals(j), docas(j), 10);
+                th(j) = my_GMquadScatteringAngle(potential, E, bvals(j), docas(j), 20);
             end
             scatterangdatapath = [datafilepath sprintf('/scatterangledata/scatterangledata_%f.csv', E)];
             docadatapath = [datafilepath sprintf('/docadata/docadata_%f.csv', E)];

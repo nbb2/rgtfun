@@ -14,6 +14,6 @@ function y = my_distclose(z1,z2,b,E)
 %   See also RUN_SCATTERINGINTEGRALS
     eps_naught = 0.005526349406; %e^2 * eV^-1 * Angstrom^-1
     Ke = 1/(4*pi*eps_naught);
-    gamma = (Ke*z1*z2*(2*z1 + 2*z2))/(2*z2*E);
+    gamma = (Ke*z1*z2/E);
     y = 0.5*(gamma+sqrt(gamma^2 + 4*(b.^2)));
 end

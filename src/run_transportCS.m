@@ -24,8 +24,8 @@ function run_transportCS(filepath,datafilepath)
         beta = welldepth./(2*Evals);
         diffusioncs = my_diffusioncs(beta);
         viscositycs = my_viscositycs(beta);
-        A = [beta' diffusioncs'];
-        B = [beta' viscositycs'];
+        A = [Evals' diffusioncs'];
+        B = [Evals' viscositycs'];
 
     elseif strcmp(inttype,'Numerical')
         diffusioncs = zeros(1,length(Evals));

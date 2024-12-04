@@ -53,6 +53,7 @@ function y = run_scatteringintegrals(filepath,datafilepath,progressBar)
 
     elseif strcmp(inttype, 'Numerical')
         mkdir scatterangledata;
+        mkdir magicscatterdata
         run(fitfile);
 
         if strcmp(Potential_Type, 'Coulomb')
@@ -83,16 +84,25 @@ function y = run_scatteringintegrals(filepath,datafilepath,progressBar)
             end
             docas = zeros(1, length(bvals));
             th = zeros(1, length(bvals));
+            thmagic = zeros(1,length(bvals));
             for j = 1:length(bvals)
                 docas(j) = my_DOCAroot(E, bvals(j), potential, minroot, maxroot);
                 th(j) = my_GMquadScatteringAngle(potential, E, bvals(j), docas(j), 20);
+                if strcmp(Potential_Type, 'ZBL')
+                    thmagic(j) = my_magicscatter(E,bvals(j),potential,docas(j),Z1,z2_param);
+                    %disp(thmagic(j))
+                end
             end
+            %disp(thmagic)
             scatterangdatapath = [datafilepath sprintf('/scatterangledata/scatterangledata_%f.csv', E)];
             docadatapath = [datafilepath sprintf('/docadata/docadata_%f.csv', E)];
+            magicscatterpath = [datafilepath sprintf('/magicscatterdata/scatterangledata_%f.csv',E)];
             A = [bvals' th'];
             B = [bvals' docas'];
+            C = [bvals' thmagic'];
             writematrix(A, scatterangdatapath);
             writematrix(B, docadatapath);
+            writematrix(C, magicscatterpath)
         end
     end
 end

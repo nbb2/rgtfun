@@ -44,7 +44,7 @@ function run_transportCS(filepath,datafilepath)
         CMtoLab = (m1+m2)/m2;
         A = [Evals' diffusioncs'];
         B = [Evals' viscositycs'];    
-        C = [(CMtoLab*Evals)' stoppingcs'];
+        C = [Evals' stoppingcs'];
         D = [Evals' totalcs'];
         stoppingcsdatapath = [datafilepath '/stoppingcsdata.csv'];
         totalcsdatapath = [datafilepath '/totalcsdata.csv'];

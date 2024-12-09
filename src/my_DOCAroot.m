@@ -16,6 +16,8 @@ function r0 = my_DOCAroot(Ec,b,V,rmin,rmax)
     ri = max(roots(chebDOCA));
     chebDOCA2 = chebfun(@(r) my_doca(r,Ec,b,V),[0.9*ri,1.1*ri]);
     r0 = max(roots(chebDOCA2));
+    %disp(ri)
+    %fplot(@(r) my_doca(r, Ec, b, V), [0.001, 2000])
 
 end
 
@@ -29,5 +31,4 @@ function doca = my_doca(r,Ec,b,V)
 %
 %   See also MY_DOCAROOT
     doca = r^2 - ((r^2)*V(r)/Ec) - (b^2);
-
 end

@@ -16,9 +16,15 @@ function y = run_calcpotential(filepath,datafilepath)
         A = [r' data'];
         writematrix(A,datapath);
         y = datapath;
-    elseif strcmp(Potential_Type,"Lennard-Jones")
-        data = my_lj(eps_well,sig,r);
-        datapath  = [datafilepath '/ljdata.csv'];
+    elseif strcmp(Potential_Type,"12-6 Lennard-Jones")
+        data = my_126lj(eps_well,sig,r);
+        datapath  = [datafilepath '/126ljdata.csv'];
+        A = [r' data'];
+        writematrix(A,datapath);
+        y = datapath;
+    elseif strcmp(Potential_Type,"12-4 Lennard-Jones")
+        data = my_124lj(eps_well,sig,r);
+        datapath  = [datafilepath '/124ljdata.csv'];
         A = [r' data'];
         writematrix(A,datapath);
         y = datapath;

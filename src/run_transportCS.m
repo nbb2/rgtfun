@@ -35,7 +35,7 @@ function run_transportCS(filepath,datafilepath)
         for j = 1:length(Evals)
             disp(Evals(j))
             file = fullfile(datafolder,sprintf('/scatterangledata_%f.csv',Evals(j)));
-            disp(file)
+            %disp(file)
             diffusioncs(j) = my_numdiffusioncs(file);
             viscositycs(j) = my_numvisccs(file);
             stoppingcs(j) = my_numstoppingcs(Evals(j),m1,m2,diffusioncs(j));

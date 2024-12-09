@@ -27,7 +27,6 @@ function y = run_scatteringintegrals(filepath,datafilepath,progressBar)
         mkdir impactparamdata
         mkdir difscatterdata
 
-
         % Loop through energies
         numSteps = numel(Evals);
         for i = 1:numSteps
@@ -58,8 +57,10 @@ function y = run_scatteringintegrals(filepath,datafilepath,progressBar)
 
         if strcmp(Potential_Type, 'Coulomb')
             potential = @(r) my_coulomb(Z1, z2_param, r);
-        elseif strcmp(Potential_Type, 'Lennard-Jones')
-            potential = @(r) my_lj(eps_param, sigma_param, r);
+        elseif strcmp(Potential_Type, '12-6 Lennard-Jones')
+            potential = @(r) my_126lj(eps_param, sigma_param, r);
+        elseif strcmp(Potential_Type, '12-4 Lennard-Jones')
+            potential = @(r) my_124lj(eps_param, sigma_param, r);
         elseif strcmp(Potential_Type, 'ZBL')
             potential = @(r) my_zbl(Z1, z2_param, r);
         elseif strcmp(Potential_Type, 'Power Law')

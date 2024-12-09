@@ -9,7 +9,7 @@ function y = run_transportcoefs(filepath,datafilepath)
 %
 %   See also MY_DIFFUSIONCOEF MY_VISCCOEF MY_NUMDIFFUSIONCOEF
 %   MY_NUMVISCCOEF
-    disp(filepath)
+    %disp(filepath)
     run(filepath);
     Tvals = minT:Tstep:maxT;
     if strcmp(inttype,'Exact LJ') | strcmp(inttype,'Trapezoidal LJ')
@@ -34,6 +34,5 @@ function y = run_transportcoefs(filepath,datafilepath)
             coefdatapath = datafilepath;
             y = coefdatapath;
     end
-   
 end
 

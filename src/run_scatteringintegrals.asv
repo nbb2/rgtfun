@@ -41,7 +41,7 @@ function y = run_scatteringintegrals(filepath,datafilepath,progressBar)
             doca = my_distclose(Z1, Z2, impactparam, E);
             difscatterdatapath = fullfile(datafilepath,sprintf('/difscatterdata/difscatterdata_%f.csv', E));
             impactparamdatapath = fullfile(datafilepath,sprintf('/impactparamdata/impactparamdata_%f.csv', E));
-            docadatapath = fullfile(datafilepath,sprintf('/docadata/docadata_%f.csv', E));
+            docadatapath = fullfile(datafilepath sprintf('/docadata/docadata_%f.csv', E)];
             A = [theta' difscatter'];
             B = [theta' impactparam'];
             C = [impactparam' doca'];
@@ -97,15 +97,15 @@ function y = run_scatteringintegrals(filepath,datafilepath,progressBar)
                 end
             end
             %disp(thmagic)
-            scatterangdatapath = fullfile(datafilepath,sprintf('/scatterangledata/scatterangledata_%f.csv', E));
-            docadatapath = fullfile(datafilepath,sprintf('/docadata/docadata_%f.csv', E));
-            magicscatterpath = fullfile(datafilepath,sprintf('/magicscatterdata/scatterangledata_%f.csv',E));
+            scatterangdatapath = [datafilepath sprintf('/scatterangledata/scatterangledata_%f.csv', E)];
+            docadatapath = [datafilepath sprintf('/docadata/docadata_%f.csv', E)];
+            magicscatterpath = [datafilepath sprintf('/magicscatterdata/scatterangledata_%f.csv',E)];
             A = [bvals' th'];
             B = [bvals' docas'];
             C = [bvals' thmagic'];
             writematrix(A, scatterangdatapath);
             writematrix(B, docadatapath);
-            %writematrix(C, magicscatterpath)
+            writematrix(C, magicscatterpath)
         end
     end
 end

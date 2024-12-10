@@ -46,13 +46,13 @@ function run_transportCS(filepath,datafilepath)
         B = [Evals' viscositycs'];    
         C = [(CMtoLab*Evals)' stoppingcs'];
         D = [Evals' totalcs'];
-        stoppingcsdatapath = [datafilepath '/stoppingcsdata.csv'];
-        totalcsdatapath = [datafilepath '/totalcsdata.csv'];
+        stoppingcsdatapath = fullfile(datafilepath,'/stoppingcsdata.csv');
+        totalcsdatapath = fullfile(datafilepath,'/totalcsdata.csv');
         writematrix(C,stoppingcsdatapath);
         writematrix(D,totalcsdatapath);
     end
-    diffusioncsdatapath  = [datafilepath '/diffusioncsdata.csv'];
-    viscositycsdatapath = [datafilepath '/viscositycsdata.csv'];
+    diffusioncsdatapath  = fullfile(datafilepath,'/diffusioncsdata.csv');
+    viscositycsdatapath = fullfile(datafilepath,'/viscositycsdata.csv');
     writematrix(A, diffusioncsdatapath);
     writematrix(B,viscositycsdatapath);
     

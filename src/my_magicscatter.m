@@ -1,19 +1,18 @@
 function th = my_magicscatter(Ec,b,V,rm,z1,z2)
-%MY_DOCAROOT    Outputs float value for the root of the DOCA equation.
-%   Y=MY_DOCAROOT(EC,B,V,RMIN,RMAX) generates a float value for the root
-%   of the distance of closest approach (DOCA) equation using two 
-%   iterations of the CHEBFUN root finding package. 
+%MY_MAGICSCATTER   Outputs float value for the scattering angle from the Magic Formula.
+%   Y=MY_MAGICSCATTER(EC,B,V,RMIN,Z1,Z2) generates a float value for the
+%   scattering angle using the Magic Formula.
 %
-
 %   -- EC must be the the energy in eV.
 %   -- B must be the impact parameter in Angstrom.
 %   -- V must be the potential function handle.
-%   -- RMIN is the lower bound of possible root values in Angstrom.
-%   -- RMAX is the upper bound of possble root values in Angstrom.
+%   -- RMIN is the distance of closest approach in Angstrom.
+%   -- Z1 is the atomic number of species 1.
+%   -- Z2 is the atomic number of species 2.
 %
-%   See also MY_GMQUADSCATTERINGANGLE RUN_SCATTERINGINTEGRALS
-    m1 = 9.012; %this needs to be updated!!
-    m2 = 1.008; %this needs to be updated!!
+%   See also RUN_SCATTERINGINTEGRALS
+    m1 = 9.012; %this needs to be updated for each run!!
+    m2 = 1.008; %this needs to be updated for each run!!
     epschar = (32.53*m2*Ec)/(z1*z2*(m1+m2)*(z1^(0.23) + z2^(0.23)));
     a = (0.46850)/(z1^(0.23) + z2^(0.23));
     Vprmin = my_zblderivative(z1,z2,rm);

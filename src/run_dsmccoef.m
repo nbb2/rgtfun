@@ -32,7 +32,7 @@ dsmcdatapath = fullfile(datapath,'/dsmccoeftable.csv');
 A = [];
 C = [Tfine' vqvisc'];
 %D = [Tfine2' vqdif'];
-interpviscdata = [datapath '/dsmcfitdata/dsmcfitviscdata.csv'];
+interpviscdata = fullfile(datapath,'/dsmcfitdata/dsmcfitviscdata.csv');
 %interpdifdata = [datapath '/dsmcfitdata/dsmcfitdifdata.csv'];
 writematrix(C,interpviscdata);
 %writematrix(D,interpdifdata);
@@ -53,7 +53,7 @@ for i = 1:N
         (2*(5-2*omega)*(7-2*omega)*(mu_sample/(1E6)))); %Angstrom
     viscfit = my_VHSviscosity(fitT,omega,T_sample,mu_sample);
     %diffit = my_VSSdiffusion(fitT,omega,alpha,d,mr,P,T_sample);
-    viscfitdatapath = [datapath sprintf('/dsmcfitdata/viscfitdata_n=%i.csv',i)];
+    viscfitdatapath = fullfile(datapath,sprintf('/dsmcfitdata/viscfitdata_n=%i.csv',i));
     %diffitdatapath = [datapath sprintf('/dsmcfitdata/diffitdata_n=%i.csv',i)];
     B1 = [fitT' viscfit'];
     %B2 = [fitT' diffit'];

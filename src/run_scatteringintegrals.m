@@ -20,41 +20,56 @@ function y = run_scatteringintegrals(filepath,datafilepath,progressBar)
         Evals = minE:Estep:maxE;
     end
     cd(sprintf('%s',y))
-    mkdir docadata
+    %mkdir docadata
 
     if strcmp(inttype,'Exact Coulomb')
         theta = theta_min:theta_step:theta_max;
-        mkdir impactparamdata
-        mkdir difscatterdata
-
+        %mkdir impactparamdata
+        %mkdir difscatterdata
         % Loop through energies
-        numSteps = numel(Evals);
-        for i = 1:numSteps
+        numESteps = numel(Evals);
+        numthSteps = numel(theta);
+        A = zeros(numthSteps,numESteps);
+        B = zeros(numthSteps,numESteps);
+        C = zeros(numthSteps,2*numESteps);
+        colNames = strings(1,1+numESteps);
+        A(:,1) = theta';
+        B(:,1) = theta';
+        colNames(1,1) = 'theta';
+        colNamesC = strings(1,2*numESteps);
+        for i = 1:numESteps
             E = Evals(i);
             % Update progress bar if provided
             if nargin > 2 && isvalid(progressBar)
-                progressBar.Value = i / numSteps;
+                progressBar.Value = i / numESteps;
                 progressBar.Message = sprintf('Running %f eV...', E);
             end
             difscatter = my_difscatter(Z1, Z2, theta, E);
             impactparam = my_impact(Z2, Z2, theta, E);
             doca = my_distclose(Z1, Z2, impactparam, E);
-            difscatterdatapath = fullfile(datafilepath,sprintf('/difscatterdata/difscatterdata_%f.csv', E));
-            impactparamdatapath = fullfile(datafilepath,sprintf('/impactparamdata/impactparamdata_%f.csv', E));
-            docadatapath = fullfile(datafilepath,sprintf('/docadata/docadata_%f.csv', E));
-            A = [theta' difscatter'];
-            B = [theta' impactparam'];
-            C = [impactparam' doca'];
-            writematrix(A, difscatterdatapath);
-            writematrix(B, impactparamdatapath);
-            writematrix(C, docadatapath);
+            colNames(i+1) = sprintf('E=%f',E);
+            colNamesC(1,2*i-1) = sprintf('bval E=%f',E);
+            colNamesC(1,2*i) = sprintf('doca E=%f',E);
+            A(:,i+1) = difscatter';
+            B(:,i+1) = impactparam';
+            C(:,2*i-1) = impactparam';
+            C(:,2*i) = doca';
         end
+        %disp(colNamesC)
+        ATable = array2table(A,'VariableNames',colNames);
+        BTable = array2table(B,'VariableNames',colNames);
+        CTable = array2table(C,'VariableNames',colNamesC);
+        difscatterdatapath = fullfile(datafilepath,'/difscatterdata.csv');
+        impactparamdatapath = fullfile(datafilepath,'/impactparamdata.csv');
+        docadatapath = fullfile(datafilepath,'/docadata.csv');
+        writetable(ATable, difscatterdatapath);
+        writetable(BTable, impactparamdatapath);
+        writetable(CTable, docadatapath);
 
     elseif strcmp(inttype, 'Numerical')
-        mkdir scatterangledata;
-        mkdir magicscatterdata
+        %mkdir scatterangledata;
+        %mkdir magicscatterdata
         run(fitfile);
-
         if strcmp(Potential_Type, 'Coulomb')
             potential = @(r) my_coulomb(Z1, z2_param, r);
         elseif strcmp(Potential_Type, '12-6 Lennard-Jones')
@@ -77,12 +92,21 @@ function y = run_scatteringintegrals(filepath,datafilepath,progressBar)
         end
 
         % Loop through energies
-        numSteps = numel(Evals);
-        for i = 1:numSteps
+        numESteps = numel(Evals);
+        numBSteps = numel(bvals);
+        A = zeros(numBSteps,numESteps);
+        B = zeros(numBSteps,numESteps);
+        colNames = strings(1,1+numESteps);
+        %disp(colNames)
+        A(:,1) = bvals';
+        B(:,1) = bvals';
+        colNames(1,1) = 'bvals';
+       
+        for i = 1:numESteps
             E = Evals(i);
             % Update progress bar if provided
             if nargin > 2 && isvalid(progressBar)
-                progressBar.Value = i / numSteps;
+                progressBar.Value = i / numESteps;
                 progressBar.Message = sprintf('Running %f eV...', E);
             end
             docas = zeros(1, length(bvals));
@@ -97,16 +121,21 @@ function y = run_scatteringintegrals(filepath,datafilepath,progressBar)
                 end
             end
             %disp(thmagic)
-            scatterangdatapath = fullfile(datafilepath,sprintf('/scatterangledata/scatterangledata_%f.csv', E));
-            docadatapath = fullfile(datafilepath,sprintf('/docadata/docadata_%f.csv', E));
-            magicscatterpath = fullfile(datafilepath,sprintf('/magicscatterdata/scatterangledata_%f.csv',E));
-            A = [bvals' th'];
-            B = [bvals' docas'];
-            C = [bvals' thmagic'];
-            writematrix(A, scatterangdatapath);
-            writematrix(B, docadatapath);
+            colNames(i+1) = sprintf('E=%f',E);
+            A(:,i+1) = th';
+            B(:,i+1) = docas';
+            %C = [bvals' thmagic'];
             %writematrix(C, magicscatterpath)
         end
+        %disp(colNames)
+        ATable = array2table(A,'VariableNames',colNames);
+        BTable = array2table(B,'VariableNames',colNames);
+        scatterangdatapath = fullfile(datafilepath,'/scatterangledata.csv');
+        docadatapath = fullfile(datafilepath,'/docadata.csv');
+        %magicscatterpath = fullfile(datafilepath,sprintf('/magicscatterdata/scatterangledata_%f.csv',E));
+        writetable(ATable, scatterangdatapath);
+        writetable(BTable, docadatapath);
+        %writematrix(C, magicscatterpath)
     end
 end
     

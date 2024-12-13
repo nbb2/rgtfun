@@ -1,4 +1,4 @@
-function y = my_numdiffusioncs(scatterdatafile)
+function y = my_numdiffusioncs(bvals,th)
 %MY_NUMDIFFUSIONCS    Outputs diffusion cross-section value.
 %   Y=MY_NUMDIFFUSIONCS(SCATTERDATAFILE) generates diffusion cross-section
 %   value by integrating scattering angle vs impact param data for a 
@@ -8,9 +8,6 @@ function y = my_numdiffusioncs(scatterdatafile)
 %   impact para data.
 %
 %   See also RUN_TRANSPORTCS 
-scatterdata = readmatrix(scatterdatafile);
-th = scatterdata(:,2);
-bvals = scatterdata(:,1);
 difcsintegrand = 2*pi*(1-cos(th)).*bvals;
 y = trapz(bvals,difcsintegrand);
 end

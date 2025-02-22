@@ -68,7 +68,7 @@ function y = run_scatteringintegrals(filepath,datafilepath,progressBar)
 
     elseif strcmp(inttype, 'Numerical')
         %mkdir scatterangledata;
-        %mkdir magicscatterdata
+        mkdir magicscatterdata
         run(fitfile);
         if strcmp(Potential_Type, 'Coulomb')
             potential = @(r) my_coulomb(Z1, z2_param, r);
@@ -124,7 +124,8 @@ function y = run_scatteringintegrals(filepath,datafilepath,progressBar)
             colNames(i+1) = sprintf('E=%f',E);
             A(:,i+1) = th';
             B(:,i+1) = docas';
-            %C = [bvals' thmagic'];
+            C = [bvals' thmagic'];
+            %magicscatterpath = fullfile(datafilepath,sprintf('/magicscatterdata/scatterangledata_%f.csv',E));
             %writematrix(C, magicscatterpath)
         end
         %disp(colNames)
@@ -132,7 +133,6 @@ function y = run_scatteringintegrals(filepath,datafilepath,progressBar)
         BTable = array2table(B,'VariableNames',colNames);
         scatterangdatapath = fullfile(datafilepath,'/scatterangledata.csv');
         docadatapath = fullfile(datafilepath,'/docadata.csv');
-        %magicscatterpath = fullfile(datafilepath,sprintf('/magicscatterdata/scatterangledata_%f.csv',E));
         writetable(ATable, scatterangdatapath);
         writetable(BTable, docadatapath);
         %writematrix(C, magicscatterpath)

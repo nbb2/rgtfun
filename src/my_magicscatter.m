@@ -11,10 +11,10 @@ function th = my_magicscatter(Ec,b,V,rm,z1,z2)
 %   -- Z2 is the atomic number of species 2.
 %
 %   See also RUN_SCATTERINGINTEGRALS
-    m1 = 9.012; %this needs to be updated for each run!!
+    m1 = 1.008; %this needs to be updated for each run!!
     m2 = 1.008; %this needs to be updated for each run!!
-    epschar = (32.53*m2*Ec)/(z1*z2*(m1+m2)*(z1^(0.23) + z2^(0.23)));
     a = (0.46850)/(z1^(0.23) + z2^(0.23));
+    epschar = (a*Ec)/(z1*z2*14.4);
     Vprmin = my_zblderivative(z1,z2,rm);
     %fprintf('Here is %f',Vprmin)
     thArg = (Bvar(b,a) + Rcvar(rhovar(Ec,V(rm),Vprmin),a) +  ... 

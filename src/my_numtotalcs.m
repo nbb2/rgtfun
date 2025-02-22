@@ -15,6 +15,7 @@ th_p = th - th_max;
 %disp(th_max)
 vqth = interp1(bvals,th_p,bfine);
 bmax = max(data_zeros(bfine,vqth));
+%disp(bmax)
 y = pi*bmax^2;
 end
 

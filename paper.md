@@ -99,49 +99,49 @@ Once an intermolecular potential is known, the scattering angle can be determine
 
 $$ 1 - \frac{V(r_o)}{E_c} - \frac{b^2}{r_o^2} = 0 \quad (1) $$
 
-$$\theta_c = \pi - 2 \int_{r_o}^{\infty} \frac{bdr}{r^2 \sqrt{1 - \frac{V(r)}{E_c} - \frac{b^2}{r^2}}} \tag{2}$$
+$$\theta_c = \pi - 2 \int_{r_o}^{\infty} \frac{bdr}{r^2 \sqrt{1 - \frac{V(r)}{E_c} - \frac{b^2}{r^2}}} \quad (2)$$
 
 ## Cross Sections
 With a relationship between the impact parameter and scattering angle, cross section quantities can be defined. The differential cross section is defined by equation (3). The total cross section is defined by equation (4). It is important to note that the classical cross section is infinite. If a quantum mechanical approach is taken, then the total cross section becomes finite again. Instead of doing a quantum mechanical calculation, we can instead define a cutoff angle, $\theta_{cutoff}$, which has a corresponding cutoff impact parameter which makes a finite cross section according to equation (5). The cutoff angle can be chosen to either be the smallest measurable angle or when the classical scattering is no longer valid. The condition for the cutoff angle becoming invalid is given by equation (6) [@lane_calculations_1960]. Solving equation (6) requires a numerical root finding procedure. The momentum cross section is given by equation (7) and the viscosity cross section is given by equation (8). These last two cross sections are needed to calculate continuum transport coefficients using Chapman-Enskog theory. The final cross section of importance is the stopping cross section, given by equation (9), which tells us how much energy is lost per unit travel per unit density.
 	
-$$\sigma(\theta_c,E) = \left|\frac{b}{sin(\theta_c)} \frac{db}{d\theta}\right| \tag{3} $$
+$$\sigma(\theta_c,E) = \left|\frac{b}{sin(\theta_c)} \frac{db}{d\theta}\right| \quad (3) $$
 
-$$\sigma_T(E) = \int_{0}^{\pi} \sigma(\theta_c,E) 2\pi \sin(\theta_c) d \theta_c = 2\pi \int_{0}^{\infty}bdb  = \infty \tag{4}$$
+$$\sigma_T(E) = \int_{0}^{\pi} \sigma(\theta_c,E) 2\pi \sin(\theta_c) d \theta_c = 2\pi \int_{0}^{\infty}bdb  = \infty \quad (4)$$
 
-$$\sigma_T(E)_{classical} = \int_{\theta_{cutoff}}^{\pi} \sigma(\theta_c,E) 2\pi \sin(\theta_c) d \theta_c =  \int_{0}^{b_{cutoff}}bdb = 2 \pi b_{cutoff}^2 \tag{5} $$
+$$\sigma_T(E)_{classical} = \int_{\theta_{cutoff}}^{\pi} \sigma(\theta_c,E) 2\pi \sin(\theta_c) d \theta_c =  \int_{0}^{b_{cutoff}}bdb = 2 \pi b_{cutoff}^2 \quad (5) $$
 
-$$\theta_c(b_{cutoff}) - \frac{\hbar}{2\sqrt{2 E_c / m_r}\cdot  r_o(b_{cutoff},E_c)} = 0 \tag{6}$$
+$$\theta_c(b_{cutoff}) - \frac{\hbar}{2\sqrt{2 E_c / m_r}\cdot  r_o(b_{cutoff},E_c)} = 0 \quad (6)$$
 
-$$\sigma_D(E) = \int_{0}^{\pi} (1 - \cos(\theta_c))\cdot \sigma(\theta_c,E) 2\pi \sin(\theta_c) d \theta_c = 2\pi \int_{0}^{\infty}(1 - \cos(\theta_c))\cdot bdb \tag{7} $$
+$$\sigma_D(E) = \int_{0}^{\pi} (1 - \cos(\theta_c))\cdot \sigma(\theta_c,E) 2\pi \sin(\theta_c) d \theta_c = 2\pi \int_{0}^{\infty}(1 - \cos(\theta_c))\cdot bdb \quad (7) $$
 
-$$\sigma_{\mu}(E) = \int_{0}^{\pi} (1 - \cos^2(\theta_c))\cdot \sigma(\theta_c,E) 2\pi \sin(\theta_c) d \theta_c = 2\pi \int_{0}^{\infty}(1 - \cos^2(\theta_c))\cdot bdb \tag{8} $$
+$$\sigma_{\mu}(E) = \int_{0}^{\pi} (1 - \cos^2(\theta_c))\cdot \sigma(\theta_c,E) 2\pi \sin(\theta_c) d \theta_c = 2\pi \int_{0}^{\infty}(1 - \cos^2(\theta_c))\cdot bdb \quad (8) $$
 
 
-$$S_n = \frac{1}{n} \frac{dE}{dx}= \gamma E \sigma_D \tag{9} $$
+$$S_n = \frac{1}{n} \frac{dE}{dx}= \gamma E \sigma_D \quad (9) $$
 where 
 $$\gamma  = \frac{2 M_1 M_2}{(M_1 + M_2)^2}$$
 
 ## Continuum Transport Coefficients
 The binary diffusion and single species viscosity [^1] coefficient can be determined by using the results of Chapman-Enskog theory [@chapman_mathematical_1990;@maitland_intermolecular_1987]. The binary diffusion coefficient is given by equation (10) and the single species viscosity is given by equation (11). In these two equations, $\sigma$ and $\sigma_{12}$ are characteristic lengths of the interatomic potential (when they cross zero) and the $\Omega$ functions are given by equations (12) and (13). The collision integrals are calculated using the results of the cross sections discussed in the previous section.
 	
-$$D_{12} = \frac{3}{16} \cdot \frac{1}{n} \cdot \left(\frac{2k_B T (m_1 + m_2)}{\pi m_1 m_2}\right)^{1/2} \frac{1}{\sigma_{12}^2 \Omega_{12}^{(1,1)^*}} \tag{10} $$
+$$D_{12} = \frac{3}{16} \cdot \frac{1}{n} \cdot \left(\frac{2k_B T (m_1 + m_2)}{\pi m_1 m_2}\right)^{1/2} \frac{1}{\sigma_{12}^2 \Omega_{12}^{(1,1)^*}} \quad (10) $$
 
-$$\mu = \frac{5}{16} \cdot \left(\frac{m k_B T}{\pi }\right)^{1/2} \frac{1}{\sigma^2 \Omega^{(2,2)^*}} \tag{11}$$
+$$\mu = \frac{5}{16} \cdot \left(\frac{m k_B T}{\pi }\right)^{1/2} \frac{1}{\sigma^2 \Omega^{(2,2)^*}} \quad (11)$$
 
-$$\Omega_{12}^{(1,1)^*} = \int_{0}^{\infty} \sigma_D E^2 e^{-\frac{E}{k_BT}}dE \tag{12} $$
+$$\Omega_{12}^{(1,1)^*} = \int_{0}^{\infty} \sigma_D E^2 e^{-\frac{E}{k_BT}}dE \quad (12) $$
 
-$$\Omega^{(2,2)^*} =  \int_{0}^{\infty} \sigma_{\mu} E^3 e^{-\frac{E}{k_BT}}dE \tag{13} $$
+$$\Omega^{(2,2)^*} =  \int_{0}^{\infty} \sigma_{\mu} E^3 e^{-\frac{E}{k_BT}}dE \quad (13) $$
 
 [^1]: The mixture viscosity is a much more tortuous expression, see [@maitland_intermolecular_1987].
 
 ## DSMC Coefficients
 The most common DSMC collision rule is called the variable hard sphere (VHS) model. In this model, the relative velocity of two colliding particles determines an effective hard sphere potential and the particles collide according to the classic hard sphere scattering rule [@bird_dsmc_2013]. This rule is given by equation (14) where $d_{12}$ is the average of the two particles' diameters and is a function of the relative velocity according to equation (15). The value of $\omega$ in equation (15) is determined by fitting viscosity data over a limited range of temperatures which passes through a reference viscosity, $\mu_{ref}$, at a chosen reference temperature, $T_{ref}$, according to equation (16). Note that equation (14), the hard shell scattering rule, is undefined at impact parameters larger than $d_{12}$ which defines its total cross section [@fratus_scattering_2015].
 	
-$$b  = d_{12} \cdot \cos (\theta_c / 2) \tag{14}$$
+$$b  = d_{12} \cdot \cos (\theta_c / 2) \quad (14)$$
 
-$$d_{12} = \left(\frac{15\cdot (mk_bT/\pi)}{2\cdot (5-2\omega)\cdot (7-2\omega )\mu}\right)^{1/2} \tag{15}$$
+$$d_{12} = \left(\frac{15\cdot (mk_bT/\pi)}{2\cdot (5-2\omega)\cdot (7-2\omega )\mu}\right)^{1/2} \quad (15)$$
 
-$$\mu = \mu_{ref} \cdot \left(\frac{T}{T_o}\right)^{\omega} \tag{16}$$
+$$\mu = \mu_{ref} \cdot \left(\frac{T}{T_o}\right)^{\omega} \quad (16)$$
 
 # Validation of RGTFun
 Four main validation cases were used to verify the results obtained from RGTFun. These were: 

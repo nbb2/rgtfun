@@ -108,7 +108,8 @@ $$\sigma(\theta_c,E) = \left|\frac{b}{sin(\theta_c)} \frac{db}{d\theta}\right| \
 
 $$\sigma_T(E) = \int_{0}^{\pi} \sigma(\theta_c,E) 2\pi \sin(\theta_c) d \theta_c = 2\pi \int_{0}^{\infty}bdb  = \infty \quad (4)$$  
   
-$$\sigma_T(E)_{classical} = \int _{\theta _{cutoff}}^{\pi} \sigma(\theta_c,E) 2\pi \sin(\theta_c) d \theta_c = \int _{0}^{b _{cutoff}}bdb =$$
+$$\sigma_T(E)_{classical} = \int _{\theta _{cutoff}}^{\pi} \sigma(\theta_c,E) 2\pi \sin(\theta_c) d \theta_c = \int _{0}^{b _{cutoff}}bdb =
+2 \pi b _{cutoff}^2 \quad (5)$$
 
 $$\sigma_T(E)_{classical} = \int _{\theta _{cutoff}}^{\pi} \sigma(\theta_c,E) 2\pi \sin(\theta_c) d \theta_c =  \int _{0}^{b_{cutoff}}bdb = 2 \pi b_{cutoff}^2 \quad (5) $$
 

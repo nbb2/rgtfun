@@ -63,7 +63,8 @@ The paper briefly reviews the theory behind bimolecular scattering and how cross
 
 The intermolecular potential describes the potential energy between two atoms or molecules and is a function of their distance $r$. The actual shape of the potential energy surface of two molecules is unique to the pair and detemrined using quantum chemistry software [@valiev_nwchem_2010] or experiments [@amdur_experimental_1961;@amdur_repulsive_1949; @amdur_scattering_1954;@ruzic_total_1984]. RGTFun currently supports the following intermolecular potential models:
 	
-- Coulomb Potential
+- Coulomb Potential  
+
 $$U(r) = \frac{Z_1 Z_2 e^2}{ 4 \pi \epsilon_0 r}$$  
 
 - 12-6 Lennard-Jones Potential [@lennard1931cohesion]  

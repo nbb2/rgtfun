@@ -97,7 +97,7 @@ $$U(r) = a r^{-k}$$
 ## Bimolecular Scattering
 Once an intermolecular potential is known, the scattering angle can be determined as a function of impact energy and impact parameter. First, the distance of closest approach $r_o$ must be solved by finding the root of equation (1) where $E_c$ is the center of mass energy. Next, the scattering angle $\theta_c$ is solved by integrating equation (2).
 
-$$1 - \frac{V(r_o)}{E_c} - \frac{b^2}{r_o^2} = 0 $$ \tag{2}
+$$ 1 - \frac{V(r_o)}{E_c} - \frac{b^2}{r_o^2} = 0 \tag{1} $$
 
 $$\theta_c = \pi - 2 \int_{r_o}^{\infty} \frac{bdr}{r^2 \sqrt{1 - \frac{V(r)}{E_c} - \frac{b^2}{r^2}}} \tag{2}$$
 

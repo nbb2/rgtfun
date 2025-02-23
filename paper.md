@@ -66,26 +66,31 @@ The intermolecular potential describes the potential energy between two atoms or
 - Coulomb Potential
 $$U(r) = \frac{Z_1 Z_2 e^2}{ 4 \pi \epsilon_0 r}$$  
 
-- 12-6 Lennard-Jones Potential [@lennard1931cohesion]
+- 12-6 Lennard-Jones Potential [@lennard1931cohesion]  
+
 $$U(r) = 4 \epsilon \left[\left(\frac{\sigma}{r}\right)^{12} - \left(\frac{\sigma}{r}\right)^6\right]$$
 where $$\sigma  = 2^{-1/6} r_{m} $$  
 
-- 12-4 Lennard-Jones Potential [@zhen1983calculation]
+- 12-4 Lennard-Jones Potential [@zhen1983calculation]  
+
 $$U(r) = \frac{3^{3/2}}{2} \epsilon \left[\left(\frac{\sigma}{r}\right)^{12} - \left(\frac{\sigma}{r}\right)^4\right]$$
 where $$\sigma  = 3^{-1/8} r_{m} $$  
 
-- ZBL Potential [@Ziegler19831861]
+- ZBL Potential [@Ziegler19831861]  
+
 $$U(r) = \frac{1}{4 \pi \epsilon_0} \frac{Z_2 Z_2 e^2}{r} \phi(r/a)$$
 where 
 $$a = \frac{0.46850}{Z_1 ^{0.23} + Z_2 ^{0.23}}$$
 and 
 $$\phi(x) = 0.18175 e^{-3.19980 x} + 0.50986 e^{-0.94229 x} + 0.28022 e^{-0.40290 x} + 0.02817 e^{-0.20162 x}$$  
 
-- Morse Potential [@morse1929diatomic]
+- Morse Potential [@morse1929diatomic]  
+
 $$U(r) = \epsilon \left( e^{-2 a (r-r_m)} -2 e^{- a (r-r_m)}\right)$$ 
 where $$a  = \sqrt{\frac{k}{2 \epsilon}}$$  
 
-- Power Law Potential	
+- Power Law Potential  
+
 $$U(r) = a r^{-k}$$ 
 	
 ## Bimolecular Scattering

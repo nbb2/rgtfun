@@ -110,7 +110,7 @@ $$\sigma_T(E) = \int_{0}^{\pi} \sigma(\theta_c,E) 2\pi \sin(\theta_c) d \theta_c
   
 $$\sigma_T(E)_{classical} = \int _{0}^{\pi} \sigma(\theta_c,E) 2\pi \sin(\theta_c) d \theta_c$$
 
-$$\sigma_T(E)_{classical} = \int _{\theta_{cutoff}}^{\pi} \sigma(\theta_c,E) 2\pi \sin(\theta_c) d \theta_c =  \int _{0}^{b_{cutoff}}bdb = 2 \pi b_{cutoff}^2 \quad (5) $$
+$$\sigma_T(E)_{classical} = \int _{\theta _{cutoff}}^{\pi} \sigma(\theta_c,E) 2\pi \sin(\theta_c) d \theta_c =  \int _{0}^{b_{cutoff}}bdb = 2 \pi b_{cutoff}^2 \quad (5) $$
 
 $$\theta_c(b_{cutoff}) - \frac{\hbar}{2\sqrt{2 E_c / m_r}\cdot  r_o(b_{cutoff},E_c)} = 0 \quad (6)$$
 

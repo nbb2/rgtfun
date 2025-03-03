@@ -51,7 +51,7 @@ $M_{Sn}$ - mass of a tin atom (Kg)
 $d_{12}$ - collision diameter used in the VHS collision rule for DSMC simulations  
 $VHS$ - variablele hard sphere - the collision rule used for the DSMC
 
-# Introduction
+# Statement of Need
 RGTFun is a MATLAB app designed for the efficient calculation of scattering integrals and transport coefficients of elastic collisions. While the solution for classical scattering, as well as its application for determining gas transport coefficients, has been known for over approximately a century [@chapman_mathematical_1990], the numerical codes are usually kept as closed source codes or are printed in textbooks in older programming languages such as FORTRAN [@maitland_intermolecular_1987].
 
 This new code is open source and uses the well known dynamically compiled language MATLAB. Furthermore, the code features a well designed graphical user interface (GUI) to facilitate the step by step process of going from an intermolecular potential to macroscopic transport coefficients such as viscosity and diffusion coefficient. The ethos of the project is to decrease the learning curve of going from quantum chemistry calculations of intermolecular potential energy surfaces to usable transport coefficients in CFD or PIC codes.   

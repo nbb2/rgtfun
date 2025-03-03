@@ -220,8 +220,9 @@ The \textit{Calculate Transport Coefficients} tab allows you to calculate the se
 
  The *Calculate DSMC Coefficients* tab allows the user to calculate the $\omega$ parameter for the VHS DSMC model. This parameter is calculated by fitting the VHS diffusion coefficient expression to the user-provided viscosity coefficient data. Note that the location of our viscosity coefficient data file was autopopulated upon execution of the previous tab. Next, we specifed the number of subintervals to split the data into for fitting. An $\omega$ parameter will be calculated for each subinterval. We also specifed the tolerance for the fitting. A tolerance of 1e-12 or lower is suggested. Note that the atomic masses of the present species were autopopulated from the previous tab. We then clicked "Write DSMC Input File" to write the input file to our "study folder". Lastly, we clicked "Execute" to calculate an $\omega$ parameter for each subinterval of our viscosity coefficient data, as well as a collision diameter for each subinterval. Our viscosity coefficient data from the previous tab and the fitted subintervals are plotted. All relevant quantities are visible in the tab’s table. This table is saved to our "study" folder.
 
- # Accessing RGTFun
+# Accessing RGTFun
  RGTFun can be downloaded from the public Github repository linked here:  
 https://github.com/nbb2/rgtfun/tree/paper  
  Please download all folders from the repository and ensure that they are all located within a *RGTFun* folder on your machine (it does not have to be called *RGTFun*). This is important because the app will ask you to select the RGTFun folder on your machine so it can establish the path to the *src* and *gui* folders. It does not matter where your *RGTFun* folder is located as long as it is a local folder, i.e. not in a cloud service. Once downloading the repository folders, you can start the app by opening the *gui.mlapp* file in the *gui* folder. 
+
 # References

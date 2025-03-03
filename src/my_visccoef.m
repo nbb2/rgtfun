@@ -22,10 +22,10 @@ mu = (m1*m2)/(m1+m2);
 mukg = mu*(1.66054e-27);
 dm = d*(1e-10);
 Tstar = T/well_depth;
-if strcmp(inttype,'Exact')
+if strcmp(inttype,'Exact LJ')
 y = (1e6)*(5*sqrt(2*pi)/8)*(((mukg)^(1/2))*(Tjoul).^(1/2))./(((dm)^2) ...
     *reducedviscint(Tstar));
-elseif strcmp(inttype,'Trapezoidal')
+elseif strcmp(inttype,'Trapezoidal LJ')
 y = (1e6)*(5*sqrt(2*pi)/8)*(((mukg)^(1/2))*(Tjoul).^(1/2))./(((dm)^2) ...
     *reducedviscquad(Tstar,data));
 else

@@ -1,4 +1,4 @@
-function y = my_diffusioncoef(well_depth,T,p,m1,m2,d,inttype,data)
+function y = my_diffusioncoef(well_depth,T,m1,m2,d,inttype,data)
 %MY_DIFFUSIONCOEF    Outputs self-diffusion coefficient.
 %   Y=MY_DIFFUSIONCOEF(WELL_DEPTH,T,P,M1,M2,D,INTTYPE,DATA) generates a float 
 %   array containing a self-diffusion coefficient value for each temperature
@@ -19,17 +19,17 @@ function y = my_diffusioncoef(well_depth,T,p,m1,m2,d,inttype,data)
 %
 %   See also RUN_TRANSPORTCS
 Tjoul = T.*(1.380649e-23);
-ppascal = p*100000;
+%ppascal = p*100000;
 mu = (m1*m2)/(m1+m2);
 mukg = mu*(1.66054e-27);
 dm = d*(1e-10);
 Tstar = T/well_depth;
-if strcmp(inttype,'Exact')
-    y = 10000*(3*sqrt(2*pi)/16)*((Tjoul).^(3/2))./((ppascal)*((mukg)^(1/2))* ...
-    ((dm)^2)*reduceddifint(Tstar));
-elseif strcmp(inttype,'Trapezoidal')
-    y = 10000*(3*sqrt(2*pi)/16)*((Tjoul).^(3/2))./((ppascal)*((mukg)^(1/2))* ...
-    ((dm)^2)*reduceddifquad(Tstar,data));
+if strcmp(inttype,'Exact LJ')
+    y = (3*sqrt(2*pi)/16)*((Tjoul).^(3/2))./(((mukg)^(1/2))* ...
+    ((dm)^2)*reduceddifint(Tstar)); %PD in units of Pa * m^2 / s
+elseif strcmp(inttype,'Trapezoidal LJ')
+    y = (3*sqrt(2*pi)/16)*((Tjoul).^(3/2))./(((mukg)^(1/2))* ...
+    ((dm)^2)*reduceddifquad(Tstar,data)); %PD in units of Pa * m^2 / s
 else
     disp('Invalid Integration Type. Please check input file and try again.')
 end

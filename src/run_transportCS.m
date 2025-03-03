@@ -16,7 +16,7 @@ function run_transportCS(filepath,datafilepath)
     if logspace_on == 1
         minElog = log10(minE);
         maxElog = log10(maxE);
-        Evals = logspace(minElog,maxElog,100);
+        Evals = logspace(minElog,maxElog,logstep);
     elseif logspace_on == 0
         Evals = minE:Estep:maxE;
     end
@@ -24,8 +24,8 @@ function run_transportCS(filepath,datafilepath)
         beta = welldepth./(2*Evals);
         diffusioncs = my_diffusioncs(beta);
         viscositycs = my_viscositycs(beta);
-        A = [beta' diffusioncs'];
-        B = [beta' viscositycs'];
+        A = [Evals' diffusioncs'];
+        B = [Evals' viscositycs'];
 
     elseif strcmp(inttype,'Numerical')
         diffusioncs = zeros(1,length(Evals));
@@ -34,24 +34,42 @@ function run_transportCS(filepath,datafilepath)
         totalcs = zeros(1,length(Evals));
         for j = 1:length(Evals)
             disp(Evals(j))
-            file = fullfile(datafolder,sprintf('/scatterangledata_%f.csv',Evals(j)));
-            disp(file)
-            diffusioncs(j) = my_numdiffusioncs(file);
-            viscositycs(j) = my_numvisccs(file);
+            file = datafile;
+            scatterdata = readmatrix(file);
+            th = scatterdata(:,j+1);
+            bvals = scatterdata(:,1);
+            if strcmp(thetacutoff,'Quantum')
+                docadata = readmatrix(docafile);
+                doca = docadata(:,j+1)*(1e-10); %m
+                hbar = 1.054571817E-34; %J*s
+                m_redamu  = m1*m2/(m1+m2);
+                m_red = m_redamu/(6.022E26); %kg
+                E = Evals(j)*(1.60218E-19); %J
+                v_cm = sqrt(2*E/m_red);
+                lam_bar = hbar/(m_red*v_cm);
+                th_c = lam_bar./doca;
+            elseif strcmp(thetacutoff,'Manual')
+                th_c = th_max;
+            end
+            %disp(file)
+            diffusioncs(j) = my_numdiffusioncs(bvals,th);
+            viscositycs(j) = my_numvisccs(bvals,th);
             stoppingcs(j) = my_numstoppingcs(Evals(j),m1,m2,diffusioncs(j));
-            totalcs(j) = my_numtotalcs(th_max,file);
+            totalcs(j) = my_numtotalcs(th_c,bvals,th);
         end
+        CMtoLab = (m1+m2)/m2;
         A = [Evals' diffusioncs'];
         B = [Evals' viscositycs'];    
-        C = [Evals' stoppingcs'];
+        C = [(CMtoLab*Evals)' stoppingcs'];
         D = [Evals' totalcs'];
+        stoppingcsdatapath = fullfile(datafilepath,'/stoppingcsdata.csv');
+        totalcsdatapath = fullfile(datafilepath,'/totalcsdata.csv');
+        writematrix(C,stoppingcsdatapath);
+        writematrix(D,totalcsdatapath);
     end
-    diffusioncsdatapath  = [datafilepath '/diffusioncsdata.csv'];
-    viscositycsdatapath = [datafilepath '/viscositycsdata.csv'];
-    stoppingcsdatapath = [datafilepath '/stoppingcsdata.csv'];
-    totalcsdatapath = [datafilepath '/totalcsdata.csv'];
+    diffusioncsdatapath  = fullfile(datafilepath,'/diffusioncsdata.csv');
+    viscositycsdatapath = fullfile(datafilepath,'/viscositycsdata.csv');
     writematrix(A, diffusioncsdatapath);
     writematrix(B,viscositycsdatapath);
-    writematrix(C,stoppingcsdatapath);
-    writematrix(D,totalcsdatapath);
+    
 end

@@ -1,4 +1,4 @@
-function y = run_scatteringintegrals(filepath,datafilepath)
+function y = run_scatteringintegrals(filepath,datafilepath,progressBar)
 %RUN_SCATTERINGINTEGRALS    Reads scattering input file and calculates scattering integrals.
 %   RUN_SCATTERINGINTEGRALS(FILEPATH,DATAFILEPATH) reads the user-specified
 %   scattering parameters from the scattering input file and calculates the
@@ -15,59 +15,127 @@ function y = run_scatteringintegrals(filepath,datafilepath)
     if logspace_on == 1
         minElog = log10(minE);
         maxElog = log10(maxE);
-        Evals = logspace(minElog,maxElog,100);
+        Evals = logspace(minElog,maxElog,logstep);
     elseif logspace_on == 0
         Evals = minE:Estep:maxE;
     end
     cd(sprintf('%s',y))
-    mkdir docadata
+    %mkdir docadata
+
     if strcmp(inttype,'Exact Coulomb')
         theta = theta_min:theta_step:theta_max;
-        mkdir impactparamdata
-        mkdir difscatterdata
-        for E = Evals
-            difscatter = my_difscatter(Z1,Z2,theta,E);
-            impactparam = my_impact(Z2,Z2,theta,E);
-            doca = my_distclose(Z1,Z2,impactparam,E);
-            difscatterdatapath  = [datafilepath sprintf('/difscatterdata/difscatterdata_%f.csv',E)];
-            impactparamdatapath = [datafilepath sprintf('/impactparamdata/impactparamdata_%f.csv',E)];
-            docadatapath = [datafilepath sprintf('/docadata/docadata_%f.csv',E)];
-            A = [theta' difscatter'];
-            B = [theta' impactparam'];
-            C = [impactparam' doca'];
-            writematrix(A,difscatterdatapath);
-            writematrix(B,impactparamdatapath);
-            writematrix(C,docadatapath);
-        end
-    elseif strcmp(inttype,'Numerical')
-        mkdir scatterangledata
-        run(fitfile);
-        if strcmp(Potential_Type,'Coulomb')
-            potential  = @(r) my_coulomb(Z1,z2_param,r);
-        elseif strcmp(Potential_Type,'Lennard-Jones')
-            potential = @(r) my_lj(eps_param,sigma_param,r);
-        elseif strcmp(Potential_Type,'ZBL')
-            potential  = @(r) my_zbl(Z1,z2_param,r);
-        elseif strcmp(Potential_Type,'Power Law')
-            potential = @(r) my_powerlaw(a_param,k_param,r);
-        end
-        bvals = bmin:bstep:bmax;
-        for E = Evals
-            disp(E)
-            docas = zeros(1,length(bvals));
-            th = zeros(1,length(bvals));
-            for j = 1:length(bvals)
-                %disp(bvals(j))
-                docas(j) = my_DOCAroot(E,bvals(j),potential,minroot,maxroot);
-                th(j) = my_GMquadScatteringAngle(potential,E,bvals(j),docas(j),10);
-                %make it so user can choose n?
+        %mkdir impactparamdata
+        %mkdir difscatterdata
+        % Loop through energies
+        numESteps = numel(Evals);
+        numthSteps = numel(theta);
+        A = zeros(numthSteps,numESteps);
+        B = zeros(numthSteps,numESteps);
+        C = zeros(numthSteps,2*numESteps);
+        colNames = strings(1,1+numESteps);
+        A(:,1) = theta';
+        B(:,1) = theta';
+        colNames(1,1) = 'theta';
+        colNamesC = strings(1,2*numESteps);
+        for i = 1:numESteps
+            E = Evals(i);
+            % Update progress bar if provided
+            if nargin > 2 && isvalid(progressBar)
+                progressBar.Value = i / numESteps;
+                progressBar.Message = sprintf('Running %f eV...', E);
             end
-            scatterangdatapath  = [datafilepath sprintf('/scatterangledata/scatterangledata_%f.csv',E)];
-            docadatapath = [datafilepath sprintf('/docadata/docadata_%f.csv',E)];
-            A = [bvals' th'];
-            B = [bvals' docas'];
-            writematrix(A,scatterangdatapath);
-            writematrix(B,docadatapath);
+            difscatter = my_difscatter(Z1, Z2, theta, E);
+            impactparam = my_impact(Z2, Z2, theta, E);
+            doca = my_distclose(Z1, Z2, impactparam, E);
+            colNames(i+1) = sprintf('E=%f',E);
+            colNamesC(1,2*i-1) = sprintf('bval E=%f',E);
+            colNamesC(1,2*i) = sprintf('doca E=%f',E);
+            A(:,i+1) = difscatter';
+            B(:,i+1) = impactparam';
+            C(:,2*i-1) = impactparam';
+            C(:,2*i) = doca';
         end
+        %disp(colNamesC)
+        ATable = array2table(A,'VariableNames',colNames);
+        BTable = array2table(B,'VariableNames',colNames);
+        CTable = array2table(C,'VariableNames',colNamesC);
+        difscatterdatapath = fullfile(datafilepath,'/difscatterdata.csv');
+        impactparamdatapath = fullfile(datafilepath,'/impactparamdata.csv');
+        docadatapath = fullfile(datafilepath,'/docadata.csv');
+        writetable(ATable, difscatterdatapath);
+        writetable(BTable, impactparamdatapath);
+        writetable(CTable, docadatapath);
+
+    elseif strcmp(inttype, 'Numerical')
+        %mkdir scatterangledata;
+        mkdir magicscatterdata
+        run(fitfile);
+        if strcmp(Potential_Type, 'Coulomb')
+            potential = @(r) my_coulomb(Z1, z2_param, r);
+        elseif strcmp(Potential_Type, '12-6 Lennard-Jones')
+            potential = @(r) my_126lj(eps_param, sigma_param, r);
+        elseif strcmp(Potential_Type, '12-4 Lennard-Jones')
+            potential = @(r) my_124lj(eps_param, sigma_param, r);
+        elseif strcmp(Potential_Type, 'ZBL')
+            potential = @(r) my_zbl(Z1, z2_param, r);
+        elseif strcmp(Potential_Type, 'Morse')
+            potential = @(r) my_morse(rm_param,eps_param,k_param,r);
+        elseif strcmp(Potential_Type, 'Power Law')
+            potential = @(r) my_powerlaw(a_param, k_param, r);
+        end
+        if blogspace_on == 1
+            minblog = log10(bmin);
+            maxblog = log10(bmax);
+            bvals = logspace(minblog,maxblog,blogstep);
+        elseif blogspace_on == 0
+            bvals = bmin:bstep:bmax;
+        end
+
+        % Loop through energies
+        numESteps = numel(Evals);
+        numBSteps = numel(bvals);
+        A = zeros(numBSteps,numESteps);
+        B = zeros(numBSteps,numESteps);
+        colNames = strings(1,1+numESteps);
+        %disp(colNames)
+        A(:,1) = bvals';
+        B(:,1) = bvals';
+        colNames(1,1) = 'bvals';
+       
+        for i = 1:numESteps
+            E = Evals(i);
+            % Update progress bar if provided
+            if nargin > 2 && isvalid(progressBar)
+                progressBar.Value = i / numESteps;
+                progressBar.Message = sprintf('Running %f eV...', E);
+            end
+            docas = zeros(1, length(bvals));
+            th = zeros(1, length(bvals));
+            thmagic = zeros(1,length(bvals));
+            for j = 1:length(bvals)
+                docas(j) = my_DOCAroot(E, bvals(j), potential, minroot, maxroot);
+                th(j) = my_GMquadScatteringAngle(potential, E, bvals(j), docas(j), 20);
+                if strcmp(Potential_Type, 'ZBL')
+                    thmagic(j) = my_magicscatter(E,bvals(j),potential,docas(j),Z1,z2_param);
+                    %disp(thmagic(j))
+                end
+            end
+            %disp(thmagic)
+            colNames(i+1) = sprintf('E=%f',E);
+            A(:,i+1) = th';
+            B(:,i+1) = docas';
+            C = [bvals' thmagic'];
+            %magicscatterpath = fullfile(datafilepath,sprintf('/magicscatterdata/scatterangledata_%f.csv',E));
+            %writematrix(C, magicscatterpath)
+        end
+        %disp(colNames)
+        ATable = array2table(A,'VariableNames',colNames);
+        BTable = array2table(B,'VariableNames',colNames);
+        scatterangdatapath = fullfile(datafilepath,'/scatterangledata.csv');
+        docadatapath = fullfile(datafilepath,'/docadata.csv');
+        writetable(ATable, scatterangdatapath);
+        writetable(BTable, docadatapath);
+        %writematrix(C, magicscatterpath)
     end
+end
     

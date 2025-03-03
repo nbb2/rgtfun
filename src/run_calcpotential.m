@@ -12,25 +12,37 @@ function y = run_calcpotential(filepath,datafilepath)
     r = minR:Rstep:maxR;
     if strcmp(Potential_Type,"Coulomb")
         data = my_coulomb(Z1,Z2,r);
-        datapath  = [datafilepath '/coulombdata.csv'];
+        datapath  = fullfile(datafilepath,'/coulombdata.csv');
         A = [r' data'];
         writematrix(A,datapath);
         y = datapath;
-    elseif strcmp(Potential_Type,"Lennard-Jones")
-        data = my_lj(eps_well,sigma,r);
-        datapath  = [datafilepath '/ljdata.csv'];
+    elseif strcmp(Potential_Type,"12-6 Lennard-Jones")
+        data = my_126lj(eps_well,sig,r);
+        datapath  = fullfile(datafilepath,'/126ljdata.csv');
+        A = [r' data'];
+        writematrix(A,datapath);
+        y = datapath;
+    elseif strcmp(Potential_Type,"12-4 Lennard-Jones")
+        data = my_124lj(eps_well,sig,r);
+        datapath  = fullfile(datafilepath,'/124ljdata.csv');
         A = [r' data'];
         writematrix(A,datapath);
         y = datapath;
     elseif strcmp(Potential_Type,"ZBL")
         data = my_zbl(Z1,Z2,r);
-        datapath  = [datafilepath '/zbldata.csv'];
+        datapath  = fullfile(datafilepath,'/zbldata.csv');
+        A = [r' data'];
+        writematrix(A,datapath);
+        y = datapath;
+    elseif strcmp(Potential_Type,"Morse")
+        data = my_morse(rm,eps_well,k,r);
+        datapath  = fullfile(datafilepath,'/morsedata.csv');
         A = [r' data'];
         writematrix(A,datapath);
         y = datapath;
     elseif strcmp(Potential_Type,"Power Law")
         data = my_powerlaw(a,k,r);
-        datapath = [datafilepath '/powerlawdata.csv'];
+        datapath = fullfile(datafilepath,'/powerlawdata.csv');
         A = [r' data'];
         writematrix(A,datapath);
         y = datapath;

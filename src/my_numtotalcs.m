@@ -1,4 +1,4 @@
-function y = my_numtotalcs(th_max,scatterdatafile)
+function y = my_numtotalcs(th_max,bvals,th)
 %MY_NUMTOTALCS    Outputs total cross-section value.
 %   Y=MY_NUMTOTALCS(SCATTERDATAFILE) generates a total cross-section value
 %   for a specific energy by finding the intersection of TH_MAX and the 
@@ -9,14 +9,13 @@ function y = my_numtotalcs(th_max,scatterdatafile)
 %   impact para data.
 %
 %   See also RUN_TRANSPORTCS 
-scatterdata = readmatrix(scatterdatafile);
-th = scatterdata(:,2);
-bvals = scatterdata(:,1);
+
 bfine = min(bvals):0.00001:max(bvals);
 th_p = th - th_max;
+%disp(th_max)
 vqth = interp1(bvals,th_p,bfine);
 bmax = max(data_zeros(bfine,vqth));
-disp(bmax)
+%disp(bmax)
 y = pi*bmax^2;
 end
 

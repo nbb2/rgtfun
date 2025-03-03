@@ -9,7 +9,9 @@ function y = my_numstoppingcs(E,m1,m2,diffusioncs)
 %   -- DIFFUSIONCS must be diffusion CS value for energy E.
 %
 %   See also RUN_TRANSPORTCS 
-y = 2*(m1*m2/(m1+m2)^2)*E*diffusioncs;
+yCM = 2*(m1*m2/(m1+m2)^2)*E*diffusioncs;
+CMtoLab = (m1+m2)/m2;
+y = yCM*CMtoLab; 
 end
 
 

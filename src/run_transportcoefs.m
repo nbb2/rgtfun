@@ -9,42 +9,30 @@ function y = run_transportcoefs(filepath,datafilepath)
 %
 %   See also MY_DIFFUSIONCOEF MY_VISCCOEF MY_NUMDIFFUSIONCOEF
 %   MY_NUMVISCCOEF
-    disp(filepath)
+    %disp(filepath)
     run(filepath);
     Tvals = minT:Tstep:maxT;
     if strcmp(inttype,'Exact LJ') | strcmp(inttype,'Trapezoidal LJ')
-        if strcmp(coeftype,'Self-Diffusion')
-            diffusioncoef = my_diffusioncoef(welldepth,Tvals,p,m1,m2,d,inttype,datafile);
-            diffusioncoefdatapath  = [datafilepath '/diffusioncoefdata.csv'];
+            diffusioncoef = my_diffusioncoef(welldepth,Tvals,m1,m2,d,inttype,diffusiondatafile);
+            diffusioncoefdatapath  = fullfile(datafilepath,'/diffusioncoefdata.csv');
             A = [Tvals' diffusioncoef'];
             writematrix(A, diffusioncoefdatapath);
-            y = diffusioncoefdatapath;
-        elseif strcmp(coeftype,'Viscosity')
-            visccoef = my_visccoef(welldepth,Tvals,m1,m2,d,inttype,datafile);
-            visccoefdatapath  = [datafilepath '/viscositycoefdata.csv'];
-            A = [Tvals' visccoef'];
-            writematrix(A, visccoefdatapath);
-            y = visccoefdatapath;
-        else
-            disp('Something went wrong.')
-        end
+            visccoef = my_visccoef(welldepth,Tvals,m1,m2,d,inttype,viscositydatafile);
+            visccoefdatapath  = fullfile(datafilepath,'/viscositycoefdata.csv');
+            B = [Tvals' visccoef'];
+            writematrix(B, visccoefdatapath);
+            y = datafilepath;
     elseif strcmp(inttype,'Numerical')
-        if strcmp(coeftype,'Self-Diffusion')
-            diffusioncoef = my_numdiffusioncoef(Tvals,m1,m2,p,datafile);
-            diffusioncoefdatapath  = [datafilepath '/diffusioncoefdata.csv'];
+            diffusioncoef = my_numdiffusioncoef(Tvals,m1,m2,diffusiondatafile);
+            diffusioncoefdatapath  = fullfile(datafilepath,'/diffusioncoefdata.csv');
             A = [Tvals' diffusioncoef'];
             writematrix(A, diffusioncoefdatapath);
-            y = diffusioncoefdatapath;
-        elseif strcmp(coeftype,'Viscosity')
-            visccoef = my_numvisccoef(Tvals,m1,m2,datafile);
-            visccoefdatapath  = [datafilepath '/viscositycoefdata.csv'];
-            A = [Tvals' visccoef'];
-            writematrix(A, visccoefdatapath);
-            y = visccoefdatapath;
-        else
-            disp('Something went wrong.')
-        end
+            visccoef = my_numvisccoef(Tvals,m1,m2,viscositydatafile);
+            visccoefdatapath  = fullfile(datafilepath,'/viscositycoefdata.csv');
+            B = [Tvals' visccoef'];
+            writematrix(B, visccoefdatapath);
+            coefdatapath = datafilepath;
+            y = coefdatapath;
     end
-   
 end
 

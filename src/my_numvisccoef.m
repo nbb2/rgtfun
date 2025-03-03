@@ -26,7 +26,7 @@ ct = 1;
 for T = Tvals
     redviscintegrand = ((kb*T).^(-4)).*exp(-Evals/(kb*T)).*(Evals.^3).*csvals;
     y(ct) = trapz(Evals,redviscintegrand);
-    disp(y(ct))
+    %disp(y(ct))
     ct = ct + 1;
 end
 end

@@ -123,7 +123,7 @@ where
 $$\gamma  = \frac{2 M_1 M_2}{(M_1 + M_2)^2}$$
 
 ## Continuum Transport Coefficients
-The binary diffusion and single species viscosity [^1] coefficient can be determined by using the results of Chapman-Enskog theory [@chapman_mathematical_1990;@maitland_intermolecular_1987]. The binary diffusion coefficient is given by equation (10) and the single species viscosity is given by equation (11). In these two equations, $\sigma$ and $\sigma_{12}$ are characteristic lengths of the interatomic potential (when they cross zero) and the $\Omega$ functions are given by equations (12) and (13). The collision integrals are calculated using the results of the cross sections discussed in the previous section.
+The binary diffusion and single species viscosity coefficient can be determined by using the results of Chapman-Enskog theory [@chapman_mathematical_1990;@maitland_intermolecular_1987]. The binary diffusion coefficient is given by equation (10) and the single species viscosity is given by equation (11). In these two equations, $\sigma$ and $\sigma_{12}$ are characteristic lengths of the interatomic potential (when they cross zero) and the $\Omega$ functions are given by equations (12) and (13). The collision integrals are calculated using the results of the cross sections discussed in the previous section.
 	
 $$D_{12} = \frac{3}{16} \cdot \frac{1}{n} \cdot \left(\frac{2k_B T (m_1 + m_2)}{\pi m_1 m_2}\right)^{1/2} \frac{1}{\sigma_{12}^2 \Omega_{12}^{(1,1)^*}} \quad (10) $$
 
@@ -132,8 +132,6 @@ $$\mu = \frac{5}{16} \cdot \left(\frac{m k_B T}{\pi }\right)^{1/2} \frac{1}{\sig
 $$\Omega_{12}^{(1,1)^*} = \int_{0}^{\infty} \sigma_D E^2 e^{-\frac{E}{k_BT}}dE \quad (12) $$
 
 $$\Omega^{(2,2)^*} =  \int_{0}^{\infty} \sigma_{\mu} E^3 e^{-\frac{E}{k_BT}}dE \quad (13) $$
-
-[^1]: The mixture viscosity is a much more tortuous expression, see [@maitland_intermolecular_1987].
 
 ## DSMC Coefficients
 The most common DSMC collision rule is called the variable hard sphere (VHS) model. In this model, the relative velocity of two colliding particles determines an effective hard sphere potential and the particles collide according to the classic hard sphere scattering rule [@bird_dsmc_2013]. This rule is given by equation (14) where $d_{12}$ is the average of the two particles' diameters and is a function of the relative velocity according to equation (15). The value of $\omega$ in equation (15) is determined by fitting viscosity data over a limited range of temperatures which passes through a reference viscosity, $\mu_{ref}$, at a chosen reference temperature, $T_{ref}$, according to equation (16). Note that equation (14), the hard shell scattering rule, is undefined at impact parameters larger than $d_{12}$ which defines its total cross section [@fratus_scattering_2015].
@@ -224,6 +222,6 @@ The \textit{Calculate Transport Coefficients} tab allows you to calculate the se
 
  # Accessing RGTFun
  RGTFun can be downloaded from the public Github repository linked here:  
- INSERT LINK TO PUBLIC REPOSITORY HERE  
+https://github.com/nbb2/rgtfun/tree/paper  
  Please download all folders from the repository and ensure that they are all located within a *RGTFun* folder on your machine (it does not have to be called *RGTFun*). This is important because the app will ask you to select the RGTFun folder on your machine so it can establish the path to the *src* and *gui* folders. It does not matter where your *RGTFun* folder is located as long as it is a local folder, i.e. not in a cloud service. Once downloading the repository folders, you can start the app by opening the *gui.mlapp* file in the *gui* folder. 
 # References

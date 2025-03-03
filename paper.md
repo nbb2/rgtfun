@@ -157,7 +157,7 @@ As a first step in validation, we compared the scattering angle data obtained fr
 
 
 ## Validation Against Magic Formula Scattering
-Next, we compared the scatteing angle data obtained from RGTFun for a H-H ZBL potential to the scattering angle data obtained from the Magic Formula [@biersack_monte_1980]. This comprison is shown in \autoref{fig:magiccomp}. In the figure, it is clear that the RGTFun scattering angle calcultations are in agreement with the Magic formula. However, RGTfun is slightly more accurate than the Magic Formula because it calcuate the full scattering integral. RGTfun can also handle a wider range of intermolecular potentials as well as help calculate transport properties. 
+Next, we compared the scattering angle data obtained from RGTFun for a H-H ZBL potential to the scattering angle data obtained from the Magic Formula [@biersack_monte_1980]. This comparison is shown in \autoref{fig:magiccomp}. In the figure, it is clear that the RGTFun scattering angle calculations are in agreement with the Magic formula. However, RGTfun is slightly more accurate than the Magic Formula because it calculates the full scattering integral. RGTfun can also handle a wider range of intermolecular potentials as well as help calculate transport properties. 
 
 ![Comparison of scattering angle vs impact parameter curves for three different CM energies for a H-H ZBL potential. The Magic Formula scattering angle curves are plotted as solid lines and the RGTFun scattering angle data are plotted as circles. RGTfun has the advantage of being slightly more accurate than the Magic algorithm as well as being able to handle a wider range of intermolecular potential types. \label{fig:magiccomp}](./figures/MagicComp.png){ width=60% }
 

@@ -13,9 +13,9 @@ authors:
 affiliations:
  - name: Department of Nuclear, Plasma, and Radiological Engineering, The University of Illinois at Urbana-Champaign, Urbana, Illinois
    index: 1
-   ror: 00hx57361
+   ror: 047426m28
 
-date: 21 February 2025
+date: 3 March 2025
 bibliography: paper.bib
 
 ---
@@ -51,7 +51,7 @@ $M_{Sn}$ - mass of a tin atom (Kg)
 $d_{12}$ - collision diameter used in the VHS collision rule for DSMC simulations  
 $VHS$ - variablele hard sphere - the collision rule used for the DSMC
 
-# Introduction
+# Statement of Need
 RGTFun is a MATLAB app designed for the efficient calculation of scattering integrals and transport coefficients of elastic collisions. While the solution for classical scattering, as well as its application for determining gas transport coefficients, has been known for over approximately a century [@chapman_mathematical_1990], the numerical codes are usually kept as closed source codes or are printed in textbooks in older programming languages such as FORTRAN [@maitland_intermolecular_1987].
 
 This new code is open source and uses the well known dynamically compiled language MATLAB. Furthermore, the code features a well designed graphical user interface (GUI) to facilitate the step by step process of going from an intermolecular potential to macroscopic transport coefficients such as viscosity and diffusion coefficient. The ethos of the project is to decrease the learning curve of going from quantum chemistry calculations of intermolecular potential energy surfaces to usable transport coefficients in CFD or PIC codes.   
@@ -151,77 +151,59 @@ Four main validation cases were used to verify the results obtained from RGTFun.
 - Comparison of RGTFun Viscosity Coefficient and Self-Diffusion Coefficient for Argon to NIST Argon data [@kestin_equilibrium_1984].
 
 ## Validation of Rutherford Scattering
-As a first step in validation, we compared the scattering angle data obtained from RGTFun for a H-H Coulomb potential to the exact scattering angles for a Coulomb potential [@goldstein_classical_2008]. This validation case was chosen because the Coulomb potential is one of the few potentials for which there exists an exact solution for the scattering angle (the other being the series solution for the inverse power law potential). This comparison is shown in figure 1. In the figure, it is clear that the RGTFun scattering angle calcuation is in agreement with the analytical calcuation of Rutherford scattering.
+As a first step in validation, we compared the scattering angle data obtained from RGTFun for a H-H Coulomb potential to the exact scattering angles for a Coulomb potential [@goldstein_classical_2008]. This validation case was chosen because the Coulomb potential is one of the few potentials for which there exists an exact solution for the scattering angle (the other being the series solution for the inverse power law potential). This comparison is shown in \autoref{fig:coulcomp}. In the figure, it is clear that the RGTFun scattering angle calcuation is in agreement with the analytical calcuation of Rutherford scattering.
 
-| <img src="./figures/CoulComp.png" alt= "Comparison of scattering angle vs impact parameter curves for three different CM energies for a H-H Coulomb potential. The exact scattering angle curves are plotted as solid lines and the RGTFun scattering angle data are plotted as circles." width="60%"> |
-|:--:|
-| **Figure 1:** Comparison of scattering angle vs impact parameter curves for three different CM energies for a H-H Coulomb potential. The exact scattering angle curves are plotted as solid lines and the RGTFun scattering angle data are plotted as circles. |
+![Comparison of scattering angle vs impact parameter curves for three different CM energies for a H-H Coulomb potential. The exact scattering angle curves are plotted as solid lines and the RGTFun scattering angle data are plotted as circles. \label{fig:coulcomp}](./figures/CoulComp.png){ width=60% }
+
 
 ## Validation Against Magic Formula Scattering
-Next, we compared the scatteing angle data obtained from RGTFun for a H-H ZBL potential to the scattering angle data obtained from the Magic Formula [@biersack_monte_1980]. This comprison is shown in figure 2. In the figure, it is clear that the RGTFun scattering angle calcultations are in agreement with the Magic formula. However, RGTfun is slightly more accurate than the Magic Formula because it calcuate the full scattering integral. RGTfun can also handle a wider range of intermolecular potentials as well as help calculate transport properties. 
+Next, we compared the scattering angle data obtained from RGTFun for a H-H ZBL potential to the scattering angle data obtained from the Magic Formula [@biersack_monte_1980]. This comparison is shown in \autoref{fig:magiccomp}. In the figure, it is clear that the RGTFun scattering angle calculations are in agreement with the Magic formula. However, RGTfun is slightly more accurate than the Magic Formula because it calculates the full scattering integral. RGTfun can also handle a wider range of intermolecular potentials as well as help calculate transport properties. 
 
-| <img src="./figures/MagicComp.png" alt= "Comparison of scattering angle vs impact parameter curves for three different CM energies for a H-H ZBL potential. The Magic Formula scattering angle curves are plotted as solid lines and the RGTFun scattering angle data are plotted as circles. RGTfun has the advantage of being slightly more accurate than the Magic algorithm as well as being able to handle a wider range of intermolecuar potential types." width="60%"> |
-|:--:|
-| **Figure 2:** Comparison of scattering angle vs impact parameter curves for three different CM energies for a H-H ZBL potential. The Magic Formula scattering angle curves are plotted as solid lines and the RGTFun scattering angle data are plotted as circles. RGTfun has the advantage of being slightly more accurate than the Magic algorithm as well as being able to handle a wider range of intermolecular potential types. |
+![Comparison of scattering angle vs impact parameter curves for three different CM energies for a H-H ZBL potential. The Magic Formula scattering angle curves are plotted as solid lines and the RGTFun scattering angle data are plotted as circles. RGTfun has the advantage of being slightly more accurate than the Magic algorithm as well as being able to handle a wider range of intermolecular potential types. \label{fig:magiccomp}](./figures/MagicComp.png){ width=60% }
 
 ## Validation Against SRIM Nuclear Stopping Cross Section
-Next, we compared the nuclear stopping cross section data obtained from RGTFun for a H-H ZBL potential to the nuclear stopping cross section data obtained from SRIM [@ziegler_srim_2010]. This comparison is shown in figure 3. In the figure, it is clear that the RGTFun nuclear stopping cross sections  are in excellent agreement with the SRIM nuclear stopping cross sections. 
+Next, we compared the nuclear stopping cross section data obtained from RGTFun for a H-H ZBL potential to the nuclear stopping cross section data obtained from SRIM [@ziegler_srim_2010]. This comparison is shown in \autoref{fig:NSPcomp}. In the figure, it is clear that the RGTFun nuclear stopping cross sections  are in excellent agreement with the SRIM nuclear stopping cross sections. 
 
-| <img src="./figures/NSPComp.png" alt= "Comparison of RTGFun nuclear stopping cross section data to SRIM nuclear stopping cross section data for H into H. The SRIM data are plotted as solid lines and the RGTFun data are plotted as circles." width="60%"> |
-|:--:|
-| **Figure 3:** Comparison of RTGFun nuclear stopping cross section data to SRIM nuclear stopping cross section data for H into H. The SRIM data are plotted as solid lines and the RGTFun data are plotted as circles. |
+![Comparison of RTGFun nuclear stopping cross section data to SRIM nuclear stopping cross section data for H into H. The SRIM data are plotted as solid lines and the RGTFun data are plotted as circles. \label{fig:NSPcomp}](./figures/NSPComp.png){ width=60% }
 
 ## Validation Against NIST Transport Coefficient Data
-Lastly, we compared the viscosity and self-diffusion coefficient data obtained from RGTFun for a 12-6 LJ potential of Ar to NIST transport coefficient data [@kestin_equilibrium_1984]. This comparison is shown in figures 4 and 5. From the figures we see excellent agreement between the RGTFun and NIST data for low temperatures, with the curves slightly diverting in both cases for high temperatures. This diversion is not an error in the calculation, but instead due to the limitation of the Lennard-Jones potential. This is deduced as the code calculated the same numerical result as the work of [@khrapak_accurate_2014].
+Lastly, we compared the viscosity and self-diffusion coefficient data obtained from RGTFun for a 12-6 LJ potential of Ar to NIST transport coefficient data [@kestin_equilibrium_1984]. This comparison is shown in \autoref{fig:ViscosityComp} and \autoref{fig:DiffusionComp}. From the figures we see excellent agreement between the RGTFun and NIST data for low temperatures, with the curves slightly diverting in both cases for high temperatures. This diversion is not an error in the calculation, but instead due to the limitation of the Lennard-Jones potential. This is deduced as the code calculated the same numerical result as the work of [@khrapak_accurate_2014].
 
-| <img src="./figures/ViscosityComp.png" alt= "Comparison of RTGFun viscosity coefficient data to NIST viscosity coefficient data for Argon. The NIST data are plotted as a solid line and the RGTFun data are plotted as a dashed line." width="60%"> |
-|:--:|
-| **Figure 4:** Comparison of RTGFun viscosity coefficient data to NIST viscosity coefficient data for Argon. The NIST data are plotted as a solid line and the RGTFun data are plotted as a dashed line. |
+![Comparison of RTGFun viscosity coefficient data to NIST viscosity coefficient data for Argon. The NIST data are plotted as a solid line and the RGTFun data are plotted as a dashed line. \label{fig:ViscosityComp}](./figures/ViscosityComp.png){ width=60% }
 
-| <img src="./figures/DiffusionComp.png" alt= "Comparison of RTGFun self-diffusion coefficient data to NIST self-diffusion coeficient data for Argon. The NIST data are plotted as a solid line and the RGTFun data are plotted as a dashed line." width="60%"> |
-|:--:|
-| **Figure 5:** Comparison of RTGFun self-diffusion coefficient data to NIST self-diffusion coeficient data for Argon. The NIST data are plotted as a solid line and the RGTFun data are plotted as a dashed line. |
+![Comparison of RTGFun self-diffusion coefficient data to NIST self-diffusion coeficient data for Argon. The NIST data are plotted as a solid line and the RGTFun data are plotted as a dashed line. \label{fig:DiffusionComp}](./figures/DiffusionComp.png){ width=60% }
 
 # An Example Calculation of Argon-Argon Interaction
 We will now present example calculations of transport quanitities and scattering integrals using RGTFun. The calculations will be performed for an Argon-Argon ZBL potential.
 
 ## Calculate/Fit Potential Tab
-| <img src="./figures/potentialtab.png" alt= "Screenshot of *Calculate/Fit Potential* tab for an Argon-Argon ZBL potential." width="80%"> |
-|:--:|
-| **Figure 6:** Screenshot of *Calculate/Fit Potential* tab for an Argon-Argon ZBL potential. |
+![Screenshot of *Calculate/Fit Potential* tab for an Argon-Argon ZBL potential. \label{fig:potentialtab}](./figures/potentialtab.png){ width=80% }
 
 The *Calculate/Fit Potential* tab allows you to either create your own potential data or fit one of the RGTFun-supported potentials to your own data. For this example, we wanted to calculate a ZBL potential for an Argon-Argon interaction. To begin, we selected "Calculate Potential" from the "Selected Action" drop-down menu. Then, we selected "ZBL" from the "Fit/Potential Type" drop-down menu. We then specified the distance values and potential parameters. Then we selected the folder where RGTFun will save the input/output files and data. We then clicked "Write Input File" to generate an input file with the potential parameters specified. This will auto populate the "Or Select Your Own Input File" box. Lastly, we selected "Execute" to generate potential data, plot the potential data, save the plot as an image, and save a fit output file for the data. 
 
 ## Calculate Scattering Integrals Tab
-| <img src="./figures/scatteringtab.png" alt= "Screenshot of *Calculate Scattering Intergrals* tab for an Argon-Argon ZBL potential." width="80%"> |
-|:--:|
-| **Figure 7:** Screenshot of *Calculate Scattering Intergrals* tab for an Argon-Argon ZBL potential. |
+![Screenshot of *Calculate Scattering Intergrals* tab for an Argon-Argon ZBL potential. \label{fig:scatteringtab}](./figures/scatteringtab.png){ width=80% }
 
 The *Calculate Scattering Integrals* tab allows you to calculate the distance of closest approach (DOCA) and scattering angle as a function of impact parameter. First, we chose "Numerical" from the "Integral Type" drop down menu becuase we wanted to use our potential data from the previous tab. We then specified the energy range for calculating the quantities. Since we wanted log spacing for the energy values, we clicked the "Log spacing" box and specifed the number of points. Note that our fit output file was autopopulated after we clicked "Execute" in the previous tab. We then specified the impact parameter range to integrate over and chose to use log spacing for these values. We then specified a range for the root solver used in the DOCA calculations. We then clicked "Write Scattering Input File" to write the input file and clicked "Execute" to generate datasets for the DOCA and scattering angle, save those data sets to our "study" folder, and save the figures as images.
 
 ## Calculate Cross Sections Tab
-| <img src="./figures/cstab.png" alt= "Screenshot of *Calculate Cross Sections* tab for an Argon-Argon ZBL potential." width="80%"> |
-|:--:|
-| **Figure 8:** Screenshot of *Calculate Cross Sections* tab for an Argon-Argon ZBL potential. |
+![Screenshot of *Calculate Cross Sections* tab for an Argon-Argon ZBL potential. \label{fig:cstab}](./figures/cstab.png){ width=80% }
 
 The *Calculate Cross Sections* tab allows you to calculate total cross section, diffusion cross section, viscosity cross section, and stopping cross section. First, we selected "Numerical" from the "Integral Type" drop-down, which will use the scattering angle vs. impact parameter data from the previous tab. While the energy values from the previous tab autopopulate into this tab, we have increased the number of energy points from what was used in figure 7 to reduce error in the trapezoidal integrals used in this tab. We then specified the atomic mass of Argon in atomic units. Note that the file path of the scattering angle data was autopopulated when the previous tab was executed. Then we chose to use a quantum mechanical cutoff for the total cross section. Then, we clicked "Write CS Input File" to create the input file for the cross section calculations. Lastly, we clicked "Execute" to calculate the cross sections, save the data as csv files in our "study folder", and save the figures as images.
 
 ## Calculate Transport Coefficients Tab
-| <img src="./figures/transporttab.png" alt= "Screenshot of *Calculate Transport Coefficients* tab for an Argon-Argon ZBL potential." width="80%"> |
-|:--:|
-| **Figure 9:** Screenshot of *Calculate Transport Coefficients* tab for an Argon-Argon ZBL potential. |
+![Screenshot of *Calculate Transport Coefficients* tab for an Argon-Argon ZBL potential. \label{fig:transporttab}](./figures/transporttab.png){ width=80% }
 
 The \textit{Calculate Transport Coefficients} tab allows you to calculate the self-diffusion coefficient and viscosity coefficient for user-specified temperatures. First, we selected "Numerical" from the "Integration Type" drop down, which allows us to use the cross section data from the previous tab.  Next, we specified the temperature range (in Kelvin) that the code should use to calculate the transport coefficient data. Note that the atomic masses of the present species, as well as the locations of the cross section data files, were autopopulated from the previous tab. We then clicked "Write Transport Input File" to write the input file to our "study" folder. Lastly, we clicked "Execute" to calculate the self-diffusion and viscosity coefficient data, save the data as csv files in our "study" folder, plot the data, and save the plots as images.
 
 ## Calculate DSMC Coefficients Tab
-| <img src="./figures/dsmctab.png" alt= "Screenshot of *Calculate DSMC Coefficients* tab for an Argon-Argon ZBL potential." width="80%"> |
-|:--:|
-| **Figure 10:** Screenshot of *Calculate DSMC Coefficients* tab for an Argon-Argon ZBL potential. |
+![Screenshot of *Calculate DSMC Coefficients* tab for an Argon-Argon ZBL potential. \label{fig:dsmctab}](./figures/dsmctab.png){ width=80% }
 
  The *Calculate DSMC Coefficients* tab allows the user to calculate the $\omega$ parameter for the VHS DSMC model. This parameter is calculated by fitting the VHS diffusion coefficient expression to the user-provided viscosity coefficient data. Note that the location of our viscosity coefficient data file was autopopulated upon execution of the previous tab. Next, we specifed the number of subintervals to split the data into for fitting. An $\omega$ parameter will be calculated for each subinterval. We also specifed the tolerance for the fitting. A tolerance of 1e-12 or lower is suggested. Note that the atomic masses of the present species were autopopulated from the previous tab. We then clicked "Write DSMC Input File" to write the input file to our "study folder". Lastly, we clicked "Execute" to calculate an $\omega$ parameter for each subinterval of our viscosity coefficient data, as well as a collision diameter for each subinterval. Our viscosity coefficient data from the previous tab and the fitted subintervals are plotted. All relevant quantities are visible in the tab’s table. This table is saved to our "study" folder.
 
- # Accessing RGTFun
+# Accessing RGTFun
  RGTFun can be downloaded from the public Github repository linked here:  
 https://github.com/nbb2/rgtfun/tree/paper  
  Please download all folders from the repository and ensure that they are all located within a *RGTFun* folder on your machine (it does not have to be called *RGTFun*). This is important because the app will ask you to select the RGTFun folder on your machine so it can establish the path to the *src* and *gui* folders. It does not matter where your *RGTFun* folder is located as long as it is a local folder, i.e. not in a cloud service. Once downloading the repository folders, you can start the app by opening the *gui.mlapp* file in the *gui* folder. 
+
 # References

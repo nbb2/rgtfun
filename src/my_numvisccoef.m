@@ -16,6 +16,8 @@ mred = m1*m2/(m1+m2);
 csdata = readmatrix(csdatafile);
 Evals = csdata(:,1); %eV
 csvals = csdata(:,2); %A^2
+% note that the 0.001629989 below is a unit conversion factor that converts
+% [amu^0.5 * Angstrom^-2 * eV^0.5] --> [kg^0.5 * m^-2 * Joules^0.5]
 y = (1E6)*0.001629989*(5/4)*((2*pi*mred)^(0.5))*((kb*Tvals).^(1/2)).*(1./(redviscquad(Tvals,Evals,csvals))); %microPa s
 end
 

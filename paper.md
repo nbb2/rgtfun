@@ -138,7 +138,7 @@ The most common DSMC collision rule is called the variable hard sphere (VHS) mod
 	
 $$b  = d_{12} \cdot \cos (\theta_c / 2) \quad (14)$$
 
-$$d_{12} = \left(\frac{15\cdot (mk_bT/\pi)}{2\cdot (5-2\omega)\cdot (7-2\omega )\mu}\right)^{1/2} \quad (15)$$
+$$d_{12} = \left(\frac{15\cdot \sqrt{mk_bT/\pi}}{2\cdot (5-2\omega)\cdot (7-2\omega )\mu}\right)^{1/2} \quad (15)$$
 
 $$\mu = \mu_{ref} \cdot \left(\frac{T}{T_o}\right)^{\omega} \quad (16)$$
 

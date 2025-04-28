@@ -1,4 +1,4 @@
-function y = my_VHScoef(fitT,T_sample,excludeT,vq,tol)
+function y = my_VHScoef(fitT,T_sample,mu_sample,excludeT,vq,tol)
 %MY_VHSCOEF  Outputs sample visc value and VHS param.
 %   Y=MY_VHSCOEF(FITT,T_SAMPLE,EXCLUDET,VQ,TOL) outputs a reference
 %   viscosity value and VHS parameter omega by fitting the VHS model to 
@@ -14,7 +14,6 @@ function y = my_VHScoef(fitT,T_sample,excludeT,vq,tol)
 %   See also RUN_DSMCCOEF
 fitcoef = vq;
 fitcoef(excludeT) = [];
-mu_sample = mean(fitcoef);
 fitchar = sprintf("(%f)*(T/(%f)).^(a)",mu_sample,T_sample);
 ft = fittype(fitchar,dependent="y",...
         independent="T",coefficients="a");

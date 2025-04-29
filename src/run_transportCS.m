@@ -24,8 +24,8 @@ function run_transportCS(filepath,datafilepath)
         beta = welldepth./(2*Evals);
         difcs = diffusioncs(beta);
         visccs = viscositycs(beta);
-        A = [Evals' diffusioncs'];
-        B = [Evals' viscositycs'];
+        A = [Evals' difcs'];
+        B = [Evals' visccs'];
 
     elseif strcmp(inttype,'Numerical')
         difcs = zeros(1,length(Evals));
@@ -58,8 +58,8 @@ function run_transportCS(filepath,datafilepath)
             totalcs(j) = numtotalcs(th_c,bvals,th);
         end
         CMtoLab = (m1+m2)/m2;
-        A = [Evals' diffusioncs'];
-        B = [Evals' viscositycs'];    
+        A = [Evals' difcs'];
+        B = [Evals' visccs'];    
         C = [(CMtoLab*Evals)' stoppingcs'];
         D = [Evals' totalcs'];
         stoppingcsdatapath = fullfile(datafilepath,'/stoppingcsdata.csv');

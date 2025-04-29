@@ -113,7 +113,7 @@ function y = run_scatteringintegrals(filepath,datafilepath,progressBar)
             th = zeros(1, length(bvals));
             thmagic = zeros(1,length(bvals));
             for j = 1:length(bvals)
-                docas(j) = DOCAroot(E, bvals(j), potential, minroot, maxroot);
+                docas(j) = DOCAroot(E, bvals(j), potential, minroot, maxroot,chebfunpath);
                 th(j) = GMquadScatteringAngle(potential, E, bvals(j), docas(j), 20);
                 if strcmp(Potential_Type, 'ZBL')
                     thmagic(j) = magicscatter(E,bvals(j),potential,docas(j),Z1,z2_param);

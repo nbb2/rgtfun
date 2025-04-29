@@ -1,4 +1,4 @@
-function y = my_VSSdiameter(alphavals,omegavals,m,Tvals,muvals)
+function y = VSSdiameter(alphavals,omegavals,m,Tvals,muvals)
 %MY_VSSCOEF  Outputs VSS params alpha and d.
 %   Y=MY_VSSCOEF(MINT,MAXT,TFINE,VQ,M,OMEGA,P,TOL) outputs VSS parameters 
 %   alpha and d by fitting the VSS model to user-specified diffusin 

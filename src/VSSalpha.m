@@ -1,5 +1,5 @@
-function y = my_VSSalpha(omegavals,m,molar,Tvals,difvals,diams)
-%MY_VSSCOEF  Outputs VSS params alpha and d.
+function y = VSSalpha(omegavals,m,molar,Tvals,difvals,diams)
+%VSSCOEF  Outputs VSS params alpha and d.
 %   Y=MY_VSSCOEF(MINT,MAXT,TFINE,VQ,M,OMEGA,P,TOL) outputs VSS parameters 
 %   alpha and d by fitting the VSS model to user-specified diffusin 
 %   coefficient data. 

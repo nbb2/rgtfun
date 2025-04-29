@@ -1,6 +1,6 @@
-function y = my_powerlaw(a,k,r)
-%MY_POWERLAW    Outputs power law potential data.
-%   Y=MY_POWERLAW(A,K,R) generates a float array containing a potential 
+function y = powerlaw(a,k,r)
+%POWERLAW    Outputs power law potential data.
+%   Y=POWERLAW(A,K,R) generates a float array containing a potential 
 %   energy value for each r value using the basic power law potential.
 %   Units of potential energy are eV.
 %

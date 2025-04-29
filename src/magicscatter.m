@@ -1,6 +1,6 @@
-function th = my_magicscatter(Ec,b,V,rm,z1,z2)
-%MY_MAGICSCATTER   Outputs float value for the scattering angle from the Magic Formula.
-%   Y=MY_MAGICSCATTER(EC,B,V,RMIN,Z1,Z2) generates a float value for the
+function th = magicscatter(Ec,b,V,rm,z1,z2)
+%MAGICSCATTER   Outputs float value for the scattering angle from the Magic Formula.
+%   Y=MAGICSCATTER(EC,B,V,RMIN,Z1,Z2) generates a float value for the
 %   scattering angle using the Magic Formula.
 %
 %   -- EC must be the the energy in eV.
@@ -15,7 +15,7 @@ function th = my_magicscatter(Ec,b,V,rm,z1,z2)
     m2 = 1.008; %this needs to be updated for each run!!
     a = (0.46850)/(z1^(0.23) + z2^(0.23));
     epschar = (a*Ec)/(z1*z2*14.4);
-    Vprmin = my_zblderivative(z1,z2,rm);
+    Vprmin = zblderivative(z1,z2,rm);
     %fprintf('Here is %f',Vprmin)
     thArg = (Bvar(b,a) + Rcvar(rhovar(Ec,V(rm),Vprmin),a) +  ... 
         Deltavar(epschar,Bvar(b,a),R0var(rm,a)))/(R0var(rm,a) + Rcvar(rhovar(Ec,V(rm),Vprmin),a));

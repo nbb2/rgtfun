@@ -1,6 +1,6 @@
-function y = my_impact(z1,z2,theta,E)
-%MY_IMPACT    Outputs impact parameter.
-%   Y=MY_IMPACT(Z1,Z2,THETA,E) generates a float array containing an 
+function y = impact(z1,z2,theta,E)
+%IMPACT    Outputs impact parameter.
+%   Y=IMPACT(Z1,Z2,THETA,E) generates a float array containing an 
 %   impact parameter value for each scattering angle using the 
 %   Rutherford scattering model. Units of impact parameter are Angstrom.
 %

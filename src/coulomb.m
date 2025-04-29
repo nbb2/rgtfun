@@ -1,6 +1,6 @@
-function y = my_coulomb(z1,z2,r)
-%MY_COULOMB    Outputs Coulomb  potential data.
-%   Y=MY_COUOMB(Z1,Z2,R) generates a float array containing
+function y = coulomb(z1,z2,r)
+%COULOMB    Outputs Coulomb  potential data.
+%   Y=COULOMB(Z1,Z2,R) generates a float array containing
 %   a potential energy value for each r value using the Coulomb potential.
 %   Units of potential energy are eV.
 %

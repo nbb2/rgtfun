@@ -1,6 +1,6 @@
-function y = my_numtotalcscheb(th_max,bvals,th)
-%MY_NUMTOTALCS    Outputs total cross-section value.
-%   Y=MY_NUMTOTALCS(SCATTERDATAFILE) generates a total cross-section value
+function y = numtotalcscheb(th_max,bvals,th)
+%NUMTOTALCSCHEB    Outputs total cross-section value.
+%   Y=NUMTOTALCSCHEB(SCATTERDATAFILE) generates a total cross-section value
 %   for a specific energy by finding the intersection of TH_MAX and the 
 %   scattering angle vs impact parameter curve using Chebfun rootfinding. 
 %

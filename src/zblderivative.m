@@ -1,6 +1,6 @@
-function y = my_zblderivative(z1,z2,r)
-%MY_ZBL    Outputs ZBL potential data.
-%   Y=MY_ZBL(Z1,Z2,R) generates a float array containing
+function y = zblderivative(z1,z2,r)
+%ZBL    Outputs ZBL potential data.
+%   Y=ZBL(Z1,Z2,R) generates a float array containing
 %   a potential energy value for each r value using the ZBL potential.
 %   Units of potential energy are eV.
 %

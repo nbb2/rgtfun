@@ -1,6 +1,6 @@
-function y = my_numdiffusioncs(bvals,th)
-%MY_NUMDIFFUSIONCS    Outputs diffusion cross-section value.
-%   Y=MY_NUMDIFFUSIONCS(SCATTERDATAFILE) generates diffusion cross-section
+function y = numdiffusioncs(bvals,th)
+%NUMDIFFUSIONCS    Outputs diffusion cross-section value.
+%   Y=NUMDIFFUSIONCS(SCATTERDATAFILE) generates diffusion cross-section
 %   value by integrating scattering angle vs impact param data for a 
 %   specific energy using TRAPZ. 
 %

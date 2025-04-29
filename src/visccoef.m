@@ -1,6 +1,6 @@
-function y = my_visccoef(well_depth,T,m1,m2,d,inttype,data)
-%MY_VISCCOEF    Outputs viscosity coefficient.
-%   Y=MY_VISCCOEF(WELL_DEPTH,T,M1,M2,D,INTTYPE,DATA) generates a float 
+function y = visccoef(well_depth,T,m1,m2,d,inttype,data)
+%VISCCOEF    Outputs viscosity coefficient.
+%   Y=VISCCOEF(WELL_DEPTH,T,M1,M2,D,INTTYPE,DATA) generates a float 
 %   array containing a viscosity coefficient value for each temperature
 %   using a Lennard_Jones potential (from "Khrapak, S.A. Accurate transport
 %   cross sections for the Lennard-Jones potential. Eur. Phys. J. D 68, 276

@@ -7,7 +7,7 @@ function y = run_dsmccoef(inputfile,datapath)
 %   -- INPUTFILE must specify the path to where input file is.
 %   -- DATAFILEPATH must specify where to save the param table.
 %
-%   See also MY_VHSCOEF MY_VHSVISCOSITY MY_VSSCOEF MY_VSSDIFFUSION
+%   See also VHSCOEF VHSVISCOSITY VSSCOEF VSSDIFFUSION
 y = datapath;
 run(inputfile);
 mr = m1*m2/(m1+m2);

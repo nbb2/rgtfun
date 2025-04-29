@@ -1,6 +1,6 @@
-function y = my_diffusioncoef(well_depth,T,m1,m2,d,inttype,data)
-%MY_DIFFUSIONCOEF    Outputs self-diffusion coefficient.
-%   Y=MY_DIFFUSIONCOEF(WELL_DEPTH,T,P,M1,M2,D,INTTYPE,DATA) generates a float 
+function y = diffusioncoef(well_depth,T,m1,m2,d,inttype,data)
+%DIFFUSIONCOEF    Outputs self-diffusion coefficient.
+%   Y=DIFFUSIONCOEF(WELL_DEPTH,T,P,M1,M2,D,INTTYPE,DATA) generates a float 
 %   array containing a self-diffusion coefficient value for each temperature
 %   using a Lennard_Jones potential (from "Khrapak, S.A. Accurate transport
 %   cross sections for the Lennard-Jones potential. Eur. Phys. J. D 68, 276
@@ -37,7 +37,7 @@ end
 
 function y = reduceddifint(Tstar)
 %REDUCEDDIFINT    Outputs the reduced diffusion integral.
-%   Y=MY_REDUCEDDIFINT(TSTAR) generates a float array containing a value
+%   Y=REDUCEDDIFINT(TSTAR) generates a float array containing a value
 %   for the exact reduced diffusion integral in Khrapak, S.A. Accurate transport 
 %   cross sections for the Lennard-Jones potential (2014).
 %
@@ -45,7 +45,7 @@ function y = reduceddifint(Tstar)
 y = zeros(size(Tstar));
 ct = 1;
 for t = Tstar
-reddifintegrand = @(x) 0.5*(x.^2).*exp(-x).*my_diffusioncs(1./(2*t*x));
+reddifintegrand = @(x) 0.5*(x.^2).*exp(-x).*diffusioncs(1./(2*t*x));
 y(ct) = integral(reddifintegrand,0,Inf);
 ct = ct + 1;
 end
@@ -53,7 +53,7 @@ end
 
 function y = reduceddifquad(Tstar,data)
 %REDUCEDDIFQUAD    Outputs the reduced diffusion integral using quadrature.
-%   Y=MY_REDUCEDDIFQUAD(TSTAR,DATA) generates a float array containing a value
+%   Y=REDUCEDDIFQUAD(TSTAR,DATA) generates a float array containing a value
 %   for the reduced diffusion integral in Khrapak, S.A. Accurate transport 
 %   cross sections for the Lennard-Jones potential (2014) using trapezoidal
 %   integration.

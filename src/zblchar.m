@@ -1,6 +1,6 @@
-function y = my_zblchar(z1)
-%MY_ZBLCHAR    Outputs character array with fitting model.
-%   Y=MY_ZBLCHAR(Z1) generates a char array containing the ZBL potential 
+function y = zblchar(z1)
+%ZBLCHAR    Outputs character array with fitting model.
+%   Y=ZBLCHAR(Z1) generates a char array containing the ZBL potential 
 %   equation with the user-specified Z1.
 %
 %   -- Z1 must be the integer atomic number of species 1.

@@ -9,7 +9,7 @@ function y = run_scatteringintegrals(filepath,datafilepath,progressBar)
 %   -- FILEPATH must specify the path to where input file is.
 %   -- DATAFILEPATH must specify where to save the scattering integral data.
 %
-%   See also MY_IMPACT MY_DIFSCATTER MY_DISTCLOSE MY_DOCAROOT MY_GMQUADSCATTERINGANGLE
+%   See also IMPACT DIFSCATTER DISTCLOSE DOCAROOT GMQUADSCATTERINGANGLE
     y = datafilepath;
     run(filepath);
     if logspace_on == 1
@@ -44,9 +44,9 @@ function y = run_scatteringintegrals(filepath,datafilepath,progressBar)
                 progressBar.Value = i / numESteps;
                 progressBar.Message = sprintf('Running %f eV...', E);
             end
-            difscatter = my_difscatter(Z1, Z2, theta, E);
-            impactparam = my_impact(Z2, Z2, theta, E);
-            doca = my_distclose(Z1, Z2, impactparam, E);
+            difscatter = difscatter(Z1, Z2, theta, E);
+            impactparam = impact(Z2, Z2, theta, E);
+            doca = distclose(Z1, Z2, impactparam, E);
             colNames(i+1) = sprintf('E=%f',E);
             colNamesC(1,2*i-1) = sprintf('bval E=%f',E);
             colNamesC(1,2*i) = sprintf('doca E=%f',E);
@@ -71,17 +71,17 @@ function y = run_scatteringintegrals(filepath,datafilepath,progressBar)
         mkdir magicscatterdata
         run(fitfile);
         if strcmp(Potential_Type, 'Coulomb')
-            potential = @(r) my_coulomb(Z1, z2_param, r);
+            potential = @(r) coulomb(Z1, z2_param, r);
         elseif strcmp(Potential_Type, '12-6 Lennard-Jones')
-            potential = @(r) my_126lj(eps_param, sigma_param, r);
+            potential = @(r) lj_126(eps_param, sigma_param, r);
         elseif strcmp(Potential_Type, '12-4 Lennard-Jones')
-            potential = @(r) my_124lj(eps_param, sigma_param, r);
+            potential = @(r) lj_124(eps_param, sigma_param, r);
         elseif strcmp(Potential_Type, 'ZBL')
-            potential = @(r) my_zbl(Z1, z2_param, r);
+            potential = @(r) zbl(Z1, z2_param, r);
         elseif strcmp(Potential_Type, 'Morse')
-            potential = @(r) my_morse(rm_param,eps_param,k_param,r);
+            potential = @(r) morse(rm_param,eps_param,k_param,r);
         elseif strcmp(Potential_Type, 'Power Law')
-            potential = @(r) my_powerlaw(a_param, k_param, r);
+            potential = @(r) powerlaw(a_param, k_param, r);
         end
         if blogspace_on == 1
             minblog = log10(bmin);
@@ -113,10 +113,10 @@ function y = run_scatteringintegrals(filepath,datafilepath,progressBar)
             th = zeros(1, length(bvals));
             thmagic = zeros(1,length(bvals));
             for j = 1:length(bvals)
-                docas(j) = my_DOCAroot(E, bvals(j), potential, minroot, maxroot);
-                th(j) = my_GMquadScatteringAngle(potential, E, bvals(j), docas(j), 20);
+                docas(j) = DOCAroot(E, bvals(j), potential, minroot, maxroot);
+                th(j) = GMquadScatteringAngle(potential, E, bvals(j), docas(j), 20);
                 if strcmp(Potential_Type, 'ZBL')
-                    thmagic(j) = my_magicscatter(E,bvals(j),potential,docas(j),Z1,z2_param);
+                    thmagic(j) = magicscatter(E,bvals(j),potential,docas(j),Z1,z2_param);
                     %disp(thmagic(j))
                 end
             end

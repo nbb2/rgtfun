@@ -1,6 +1,6 @@
-function y = my_numstoppingcs(E,m1,m2,diffusioncs)
-%MY_NUMSTOPPINGCS    Outputs stopping cross-section value.
-%   Y=MY_NUMSTOPPINGCS(SCATTERDATAFILE) generates a stopping cross-section 
+function y = numstoppingcs(E,m1,m2,diffusioncs)
+%NUMSTOPPINGCS    Outputs stopping cross-section value.
+%   Y=NUMSTOPPINGCS(SCATTERDATAFILE) generates a stopping cross-section 
 %   value using diffusion cs value, masses, and energy. 
 %
 %   -- E must be energy in eV.

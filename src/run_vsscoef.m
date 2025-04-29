@@ -7,7 +7,7 @@ function y = run_vsscoef(inputfile,datapath)
 %   -- INPUTFILE must specify the path to where input file is.
 %   -- DATAFILEPATH must specify where to save the param table.
 %
-%   See also MY_VHSCOEF MY_VHSVISCOSITY
+%   See also VSSALPHA VSSDIAMETER VSSCONVERGENCE
 y = datapath;
 run(inputfile);
 %mr = m1*m2/(m1+m2);
@@ -25,12 +25,12 @@ difcoef_T = difcoefdata(:,1);
 dif_sample = interp1(difcoef_T, difcoef, Tvals);
 max_iter = 100;
 iter = 0;
-while my_VSSconvergence(alphavals,omegavals,molarkg,Tvals,dif_sample,viscvals,tol) && iter < max_iter
-diams = my_VSSdiameter(alphavals,omegavals,mrkg,Tvals,viscvals);
+while VSSconvergence(alphavals,omegavals,molarkg,Tvals,dif_sample,viscvals,tol) && iter < max_iter
+diams = VSSdiameter(alphavals,omegavals,mrkg,Tvals,viscvals);
 % disp('loop diams are ')
 % disp(diams*(1E10))
 % disp('end loop diams')
-newalpha = my_VSSalpha(omegavals,mrkg,molarkg,Tvals,dif_sample,diams);
+newalpha = VSSalpha(omegavals,mrkg,molarkg,Tvals,dif_sample,diams);
 alphavals = newalpha;
 % disp('alpha vals')
 % disp(alphavals)
@@ -40,7 +40,7 @@ end
 if iter == max_iter
     warning('Reached maximum number of iterations without convergence.');
 end
-diams = my_VSSdiameter(alphavals,omegavals,mrkg,Tvals,viscvals);
+diams = VSSdiameter(alphavals,omegavals,mrkg,Tvals,viscvals);
 %disp(diams)
 diams_angstrom  = diams*(1E10);
 %disp(diams_angstrom)

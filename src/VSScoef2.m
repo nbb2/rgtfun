@@ -1,4 +1,4 @@
-function y = my_VSScoef2(minT, maxT, Tfine, vq, m, omega, P, tol)
+function y = VSScoef2(minT, maxT, Tfine, vq, m, omega, P, tol)
     %MY_NUMVISCCOEF   Outputs float array with viscosity coefficient values.
     %   Y=MY_NUMVISCCOEF(TVALS,M1,M2,CSDATAFILE) generates a float array containing viscosity 
     %   coefficient value for each value of Tvals. 

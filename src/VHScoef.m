@@ -1,6 +1,6 @@
-function y = my_VHScoef(fitT,T_sample,mu_sample,excludeT,vq,tol)
-%MY_VHSCOEF  Outputs sample visc value and VHS param.
-%   Y=MY_VHSCOEF(FITT,T_SAMPLE,EXCLUDET,VQ,TOL) outputs a reference
+function y = VHScoef(fitT,T_sample,mu_sample,excludeT,vq,tol)
+%VHSCOEF  Outputs sample visc value and VHS param.
+%   Y=VHSCOEF(FITT,T_SAMPLE,EXCLUDET,VQ,TOL) outputs a reference
 %   viscosity value and VHS parameter omega by fitting the VHS model to 
 %   user-specified visocity coefficient data. 
 %

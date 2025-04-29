@@ -1,4 +1,4 @@
-function y = my_VSSdiffusion(T,omega,a,d,m,P,T_sample)
+function y = VSSdiffusion(T,omega,a,d,m,P,T_sample)
 %MY_VSSDIFFUSION  Outputs float array with diffusion coefficient values.
 %   Y=MY_VSSDIFFUSION(T,OMEGA,A,D,M,P,T_SAMPLE) generates a float array 
 %   containing diffusion coefficient value for each value of T using the 

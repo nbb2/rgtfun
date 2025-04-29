@@ -1,6 +1,6 @@
-function y = my_morse(rm,eps_well,k,r)
-%MY_MORSE    Outputs MORSE potential data.
-%   Y=MY_MORSE(RM,EPS_WELL,K,R) generates a float array containing
+function y = morse(rm,eps_well,k,r)
+%MORSE    Outputs MORSE potential data.
+%   Y=MORSE(RM,EPS_WELL,K,R) generates a float array containing
 %   a potential energy value for each r value using the Morse potential. 
 %   Units of potential energy are eV.
 %

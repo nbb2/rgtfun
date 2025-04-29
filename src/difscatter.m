@@ -1,6 +1,6 @@
-function y = my_difscatter(z1,z2,theta,E)
-%MY_DIFSCATTER    Outputs differential scattering cross section.
-%   Y=MY_DIFSCATTER(Z1,Z2,THETA,E) generates a float array containing
+function y = difscatter(z1,z2,theta,E)
+%DIFSCATTER    Outputs differential scattering cross section.
+%   Y=DIFSCATTER(Z1,Z2,THETA,E) generates a float array containing
 %   a differential scattering cross section value for each scattering 
 %   angle using the Rutherford scattering model. Units of differential 
 %   scattering cross section are Angstrom^2 / sr.

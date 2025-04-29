@@ -7,7 +7,7 @@ function y = run_vhscoef(inputfile,datapath)
 %   -- INPUTFILE must specify the path to where input file is.
 %   -- DATAFILEPATH must specify where to save the param table.
 %
-%   See also MY_VHSCOEF MY_VHSVISCOSITY
+%   See also VHSCOEF VHSVISCOSITY
 y = datapath;
 run(inputfile);
 %mr = m1*m2/(m1+m2);
@@ -45,14 +45,14 @@ for i = 1:N
     fitT(excludeT) = [];
     T_sample = 0.5*(minT + maxT);
     mu_sample = interp1(Tfine, vqvisc, T_sample);
-    vhscoefs = my_VHScoef(fitT,T_sample,mu_sample,excludeT,vqvisc,tol);
+    vhscoefs = VHScoef(fitT,T_sample,mu_sample,excludeT,vqvisc,tol);
     omega = vhscoefs(2);
     %vsscoefs = my_VSScoef(minT,maxT,Tfine2,vqdif,mr,omega,P,tol);
     %alpha = vsscoefs(1);
     %d = vsscoefs(2);
     dcollision = (1E10)*sqrt(15*sqrt(mrkg*kb*T_sample/pi)/...
         (2*(5-2*omega)*(7-2*omega)*(mu_sample/(1E6)))); %Angstrom
-    viscfit = my_VHSviscosity(fitT,omega,T_sample,mu_sample);
+    viscfit = VHSviscosity(fitT,omega,T_sample,mu_sample);
     %diffit = my_VSSdiffusion(fitT,omega,alpha,d,mr,P,T_sample);
     viscfitdatapath = fullfile(datapath,sprintf('/vhsfitdata/viscfitdata_n=%i.csv',i));
     %diffitdatapath = [datapath sprintf('/dsmcfitdata/diffitdata_n=%i.csv',i)];

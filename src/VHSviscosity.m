@@ -1,6 +1,6 @@
-function y = my_VHSviscosity(T,omega,T_ref,mu_ref)
-%MY_VHSVISCOSITY  Outputs float array with viscosity coefficient values.
-%   Y=MY_VHSVISCOSITY(T,OMEGA,T_REF,MU_REF) generates a float array 
+function y = VHSviscosity(T,omega,T_ref,mu_ref)
+%VHSVISCOSITY  Outputs float array with viscosity coefficient values.
+%   Y=VHSVISCOSITY(T,OMEGA,T_REF,MU_REF) generates a float array 
 %   containing viscosity coefficient value for each value of T using the 
 %   VHS model. 
 %

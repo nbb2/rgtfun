@@ -1,6 +1,6 @@
-function y = my_distclose(z1,z2,b,E)
-%MY_DISTCLOSE    Outputs distance of closest approach.
-%   Y=MY_DISTCLOSE(Z1,Z2,B,E) generates a float array containing an 
+function y = distclose(z1,z2,b,E)
+%DISTCLOSE    Outputs distance of closest approach.
+%   Y=DISTCLOSE(Z1,Z2,B,E) generates a float array containing an 
 %   impact parameter value for each scattering angle using the 
 %   Rutherford scattering model. Units of distance of closest approach 
 %   are Angstroms.

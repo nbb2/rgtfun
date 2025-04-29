@@ -1,6 +1,6 @@
-function y = my_numvisccoef(Tvals,m1,m2,csdatafile)
-%MY_NUMVISCCOEF   Outputs float array with viscosity coefficient values.
-%   Y=MY_NUMVISCCOEF(TVALS,M1,M2,CSDATAFILE) generates a float array 
+function y = numvisccoef(Tvals,m1,m2,csdatafile)
+%NUMVISCCOEF   Outputs float array with viscosity coefficient values.
+%   Y=NUMVISCCOEF(TVALS,M1,M2,CSDATAFILE) generates a float array 
 %   containing viscosity coefficient value for each value of Tvals by using
 %   trapezoidal integration. 
 %
@@ -9,7 +9,7 @@ function y = my_numvisccoef(Tvals,m1,m2,csdatafile)
 %   -- M2 must be mass in amu.
 %   -- CSDATAFILE must be location of viscosity cross section data file.
 %
-%   See also MY_NUMDIFFUSIONCOEF RUN_TRANSPORTCS
+%   See also NUMDIFFUSIONCOEF RUN_TRANSPORTCS
 %kb = 1.380649E-23; %J/K
 kb = 8.617333262E-5; %eV/K
 mred = m1*m2/(m1+m2);

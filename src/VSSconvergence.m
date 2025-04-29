@@ -1,4 +1,4 @@
-function y = my_VSSconvergence(alphavals,omegavals,m,Tvals,difvals,muref,tol)
+function y = VSSconvergence(alphavals,omegavals,m,Tvals,difvals,muref,tol)
 %MY_VSSCOEF  Outputs VSS params alpha and d.
 %   Y=MY_VSSCOEF(MINT,MAXT,TFINE,VQ,M,OMEGA,P,TOL) outputs VSS parameters 
 %   alpha and d by fitting the VSS model to user-specified diffusin 

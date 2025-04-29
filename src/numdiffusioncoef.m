@@ -1,6 +1,6 @@
-function y = my_numdiffusioncoef(Tvals,m1,m2,csdatafile)
-%MY_NUMDIFFUSIONCOEF   Outputs float array with diffusion coefficient values.
-%   Y=MY_NUMDIFFUSIONCOEF(TVALS,M1,M2,P,CSDATAFILE) generates a float array 
+function y = numdiffusioncoef(Tvals,m1,m2,csdatafile)
+%NUMDIFFUSIONCOEF   Outputs float array with diffusion coefficient values.
+%   Y=NUMDIFFUSIONCOEF(TVALS,M1,M2,P,CSDATAFILE) generates a float array 
 %   containing self-diffusion coefficient value for each value of Tvals by]
 %   using trapezoidal integration. 
 %
@@ -9,7 +9,7 @@ function y = my_numdiffusioncoef(Tvals,m1,m2,csdatafile)
 %   -- M2 must be mass in amu.
 %   -- CSDATAFILE must be location of diffusion cross section data file.
 %
-%   See also MY_NUMDIFFUSIONCOEF RUN_TRANSPORTCS
+%   See also NUMDIFFUSIONCS RUN_TRANSPORTCS
 %kb = 1.380649E-23; %J/K
 kb = 8.617333262E-5; %eV/K
 mred = m1*m2/(m1+m2);

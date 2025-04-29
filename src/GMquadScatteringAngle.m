@@ -1,6 +1,6 @@
-function th = my_GMquadScatteringAngle(V,Ec,b,rm,n)
-%MY_GMQUADSCATTERINGANGLE    Outputs float scattering angle.
-%   Y=MY_GMQUADSCATTERINGANGLE(V,EC,B,RM,N) generates a float value for the
+function th = GMquadScatteringAngle(V,Ec,b,rm,n)
+%GMQUADSCATTERINGANGLE    Outputs float scattering angle.
+%   Y=GMQUADSCATTERINGANGLE(V,EC,B,RM,N) generates a float value for the
 %   scattering angle using GM Quadrature. 
 %
 %   -- V must be the potential function handle.
@@ -9,7 +9,7 @@ function th = my_GMquadScatteringAngle(V,Ec,b,rm,n)
 %   -- RM is the distance of closest approach in Angstrom.
 %   -- N is the number of trapezoids to use.
 %
-%   See also MY_DOCAROOT RUN_SCATTERINGINTEGRALS
+%   See also DOCAROOT RUN_SCATTERINGINTEGRALS
     sum = 0;
     for j = 1:(n/2)
         anj = cos(((2*((n/2) - j + 1) - 1)/(2*n))*pi);

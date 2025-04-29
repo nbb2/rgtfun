@@ -1,13 +1,13 @@
-function y = my_viscositycs(beta)
-%MY_VISCOSITYCS    Outputs float array with viscosity cross-section values.
-%   Y=MY_VISCOSITYCS(BETA) generates a float array containing viscosity 
+function y = viscositycs(beta)
+%VISCOSITYCS    Outputs float array with viscosity cross-section values.
+%   Y=VISCOSITYCS(BETA) generates a float array containing viscosity 
 %   cros-section value for each value of the scattering parameter beta
 %   using a Lennard_Jones potential. 
 %
 %   -- BETA must be a float array containing values for the dimensionless
 %   scattering parameter.
 %
-%   See also MY_DIFFUSIONCS RUN_TRANSPORTCS
+%   See also DIFFUSIONCS RUN_TRANSPORTCS
 fLEeta = 1;
 fHEeta = 1 - 2.229.*(beta) + 35.967.*(beta.^(2)) - 86.490.*(beta.^(3)) ...
     + 60.335.*(beta.^(4));

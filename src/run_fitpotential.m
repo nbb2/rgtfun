@@ -8,10 +8,10 @@ function y = run_fitpotential(filepath,datapath)
 %   -- FILEPATH must specify the path to where input file is.
 %   -- DATAFILEPATH must specify where the potential data is saved.
 %
-%   See also MY_COULOMBCHAR MY_ZBLCHAR
+%   See also COULOMBCHAR ZBLCHAR
     run(filepath);
     if strcmp(Potential_Type,"Coulomb")
-        ft = fittype(my_coulombchar(Z1),dependent="y",independent="x",...
+        ft = fittype(coulombchar(Z1),dependent="y",independent="x",...
         coefficients="z2");
         t = readmatrix(datapath);
         excludex = ((t(:,1) < minR) | (t(:,1) > maxR));
@@ -22,7 +22,7 @@ function y = run_fitpotential(filepath,datapath)
         y = fit(xvals,yvals,ft,'Exclude',(xvals<minR)&(xvals>maxR),...
             'TolFun',tol,'Lower',minZ2,'Upper',maxZ2);
     elseif strcmp(Potential_Type,"ZBL")
-        ft = fittype(my_zblchar(Z1),dependent="y",independent="x",...
+        ft = fittype(zblchar(Z1),dependent="y",independent="x",...
         coefficients="z2");
         t = readmatrix(datapath);
         excludex = ((t(:,1) < minR) | (t(:,1) > maxR));
@@ -44,7 +44,6 @@ function y = run_fitpotential(filepath,datapath)
         y = fit(xvals,yvals,ft,...
                     'TolFun',tol,'Lower',[min_eps min_sigma],...
                     'Upper',[max_eps max_sigma],'StartPoint',[eps_start sigma_start]);
-        %Exclude',(xvals<minR)|(xvals>maxR),
     elseif strcmp(Potential_Type,"12-4 Lennard-Jones")
         t = readmatrix(datapath);
         excludex = ((t(:,1) < minR) | (t(:,1) > maxR));
@@ -57,7 +56,6 @@ function y = run_fitpotential(filepath,datapath)
         y = fit(xvals,yvals,ft,...
                     'TolFun',tol,'Lower',[min_eps min_sigma],...
                     'Upper',[max_eps max_sigma],'StartPoint',[eps_start sigma_start]);
-        %Exclude',(xvals<minR)|(xvals>maxR),
     elseif strcmp(Potential_Type,"Morse")
         t = readmatrix(datapath);
         excludex = ((t(:,1) < minR) | (t(:,1) > maxR));

@@ -1,9 +1,0 @@
-inttype = "Exact Coulomb";
-minE = 1.000000;
-maxE = 100.000000;
-Estep = 10.000000;
-Z1 = 1;
-Z2 = 1;
-theta_min = 0.000000; 
-theta_max = 3.140000; 
-theta_step = 0.100000; 

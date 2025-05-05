@@ -10,8 +10,8 @@ function run_transportCS(filepath,datafilepath)
 %   -- FILEPATH must specify the path to where input file is.
 %   -- DATAFILEPATH must specify where to save the CS data.
 %
-%   See also MY_DIFFUSIONCS MY_VISCOSITYCS MY_NUMDIFFUSIONCS MY_NUMVISCCS
-%   MY_NUMTOTALCS MY_NUMSTOPPINGCS
+%   See also DIFFUSIONCS VISCOSITYCS NUMDIFFUSIONCS NUMVISCCS
+%   NUMTOTALCS NUMSTOPPINGCS
     run(filepath);
     if logspace_on == 1
         minElog = log10(minE);
@@ -22,14 +22,14 @@ function run_transportCS(filepath,datafilepath)
     end
     if strcmp(inttype,'Exact LJ')
         beta = welldepth./(2*Evals);
-        diffusioncs = my_diffusioncs(beta);
-        viscositycs = my_viscositycs(beta);
-        A = [Evals' diffusioncs'];
-        B = [Evals' viscositycs'];
+        difcs = diffusioncs(beta);
+        visccs = viscositycs(beta);
+        A = [Evals' difcs'];
+        B = [Evals' visccs'];
 
     elseif strcmp(inttype,'Numerical')
-        diffusioncs = zeros(1,length(Evals));
-        viscositycs = zeros(1,length(Evals));
+        difcs = zeros(1,length(Evals));
+        visccs = zeros(1,length(Evals));
         stoppingcs = zeros(1,length(Evals));
         totalcs = zeros(1,length(Evals));
         for j = 1:length(Evals)
@@ -51,15 +51,14 @@ function run_transportCS(filepath,datafilepath)
             elseif strcmp(thetacutoff,'Manual')
                 th_c = th_max;
             end
-            %disp(file)
-            diffusioncs(j) = my_numdiffusioncs(bvals,th);
-            viscositycs(j) = my_numvisccs(bvals,th);
-            stoppingcs(j) = my_numstoppingcs(Evals(j),m1,m2,diffusioncs(j));
-            totalcs(j) = my_numtotalcs(th_c,bvals,th);
+            difcs(j) = numdiffusioncs(bvals,th);
+            visccs(j) = numvisccs(bvals,th);
+            stoppingcs(j) = numstoppingcs(Evals(j),m1,m2,diffusioncs(j));
+            totalcs(j) = numtotalcs(th_c,bvals,th);
         end
         CMtoLab = (m1+m2)/m2;
-        A = [Evals' diffusioncs'];
-        B = [Evals' viscositycs'];    
+        A = [Evals' difcs'];
+        B = [Evals' visccs'];    
         C = [(CMtoLab*Evals)' stoppingcs'];
         D = [Evals' totalcs'];
         stoppingcsdatapath = fullfile(datafilepath,'/stoppingcsdata.csv');

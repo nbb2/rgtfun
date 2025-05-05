@@ -16,8 +16,6 @@ function r0 = DOCAroot(Ec,b,V,rmin,rmax,chebfunpath)
     ri = max(roots(chebDOCA));
     chebDOCA2 = chebfun(@(r) doca(r,Ec,b,V),[0.9*ri,1.1*ri]);
     r0 = max(roots(chebDOCA2));
-    %disp(ri)
-    %fplot(@(r) my_doca(r, Ec, b, V), [0.001, 2000])
 
 end
 

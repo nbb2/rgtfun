@@ -20,13 +20,9 @@ function y = run_scatteringintegrals(filepath,datafilepath,progressBar)
         Evals = minE:Estep:maxE;
     end
     cd(sprintf('%s',y))
-    %mkdir docadata
 
     if strcmp(inttype,'Exact Coulomb')
         theta = theta_min:theta_step:theta_max;
-        %mkdir impactparamdata
-        %mkdir difscatterdata
-        % Loop through energies
         numESteps = numel(Evals);
         numthSteps = numel(theta);
         A = zeros(numthSteps,numESteps);
@@ -39,23 +35,21 @@ function y = run_scatteringintegrals(filepath,datafilepath,progressBar)
         colNamesC = strings(1,2*numESteps);
         for i = 1:numESteps
             E = Evals(i);
-            % Update progress bar if provided
             if nargin > 2 && isvalid(progressBar)
                 progressBar.Value = i / numESteps;
                 progressBar.Message = sprintf('Running %f eV...', E);
             end
-            difscatter = difscatter(Z1, Z2, theta, E);
+            mydifscatter = difscatter(Z1, Z2, theta, E);
             impactparam = impact(Z2, Z2, theta, E);
             doca = distclose(Z1, Z2, impactparam, E);
             colNames(i+1) = sprintf('E=%f',E);
             colNamesC(1,2*i-1) = sprintf('bval E=%f',E);
             colNamesC(1,2*i) = sprintf('doca E=%f',E);
-            A(:,i+1) = difscatter';
+            A(:,i+1) = mydifscatter';
             B(:,i+1) = impactparam';
             C(:,2*i-1) = impactparam';
             C(:,2*i) = doca';
         end
-        %disp(colNamesC)
         ATable = array2table(A,'VariableNames',colNames);
         BTable = array2table(B,'VariableNames',colNames);
         CTable = array2table(C,'VariableNames',colNamesC);
@@ -67,8 +61,6 @@ function y = run_scatteringintegrals(filepath,datafilepath,progressBar)
         writetable(CTable, docadatapath);
 
     elseif strcmp(inttype, 'Numerical')
-        %mkdir scatterangledata;
-        mkdir magicscatterdata
         run(fitfile);
         if strcmp(Potential_Type, 'Coulomb')
             potential = @(r) coulomb(Z1, z2_param, r);
@@ -91,20 +83,17 @@ function y = run_scatteringintegrals(filepath,datafilepath,progressBar)
             bvals = bmin:bstep:bmax;
         end
 
-        % Loop through energies
         numESteps = numel(Evals);
         numBSteps = numel(bvals);
         A = zeros(numBSteps,numESteps);
         B = zeros(numBSteps,numESteps);
         colNames = strings(1,1+numESteps);
-        %disp(colNames)
         A(:,1) = bvals';
         B(:,1) = bvals';
         colNames(1,1) = 'bvals';
        
         for i = 1:numESteps
             E = Evals(i);
-            % Update progress bar if provided
             if nargin > 2 && isvalid(progressBar)
                 progressBar.Value = i / numESteps;
                 progressBar.Message = sprintf('Running %f eV...', E);
@@ -117,10 +106,8 @@ function y = run_scatteringintegrals(filepath,datafilepath,progressBar)
                 th(j) = GMquadScatteringAngle(potential, E, bvals(j), docas(j), 20);
                 if strcmp(Potential_Type, 'ZBL')
                     thmagic(j) = magicscatter(E,bvals(j),potential,docas(j),Z1,z2_param);
-                    %disp(thmagic(j))
                 end
             end
-            %disp(thmagic)
             colNames(i+1) = sprintf('E=%f',E);
             A(:,i+1) = th';
             B(:,i+1) = docas';
@@ -128,7 +115,6 @@ function y = run_scatteringintegrals(filepath,datafilepath,progressBar)
             %magicscatterpath = fullfile(datafilepath,sprintf('/magicscatterdata/scatterangledata_%f.csv',E));
             %writematrix(C, magicscatterpath)
         end
-        %disp(colNames)
         ATable = array2table(A,'VariableNames',colNames);
         BTable = array2table(B,'VariableNames',colNames);
         scatterangdatapath = fullfile(datafilepath,'/scatterangledata.csv');

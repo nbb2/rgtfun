@@ -44,7 +44,6 @@ function y = run_fitpotential(filepath,datapath)
         y = fit(xvals,yvals,ft,...
                     'TolFun',tol,'Lower',[min_eps min_sigma],...
                     'Upper',[max_eps max_sigma],'StartPoint',[eps_start sigma_start]);
-        %Exclude',(xvals<minR)|(xvals>maxR),
     elseif strcmp(Potential_Type,"12-4 Lennard-Jones")
         t = readmatrix(datapath);
         excludex = ((t(:,1) < minR) | (t(:,1) > maxR));
@@ -57,7 +56,6 @@ function y = run_fitpotential(filepath,datapath)
         y = fit(xvals,yvals,ft,...
                     'TolFun',tol,'Lower',[min_eps min_sigma],...
                     'Upper',[max_eps max_sigma],'StartPoint',[eps_start sigma_start]);
-        %Exclude',(xvals<minR)|(xvals>maxR),
     elseif strcmp(Potential_Type,"Morse")
         t = readmatrix(datapath);
         excludex = ((t(:,1) < minR) | (t(:,1) > maxR));

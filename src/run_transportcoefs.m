@@ -12,11 +12,11 @@ function y = run_transportcoefs(filepath,datafilepath)
     run(filepath);
     Tvals = minT:Tstep:maxT;
     if strcmp(inttype,'Exact LJ') | strcmp(inttype,'Trapezoidal LJ')
-            difcoef = diffusioncoef(welldepth,Tvals,m1,m2,d,inttype,diffusiondatafile);
+            difcoef = diffusion_coef(welldepth,Tvals,m1,m2,d,inttype,diffusiondatafile);
             diffusioncoefdatapath  = fullfile(datafilepath,'/diffusioncoefdata.csv');
             A = [Tvals' difcoef'];
             writematrix(A, diffusioncoefdatapath);
-            viscositycoef = visccoef(welldepth,Tvals,m1,m2,d,inttype,viscositydatafile);
+            viscositycoef = visc_coef(welldepth,Tvals,m1,m2,d,inttype,viscositydatafile);
             visccoefdatapath  = fullfile(datafilepath,'/viscositycoefdata.csv');
             B = [Tvals' viscositycoef'];
             writematrix(B, visccoefdatapath);

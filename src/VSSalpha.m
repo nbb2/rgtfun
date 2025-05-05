@@ -1,33 +1,18 @@
 function y = VSSalpha(omegavals,m,molar,Tvals,difvals,diams)
-%VSSCOEF  Outputs VSS params alpha and d.
-%   Y=MY_VSSCOEF(MINT,MAXT,TFINE,VQ,M,OMEGA,P,TOL) outputs VSS parameters 
-%   alpha and d by fitting the VSS model to user-specified diffusin 
-%   coefficient data. 
+%VSSALPHA  Outputs VSS param alpha.
+%   Y=VSSALPHA(OMEGAVALS,M,MOLAR,TVALS,DIFVALS,DIAMS) outputs VSS parameter 
+%   alpha using reference diffusion coefficient and collision diameter data. 
 %
-
-
-%   -- MINT must be the lower bound of the temp range in K.
-%   -- MAXT mut be the upper bound of the temp range in K.
-%   -- TFINE must be the interpolated temperature values in K.
-%   -- VQ must be the interpolated diffusion coefficient values with the
-%   same dimension as TFINE.
-%   -- M must be the reduced mass of the system in amu.
-%   -- OMEGA must be the VHS param.
-%   -- TOL must be the fitting tolerance.
+%   -- OMEGAVALS must be an array of reference omega values.
+%   -- M must be the mass of a particle in kg.
+%   -- MOLAR must be the molar mass in kg.
+%   -- TVALS must be an array of the reference temperature values in K.
+%   -- DIFVALS must be an array of the reference diffusion coefficient data.
+%   -- DIAMS must be an array of the reference collision diameteres in angstrom.
 %
-%   See also RUN_DSMCCOEF
+%   See also RUN_VSSCOEF
 kb = 1.380649E-23; %J/K
-%kb = 8.617333262E-5; %eV/K
 Na = 6.022E23;
 rhoD = molar*difvals./(Na*kb*Tvals);
-% disp(molar)
-% disp('rhoD')
-% disp(rhoD)
-% disp('diams')
-% disp(diams)
-% test_y = 4*(5-2*omegavals).*rhoD.*(diams.^2)./(3*sqrt(m*kb*Tvals/pi));
-% %disp(test_y)
-% disp('omegas')
-% disp(omegavals)
 y = ((4*(5-2*omegavals).*rhoD.*(diams.^2))./(3*sqrt(m*kb*Tvals/pi))) - 1;
 end

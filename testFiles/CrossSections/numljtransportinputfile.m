@@ -1,0 +1,11 @@
+inttype = "Numerical";
+minE = 0.010000;
+maxE = 10.000000;
+Estep = 0.000000;
+logspace_on = 1;
+logstep = 20;
+m1 = 39.000000;
+m2 = 39.000000;
+thetacutoff = "Quantum";
+docafile = "/Users/JackG/Desktop/project/rgtfun/testFiles/ScatteringQuantities/numlj_docadata.csv";
+datafile = "/Users/JackG/Desktop/project/rgtfun/testFiles/ScatteringQuantities/numlj_scatterangledata.csv";

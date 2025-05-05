@@ -1,10 +1,9 @@
 function y = zblderivative(z1,z2,r)
-%ZBL    Outputs ZBL potential data.
-%   Y=ZBL(Z1,Z2,R) generates a float array containing
-%   a potential energy value for each r value using the ZBL potential.
+%ZBLDERIVATIVE    Outputs the derivative of a ZBL potential.
+%   Y=ZBLDERIVATIVE(Z1,Z2,R) generates a float array containing
+%   the derivative of the potential energy for each r value using the ZBL potential.
 %   Units of potential energy are eV.
 %
-
 %   -- Z1 must be the integer atomic number of species 1.
 %   -- Z2 must be the integer atomic number of species 2.
 %   -- R must be the numerical array containing r values in units of 

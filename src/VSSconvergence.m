@@ -1,32 +1,23 @@
 function y = VSSconvergence(alphavals,omegavals,m,Tvals,difvals,muref,tol)
-%MY_VSSCOEF  Outputs VSS params alpha and d.
-%   Y=MY_VSSCOEF(MINT,MAXT,TFINE,VQ,M,OMEGA,P,TOL) outputs VSS parameters 
-%   alpha and d by fitting the VSS model to user-specified diffusin 
-%   coefficient data. 
+%VSSCONVERGENCE  Checks least squares convergence of VSS parameters.
+%   Y=VSSCONVERGENCE(ALPHAVALS,OMEGAVALS,M,TVALS,DIFVALS,MUREF,TOL) outputs
+%   TRUE or FALSE depending on if the user-specified least-squares
+%   tolerance is satisfied.
 %
-
-
-%   -- MINT must be the lower bound of the temp range in K.
-%   -- MAXT mut be the upper bound of the temp range in K.
-%   -- TFINE must be the interpolated temperature values in K.
-%   -- VQ must be the interpolated diffusion coefficient values with the
-%   same dimension as TFINE.
-%   -- M must be the reduced mass of the system in amu.
-%   -- OMEGA must be the VHS param.
-%   -- TOL must be the fitting tolerance.
-%
-%   See also RUN_DSMCCOEF
+%   -- ALPHAVALS must be an array of the alpha values at each reference temperature.
+%   -- OMEGAVALS must be an array of the omega values at each reference
+%   temperature.
+%   -- M must be the mass of a particle in kg.
+%   -- TVALS must be an array of the reference temperature values in K.
+%   -- DIFVALS must be an array of the reference diffusion coefficient data.
+%   -- MUREF must be an array of the reference viscosity coefficient data.
+%   -- TOL must be the user-specified least squares tolerance.
+%   See also RUN_VSSCOEF
 kb = 1.380649E-23; %J/K
-%kb = 8.617333262E-5; %eV/K
 Na = 6.022E23;
 rhoD = m*difvals./(Na*kb*Tvals);
 muvals = ((10./alphavals)+5).*rhoD./(21-6*omegavals);
-Sc = rhoD./muref;
-%disp('Tvals Sc muvals muref')
-%disp([Tvals Sc muvals*(1E6) muref*(1E6)])
-% disp(sum((muvals - muref).^2))
+Sc = rhoD./muref; %Schmidt number
 LSerror = sum((muvals - muref).^2);
-%disp(LSerror)
-%fprintf('least squares error is %e \n',LSerror)
 y = (LSerror > tol);
 end

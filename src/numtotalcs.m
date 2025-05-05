@@ -12,10 +12,8 @@ function y = numtotalcs(th_max,bvals,th)
 
 bfine = min(bvals):0.00001:max(bvals);
 th_p = th - th_max;
-%disp(th_max)
 vqth = interp1(bvals,th_p,bfine);
 bmax = max(data_zeros(bfine,vqth));
-%disp(bmax)
 y = pi*bmax^2;
 end
 

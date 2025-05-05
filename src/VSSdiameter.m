@@ -1,26 +1,17 @@
 function y = VSSdiameter(alphavals,omegavals,m,Tvals,muvals)
-%MY_VSSCOEF  Outputs VSS params alpha and d.
-%   Y=MY_VSSCOEF(MINT,MAXT,TFINE,VQ,M,OMEGA,P,TOL) outputs VSS parameters 
-%   alpha and d by fitting the VSS model to user-specified diffusin 
-%   coefficient data. 
+%VSSDIAMETER  Outputs VSS collision diameter.
+%   Y=VSSDIAMETER(ALPHAVALS,OMEGAVALS,M,TVALS,MUVALS) outputs VSS collision  
+%   diamater using reference viscosity coefficient and VHS parameter data. 
 %
-
-
-%   -- MINT must be the lower bound of the temp range in K.
-%   -- MAXT mut be the upper bound of the temp range in K.
-%   -- TFINE must be the interpolated temperature values in K.
-%   -- VQ must be the interpolated diffusion coefficient values with the
-%   same dimension as TFINE.
-%   -- M must be the reduced mass of the system in amu.
-%   -- OMEGA must be the VHS param.
-%   -- TOL must be the fitting tolerance.
+%   -- ALPHAVALS must be an array of the alpha values at each reference temperature.
+%   -- OMEGAVALS must be an array of reference omega values.
+%   -- M must be the mass of a particle in kg.
+%   -- TVALS must be an array of the reference temperature values in K.
+%   -- MUVALS must be an array of the reference viscosity coefficient data.
 %
-%   See also RUN_DSMCCOEF
-%disp(omegavals)
+%   See also RUN_VSSCOEF
 kb = 1.380649E-23; %J/K
-%kb = 8.617333262E-5; %eV/K
 y2 = ((5*(alphavals+1).*(alphavals+2).*sqrt(m*kb*Tvals/pi))./...
     (4*alphavals.*(5-2*omegavals).*(7-2*omegavals).*muvals)); % meters
-%disp(y2)
 y = sqrt(y2);
 end

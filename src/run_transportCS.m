@@ -51,7 +51,6 @@ function run_transportCS(filepath,datafilepath)
             elseif strcmp(thetacutoff,'Manual')
                 th_c = th_max;
             end
-            %disp(file)
             difcs(j) = numdiffusioncs(bvals,th);
             visccs(j) = numvisccs(bvals,th);
             stoppingcs(j) = numstoppingcs(Evals(j),m1,m2,diffusioncs(j));

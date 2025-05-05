@@ -10,7 +10,6 @@ function y = numvisccoef(Tvals,m1,m2,csdatafile)
 %   -- CSDATAFILE must be location of viscosity cross section data file.
 %
 %   See also NUMDIFFUSIONCOEF RUN_TRANSPORTCS
-%kb = 1.380649E-23; %J/K
 kb = 8.617333262E-5; %eV/K
 mred = m1*m2/(m1+m2);
 csdata = readmatrix(csdatafile);
@@ -28,7 +27,6 @@ ct = 1;
 for T = Tvals
     redviscintegrand = ((kb*T).^(-4)).*exp(-Evals/(kb*T)).*(Evals.^3).*csvals;
     y(ct) = trapz(Evals,redviscintegrand);
-    %disp(y(ct))
     ct = ct + 1;
 end
 end

@@ -9,10 +9,7 @@ function y = numtotalcscheb(th_max,bvals,th)
 %   impact para data.
 %
 %   See also RUN_TRANSPORTCS 
-%addpath('../src/chebfun');
-%bfine = min(bvals):0.00001:max(bvals);
 th_p = th - th_max;
-%disp(th_max)
 p = spline(bvals,th_p);
 poly = @(r) ppval(p,r);
 chebtotalcs = chebfun(poly,[min(bvals),max(bvals)]);

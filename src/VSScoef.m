@@ -14,7 +14,6 @@ function y = VSScoef(minT,maxT,Tfine,vq,m,omega,P,tol)
 %   -- TOL must be the fitting tolerance.
 %
 %   See also RUN_DSMCCOEF
-%kb = 1.380649E-23; %J/K
 kb = 8.617333262E-5; %eV/K
 excludeT = ((Tfine < minT) | (Tfine > maxT));
 fitcoef = vq;

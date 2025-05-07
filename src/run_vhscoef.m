@@ -10,8 +10,8 @@ function y = run_vhscoef(inputfile,datapath)
 %   See also VHSCOEF VHSVISCOSITY
 y = datapath;
 run(inputfile);
-%mr = m1*m2/(m1+m2);
-mr = m1;
+mr = m1*m2/(m1+m2);
+%mr = m1;
 mrkg = mr/(6.022E26);
 kb = 1.380649E-23; %J/K
 cd(sprintf('%s',y))
@@ -38,7 +38,7 @@ for i = 1:N
     mu_sample = interp1(Tfine, vqvisc, T_sample);
     vhscoefs = VHScoef(fitT,T_sample,mu_sample,excludeT,vqvisc,tol);
     omega = vhscoefs(2);
-    dcollision = (1E10)*sqrt(15*sqrt(mrkg*kb*T_sample/pi)/...
+    dcollision = (1E10)*sqrt(15*sqrt(2*mrkg*kb*T_sample/pi)/...
         (2*(5-2*omega)*(7-2*omega)*(mu_sample/(1E6)))); %Angstrom
     viscfit = VHSviscosity(fitT,omega,T_sample,mu_sample);
     viscfitdatapath = fullfile(datapath,sprintf('/vhsfitdata/viscfitdata_n=%i.csv',i));

@@ -10,8 +10,8 @@ function y = run_vsscoef(inputfile,datapath)
 %   See also VSSALPHA VSSDIAMETER VSSCONVERGENCE
 y = datapath;
 run(inputfile);
-%mr = m1*m2/(m1+m2);
-mr = m1;
+mr = m1*m2/(m1+m2);
+%mr = m1;
 mrkg = mr/(6.022E26);
 molarkg = mr/(1E3);
 difcoefdata = readmatrix(diffusiondatafile);

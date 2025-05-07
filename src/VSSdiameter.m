@@ -11,7 +11,7 @@ function y = VSSdiameter(alphavals,omegavals,m,Tvals,muvals)
 %
 %   See also RUN_VSSCOEF
 kb = 1.380649E-23; %J/K
-y2 = ((5*(alphavals+1).*(alphavals+2).*sqrt(m*kb*Tvals/pi))./...
+y2 = ((5*(alphavals+1).*(alphavals+2).*sqrt(2*m*kb*Tvals/pi))./...
     (4*alphavals.*(5-2*omegavals).*(7-2*omegavals).*muvals)); % meters
 y = sqrt(y2);
 end

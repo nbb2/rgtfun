@@ -14,5 +14,5 @@ function y = VSSalpha(omegavals,m,molar,Tvals,difvals,diams)
 kb = 1.380649E-23; %J/K
 Na = 6.022E23;
 rhoD = molar*difvals./(Na*kb*Tvals);
-y = ((4*(5-2*omegavals).*rhoD.*(diams.^2))./(3*sqrt(m*kb*Tvals/pi))) - 1;
+y = ((2*4*(5-2*omegavals).*rhoD.*(diams.^2))./(3*sqrt(2*m*kb*Tvals/pi))) - 1;
 end

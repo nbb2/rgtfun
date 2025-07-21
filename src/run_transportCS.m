@@ -53,7 +53,7 @@ function run_transportCS(filepath,datafilepath)
             end
             difcs(j) = numdiffusioncs(bvals,th);
             visccs(j) = numvisccs(bvals,th);
-            stoppingcs(j) = numstoppingcs(Evals(j),m1,m2,diffusioncs(j));
+            stoppingcs(j) = numstoppingcs(Evals(j),m1,m2,difcs(j));
             totalcs(j) = numtotalcs(th_c,bvals,th);
         end
         CMtoLab = (m1+m2)/m2;

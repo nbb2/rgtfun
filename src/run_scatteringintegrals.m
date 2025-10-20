@@ -11,18 +11,19 @@ function y = run_scatteringintegrals(filepath,datafilepath,progressBar)
 %
 %   See also IMPACT DIFSCATTER DISTCLOSE DOCAROOT GMQUADSCATTERINGANGLE
     y = datafilepath;
-    run(filepath);
-    if logspace_on == 1
-        minElog = log10(minE);
-        maxElog = log10(maxE);
-        Evals = logspace(minElog,maxElog,logstep);
-    elseif logspace_on == 0
-        Evals = minE:Estep:maxE;
+    %run(filepath);
+    cfg = loadinputfile(filepath);
+    if cfg.logspace_on == 1
+        minElog = log10(cfg.minE);
+        maxElog = log10(cfg.maxE);
+        Evals = logspace(minElog,maxElog,cfg.logstep);
+    elseif cfg.logspace_on == 0
+        Evals = cfg.minE:cfg.Estep:cfg.maxE;
     end
     cd(sprintf('%s',y))
 
-    if strcmp(inttype,'Exact Coulomb')
-        theta = theta_min:theta_step:theta_max;
+    if strcmp(cfg.inttype,'Exact Coulomb')
+        theta = cfg.theta_min:cfg.theta_step:cfg.theta_max;
         numESteps = numel(Evals);
         numthSteps = numel(theta);
         A = zeros(numthSteps,numESteps);
@@ -39,9 +40,9 @@ function y = run_scatteringintegrals(filepath,datafilepath,progressBar)
                 progressBar.Value = i / numESteps;
                 progressBar.Message = sprintf('Running %f eV...', E);
             end
-            mydifscatter = difscatter(Z1, Z2, theta, E);
-            impactparam = impact(Z2, Z2, theta, E);
-            doca = distclose(Z1, Z2, impactparam, E);
+            mydifscatter = difscatter(cfg.Z1, cfg.Z2, theta, E);
+            impactparam = impact(cfg.Z2, cfg.Z2, theta, E);
+            doca = distclose(cfg.Z1, cfg.Z2, impactparam, E);
             colNames(i+1) = sprintf('E=%f',E);
             colNamesC(1,2*i-1) = sprintf('bval E=%f',E);
             colNamesC(1,2*i) = sprintf('doca E=%f',E);
@@ -60,27 +61,28 @@ function y = run_scatteringintegrals(filepath,datafilepath,progressBar)
         writetable(BTable, impactparamdatapath);
         writetable(CTable, docadatapath);
 
-    elseif strcmp(inttype, 'Numerical')
-        run(fitfile);
-        if strcmp(Potential_Type, 'Coulomb')
-            potential = @(r) coulomb(Z1, z2_param, r);
-        elseif strcmp(Potential_Type, '12-6 Lennard-Jones')
-            potential = @(r) lj_126(eps_param, sigma_param, r);
-        elseif strcmp(Potential_Type, '12-4 Lennard-Jones')
-            potential = @(r) lj_124(eps_param, sigma_param, r);
-        elseif strcmp(Potential_Type, 'ZBL')
-            potential = @(r) zbl(Z1, z2_param, r);
-        elseif strcmp(Potential_Type, 'Morse')
-            potential = @(r) morse(rm_param,eps_param,k_param,r);
-        elseif strcmp(Potential_Type, 'Power Law')
-            potential = @(r) powerlaw(a_param, k_param, r);
+    elseif strcmp(cfg.inttype, 'Numerical')
+        fitf = loadinputfile(cfg.fitfile);
+        %run(fitfile);
+        if strcmp(fitf.Potential_Type, 'Coulomb')
+            potential = @(r) coulomb(fitf.Z1, fitf.z2_param, r);
+        elseif strcmp(fitf.Potential_Type, '12-6 Lennard-Jones')
+            potential = @(r) lj_126(fitf.eps_param, fitf.sigma_param, r);
+        elseif strcmp(fitf.Potential_Type, '12-4 Lennard-Jones')
+            potential = @(r) lj_124(fitf.eps_param, fitf.sigma_param, r);
+        elseif strcmp(fitf.Potential_Type, 'ZBL')
+            potential = @(r) zbl(fitf.Z1, fitf.z2_param, r);
+        elseif strcmp(fitf.Potential_Type, 'Morse')
+            potential = @(r) morse(fitf.rm_param,fitf.eps_param,fitf.k_param,r);
+        elseif strcmp(fitf.Potential_Type, 'Power Law')
+            potential = @(r) powerlaw(fitf.a_param, fitf.k_param, r);
         end
-        if blogspace_on == 1
-            minblog = log10(bmin);
-            maxblog = log10(bmax);
-            bvals = logspace(minblog,maxblog,blogstep);
-        elseif blogspace_on == 0
-            bvals = bmin:bstep:bmax;
+        if cfg.blogspace_on == 1
+            minblog = log10(cfg.bmin);
+            maxblog = log10(cfg.bmax);
+            bvals = logspace(minblog,maxblog,cfg.blogstep);
+        elseif cfg.blogspace_on == 0
+            bvals = cfg.bmin:cfg.bstep:cfg.bmax;
         end
 
         numESteps = numel(Evals);
@@ -102,10 +104,10 @@ function y = run_scatteringintegrals(filepath,datafilepath,progressBar)
             th = zeros(1, length(bvals));
             thmagic = zeros(1,length(bvals));
             for j = 1:length(bvals)
-                docas(j) = DOCAroot(E, bvals(j), potential, minroot, maxroot,chebfunpath);
+                docas(j) = DOCAroot(E, bvals(j), potential, cfg.minroot, cfg.maxroot,cfg.chebfunpath);
                 th(j) = GMquadScatteringAngle(potential, E, bvals(j), docas(j), 20);
-                if strcmp(Potential_Type, 'ZBL')
-                    thmagic(j) = magicscatter(E,bvals(j),potential,docas(j),Z1,z2_param);
+                if strcmp(fitf.Potential_Type, 'ZBL')
+                    thmagic(j) = magicscatter(E,bvals(j),potential,docas(j),fitf.Z1,fitf.z2_param);
                 end
             end
             colNames(i+1) = sprintf('E=%f',E);

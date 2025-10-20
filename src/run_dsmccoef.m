@@ -9,32 +9,33 @@ function y = run_dsmccoef(inputfile,datapath)
 %
 %   See also VHSCOEF VHSVISCOSITY VSSCOEF VSSDIFFUSION
 y = datapath;
-run(inputfile);
-mr = m1*m2/(m1+m2);
+%run(inputfile);
+cfg = loadinputfile(inputfile);
+mr = cfg.m1*cfg.m2/(cfg.m1+cfg.m2);
 mrkg = mr/(6.022E26);
 kb = 1.380649E-23; %J/K
 cd(sprintf('%s',y))
 mkdir dsmcfitdata
-visccoefdata = readmatrix(viscdatafile);
+visccoefdata = readmatrix(cfg.viscdatafile);
 visccoef = visccoefdata(:,2);
 Tvals = visccoefdata(:,1);
 Tfine = min(Tvals):0.01:max(Tvals);
 vqvisc = interp1(Tvals,visccoef,Tfine);
-delta = (max(Tvals) - min(Tvals))/N;
+delta = (max(Tvals) - min(Tvals))/cfg.N;
 offset = min(Tvals);
 dsmcdatapath = fullfile(datapath,'/dsmccoeftable.csv');
 A = [];
 C = [Tfine' vqvisc'];
 interpviscdata = fullfile(datapath,'/dsmcfitdata/dsmcfitviscdata.csv');
 writematrix(C,interpviscdata);
-for i = 1:N
+for i = 1:cfg.N
     minT = offset;
     maxT = minT + delta;
     excludeT = ((Tfine < minT) | (Tfine > maxT));
     fitT = Tfine;
     fitT(excludeT) = [];
     T_sample = 0.5*(minT + maxT);
-    vhscoefs = my_VHScoef(fitT,T_sample,excludeT,vqvisc,tol);
+    vhscoefs = my_VHScoef(fitT,T_sample,excludeT,vqvisc,cfg.tol);
     mu_sample = vhscoefs(1);
     omega = vhscoefs(2);
     dcollision = (1E10)*sqrt(15*sqrt(mrkg*kb*T_sample/pi)/...

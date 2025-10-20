@@ -1,4 +1,5 @@
 function r0 = DOCAroot(Ec,b,V,rmin,rmax,chebfunpath)
+%#function doca   % ensure doca.m is included in the compiled app
 %DOCAROOT    Outputs float value for the root of the DOCA equation.
 %   Y=DOCAROOT(EC,B,V,RMIN,RMAX) generates a float value for the root
 %   of the distance of closest approach (DOCA) equation using two 
@@ -11,7 +12,7 @@ function r0 = DOCAroot(Ec,b,V,rmin,rmax,chebfunpath)
 %   -- RMAX is the upper bound of possble root values in Angstrom.
 %
 %   See also GMQUADSCATTERINGANGLE RUN_SCATTERINGINTEGRALS
-    addpath(chebfunpath)
+    %addpath(chebfunpath)
     chebDOCA = chebfun(@(r) doca(r,Ec,b,V),[rmin,rmax]);
     ri = max(roots(chebDOCA));
     chebDOCA2 = chebfun(@(r) doca(r,Ec,b,V),[0.9*ri,1.1*ri]);

@@ -175,7 +175,7 @@ Lastly, we compared the viscosity and self-diffusion coefficient data obtained f
 
 # Accessing RGTFun
  RGTFun can be downloaded from the public Github repository linked here:  
-https://github.com/nbb2/rgtfun/tree/paper  
- Please download all folders from the repository and ensure that they are all located within a *RGTFun* folder on your machine (it does not have to be called *RGTFun*). This is important because the app will ask you to select the RGTFun folder on your machine so it can establish the path to the *src* and *gui* folders. It does not matter where your *RGTFun* folder is located as long as it is a local folder, i.e. not in a cloud service. Once downloading the repository folders, you can start the app by opening the *gui.mlapp* file in the *gui* folder. 
+https://github.com/nbb2/rgtfun/releases/tag/v1.0.0
+ Please follow installation instructions on the release page.
 
 # References

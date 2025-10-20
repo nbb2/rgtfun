@@ -9,23 +9,24 @@ function y = run_vsscoef(inputfile,datapath)
 %
 %   See also VSSALPHA VSSDIAMETER VSSCONVERGENCE
 y = datapath;
-run(inputfile);
-mr = m1*m2/(m1+m2);
+%run(inputfile);
+cfg = loadinputfile(inputfile);
+mr = cfg.m1*cfg.m2/(cfg.m1+cfg.m2);
 %mr = m1;
 mrkg = mr/(6.022E26);
 molarkg = mr/(1E3);
-difcoefdata = readmatrix(diffusiondatafile);
-vhscoefdata = readmatrix(vhstablefile);
+difcoefdata = readmatrix(cfg.diffusiondatafile);
+vhscoefdata = readmatrix(cfg.vhstablefile);
 viscvals = vhscoefdata(:,3)*(1E-6);
 omegavals = vhscoefdata(:,5);
-alphavals = alphaguess*ones(length(omegavals),1);
+alphavals = cfg.alphaguess*ones(length(omegavals),1);
 Tvals = vhscoefdata(:,4);
 difcoef = difcoefdata(:,2);
 difcoef_T = difcoefdata(:,1);
 dif_sample = interp1(difcoef_T, difcoef, Tvals);
 max_iter = 100;
 iter = 0;
-while VSSconvergence(alphavals,omegavals,molarkg,Tvals,dif_sample,viscvals,tol) && iter < max_iter
+while VSSconvergence(alphavals,omegavals,molarkg,Tvals,dif_sample,viscvals,cfg.tol) && iter < max_iter
 diams = VSSdiameter(alphavals,omegavals,mrkg,Tvals,viscvals);
 newalpha = VSSalpha(omegavals,mrkg,molarkg,Tvals,dif_sample,diams);
 alphavals = newalpha;

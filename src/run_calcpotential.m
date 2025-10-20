@@ -8,40 +8,41 @@ function y = run_calcpotential(filepath,datafilepath)
 %   -- DATAFILEPATH must specify where to save the potential data.
 %
 %   See also COULOMB LJ_126 LJ_124 ZBL POWERLAW MORSE
-    run(filepath);
-    r = minR:Rstep:maxR;
-    if strcmp(Potential_Type,"Coulomb")
-        data = coulomb(Z1,Z2,r);
+    cfg = loadinputfile(filepath);
+    %run(filepath);
+    r = cfg.minR:cfg.Rstep:cfg.maxR;
+    if strcmp(cfg.Potential_Type,"Coulomb")
+        data = coulomb(cfg.Z1,cfg.Z2,r);
         datapath  = fullfile(datafilepath,'/coulombdata.csv');
         A = [r' data'];
         writematrix(A,datapath);
         y = datapath;
-    elseif strcmp(Potential_Type,"12-6 Lennard-Jones")
-        data = lj_126(eps_well,sig,r);
+    elseif strcmp(cfg.Potential_Type,"12-6 Lennard-Jones")
+        data = lj_126(cfg.eps_well,cfg.sig,r);
         datapath  = fullfile(datafilepath,'/126ljdata.csv');
         A = [r' data'];
         writematrix(A,datapath);
         y = datapath;
-    elseif strcmp(Potential_Type,"12-4 Lennard-Jones")
-        data = lj_124(eps_well,sig,r);
+    elseif strcmp(cfg.Potential_Type,"12-4 Lennard-Jones")
+        data = lj_124(cfg.eps_well,cfg.sig,r);
         datapath  = fullfile(datafilepath,'/124ljdata.csv');
         A = [r' data'];
         writematrix(A,datapath);
         y = datapath;
-    elseif strcmp(Potential_Type,"ZBL")
-        data = zbl(Z1,Z2,r);
+    elseif strcmp(cfg.Potential_Type,"ZBL")
+        data = zbl(cfg.Z1,cfg.Z2,r);
         datapath  = fullfile(datafilepath,'/zbldata.csv');
         A = [r' data'];
         writematrix(A,datapath);
         y = datapath;
-    elseif strcmp(Potential_Type,"Morse")
-        data = morse(rm,eps_well,k,r);
+    elseif strcmp(cfg.Potential_Type,"Morse")
+        data = morse(cfg.rm,cfg.eps_well,cfg.k,r);
         datapath  = fullfile(datafilepath,'/morsedata.csv');
         A = [r' data'];
         writematrix(A,datapath);
         y = datapath;
-    elseif strcmp(Potential_Type,"Power Law")
-        data = powerlaw(a,k,r);
+    elseif strcmp(cfg.Potential_Type,"Power Law")
+        data = powerlaw(cfg.a,cfg.k,r);
         datapath = fullfile(datafilepath,'/powerlawdata.csv');
         A = [r' data'];
         writematrix(A,datapath);

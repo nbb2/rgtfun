@@ -9,24 +9,25 @@ function y = run_transportcoefs(filepath,datafilepath)
 %
 %   See also DIFFUSIONCOEF VISCCOEF NUMDIFFUSIONCOEF NUMVISCCOEF
     %disp(filepath)
-    run(filepath);
-    Tvals = minT:Tstep:maxT;
-    if strcmp(inttype,'Exact LJ') | strcmp(inttype,'Trapezoidal LJ')
-            difcoef = diffusion_coef(welldepth,Tvals,m1,m2,d,inttype,diffusiondatafile);
+    %run(filepath);
+    cfg = loadinputfile(filepath);
+    Tvals = cfg.minT:cfg.Tstep:cfg.maxT;
+    if strcmp(cfg.inttype,'Exact LJ') | strcmp(cfg.inttype,'Trapezoidal LJ')
+            difcoef = diffusion_coef(cfg.welldepth,Tvals,cfg.m1,cfg.m2,cfg.d,cfg.inttype,cfg.diffusiondatafile);
             diffusioncoefdatapath  = fullfile(datafilepath,'/diffusioncoefdata.csv');
             A = [Tvals' difcoef'];
             writematrix(A, diffusioncoefdatapath);
-            viscositycoef = visc_coef(welldepth,Tvals,m1,m2,d,inttype,viscositydatafile);
+            viscositycoef = visc_coef(cfg.welldepth,Tvals,cfg.m1,cfg.m2,cfg.d,cfg.inttype,cfg.viscositydatafile);
             visccoefdatapath  = fullfile(datafilepath,'/viscositycoefdata.csv');
             B = [Tvals' viscositycoef'];
             writematrix(B, visccoefdatapath);
             y = datafilepath;
-    elseif strcmp(inttype,'Numerical')
-            diffusioncoef = numdiffusioncoef(Tvals,m1,m2,diffusiondatafile);
+    elseif strcmp(cfg.inttype,'Numerical')
+            diffusioncoef = numdiffusioncoef(Tvals,cfg.m1,cfg.m2,cfg.diffusiondatafile);
             diffusioncoefdatapath  = fullfile(datafilepath,'/diffusioncoefdata.csv');
             A = [Tvals' diffusioncoef'];
             writematrix(A, diffusioncoefdatapath);
-            visccoef = numvisccoef(Tvals,m1,m2,viscositydatafile);
+            visccoef = numvisccoef(Tvals,cfg.m1,cfg.m2,cfg.viscositydatafile);
             visccoefdatapath  = fullfile(datafilepath,'/viscositycoefdata.csv');
             B = [Tvals' visccoef'];
             writematrix(B, visccoefdatapath);

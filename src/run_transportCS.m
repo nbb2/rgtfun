@@ -12,51 +12,52 @@ function run_transportCS(filepath,datafilepath)
 %
 %   See also DIFFUSIONCS VISCOSITYCS NUMDIFFUSIONCS NUMVISCCS
 %   NUMTOTALCS NUMSTOPPINGCS
-    run(filepath);
-    if logspace_on == 1
-        minElog = log10(minE);
-        maxElog = log10(maxE);
-        Evals = logspace(minElog,maxElog,logstep);
-    elseif logspace_on == 0
-        Evals = minE:Estep:maxE;
+    %run(filepath);
+    cfg = loadinputfile(filepath);
+    if cfg.logspace_on == 1
+        minElog = log10(cfg.minE);
+        maxElog = log10(cfg.maxE);
+        Evals = logspace(minElog,maxElog,cfg.logstep);
+    elseif cfg.logspace_on == 0
+        Evals = cfg.minE:cfg.Estep:cfg.maxE;
     end
-    if strcmp(inttype,'Exact LJ')
-        beta = welldepth./(2*Evals);
+    if strcmp(cfg.inttype,'Exact LJ')
+        beta = cfg.welldepth./(2*Evals);
         difcs = diffusioncs(beta);
         visccs = viscositycs(beta);
         A = [Evals' difcs'];
         B = [Evals' visccs'];
 
-    elseif strcmp(inttype,'Numerical')
+    elseif strcmp(cfg.inttype,'Numerical')
         difcs = zeros(1,length(Evals));
         visccs = zeros(1,length(Evals));
         stoppingcs = zeros(1,length(Evals));
         totalcs = zeros(1,length(Evals));
         for j = 1:length(Evals)
             disp(Evals(j))
-            file = datafile;
+            file = cfg.datafile;
             scatterdata = readmatrix(file);
             th = scatterdata(:,j+1);
             bvals = scatterdata(:,1);
-            if strcmp(thetacutoff,'Quantum')
-                docadata = readmatrix(docafile);
+            if strcmp(cfg.thetacutoff,'Quantum')
+                docadata = readmatrix(cfg.docafile);
                 doca = docadata(:,j+1)*(1e-10); %m
                 hbar = 1.054571817E-34; %J*s
-                m_redamu  = m1*m2/(m1+m2);
+                m_redamu  = cfg.m1*cfg.m2/(cfg.m1+cfg.m2);
                 m_red = m_redamu/(6.022E26); %kg
                 E = Evals(j)*(1.60218E-19); %J
                 v_cm = sqrt(2*E/m_red);
                 lam_bar = hbar/(m_red*v_cm);
                 th_c = lam_bar./doca;
-            elseif strcmp(thetacutoff,'Manual')
-                th_c = th_max;
+            elseif strcmp(cfg.thetacutoff,'Manual')
+                th_c = cfg.th_max;
             end
             difcs(j) = numdiffusioncs(bvals,th);
             visccs(j) = numvisccs(bvals,th);
-            stoppingcs(j) = numstoppingcs(Evals(j),m1,m2,difcs(j));
+            stoppingcs(j) = numstoppingcs(Evals(j),cfg.m1,cfg.m2,difcs(j));
             totalcs(j) = numtotalcs(th_c,bvals,th);
         end
-        CMtoLab = (m1+m2)/m2;
+        CMtoLab = (cfg.m1+cfg.m2)/cfg.m2;
         A = [Evals' difcs'];
         B = [Evals' visccs'];    
         C = [(CMtoLab*Evals)' stoppingcs'];

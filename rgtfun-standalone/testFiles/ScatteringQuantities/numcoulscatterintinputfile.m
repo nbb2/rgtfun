@@ -1,0 +1,15 @@
+inttype = "Numerical";
+minE = 0.010000;
+maxE = 10.000000;
+Estep = 0.000000;
+logspace_on = 1;
+logstep = 20;
+chebfunpath = "/Users/JackG/Desktop/chebfun";
+fitfile = "/Users/JackG/Desktop/project/rgtfun/testFiles/ScatteringQuantities/fitoutputfile.m";
+blogspace_on = 1;
+blogstep = 100;
+bmin = 0.000100; 
+bmax = 100.000000; 
+bstep = 0.000000; 
+minroot = 1.000000; 
+maxroot = 10000.000000; 

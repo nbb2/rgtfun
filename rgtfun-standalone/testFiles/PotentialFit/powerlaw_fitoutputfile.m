@@ -1,0 +1,12 @@
+Potential_Type = "Power Law";
+minR = 1.000000;
+maxR = 10.000000;
+Tol = 1.000000e-12;
+a_param = 9.999999e+00;
+k_param = 4.000000e+00;
+min_a = 0.000000;
+max_a = 10.000000;
+min_k = 0.000000;
+max_k = 10.000000;
+a_start = 5.000000;
+k_start = 2.000000;

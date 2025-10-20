@@ -1,0 +1,16 @@
+Potential_Type = "Morse";
+minR = 1.000000;
+maxR = 8.000000;
+Tol = 1.000000e-12;
+rm_param = 4.008115;
+eps_param = 0.483595;
+k_param = 3.869290;
+min_eps = 0.100000;
+max_eps = 0.800000;
+min_k = 1.000000;
+max_k = 7.000000;
+min_rm = 1.000000;
+max_rm = 5.000000;
+eps_start = 0.400000;
+k_start = 3.000000;
+rm_start = 3.000000;

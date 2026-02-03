@@ -158,6 +158,7 @@ $$\mu = \mu_{ref} \cdot \left(\frac{T}{T_o}\right)^{\omega} \quad (16)$$
 RGTFun is validated across four levels of fidelity: (1) a single-collision analytic benchmark by comparing Coulomb scattering angles against the exact classical solution; (2) a screened-potential benchmark by comparing ZBL scattering angles to the Biersack “Magic Formula” [@biersack_monte_1980]; (3) a cross-tool benchmark by comparing ZBL-based nuclear stopping cross sections to SRIM results for H–H [@ziegler_treatise_1985] [@ziegler_srim_2010]; and (4) an end-to-end macroscopic benchmark by comparing predicted argon viscosity and self-diffusion coefficients to NIST reference data [@kestin_equilibrium_1984].
 
 The corresponding validation cases are:
+
 - Coulomb scattering angle: RGTFun vs exact classical solution.
 - ZBL scattering angle: RGTFun vs the Magic Formula [@biersack_monte_1980].
 - Nuclear stopping cross section (H in H): RGTFun (ZBL) vs SRIM [@ziegler_treatise_1985] [@ziegler_srim_2010].

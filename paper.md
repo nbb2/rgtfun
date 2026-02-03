@@ -54,11 +54,10 @@ $VHS$ - variablele hard sphere - the collision rule used for the DSMC
 # Statement of Need
 RGTFun is a MATLAB app designed for the efficient calculation of scattering integrals and transport coefficients of elastic collisions. While the solution for classical scattering, as well as its application for determining gas transport coefficients, has been known for over approximately a century [@chapman_mathematical_1990], the numerical codes are usually kept as closed-source or are printed in textbooks in older programming languages such as FORTRAN [@maitland_intermolecular_1987]. To our knowledge, existing publicly available tools (e.g., SRIM for stopping power calculations) offer limited support for user-adjustable interatomic potentials (especially across energy regimes) in end-to-end workflows that compute scattering integrals and the resulting transport coefficients.
 
-RGTFun is open source and implemented in MATLAB, leveraging its numerical computing capabilities and App Designer for the graphical interface. We welcome issues and pull requests, and we encourage users to extend the app to their applications. Furthermore, the code features a well-designed graphical user interface (GUI) to facilitate the step by step process of going from an intermolecular potential to macroscopic transport coefficients such as viscosity and diffusion coefficients. The ethos of the project is to decrease the learning curve of going from quantum chemistry calculations of intermolecular potential energy surfaces to usable transport coefficients in CFD or PIC codes.  
+RGTFun is open source and implemented in MATLAB, leveraging its numerical computing capabilities and App Designer for the graphical interface. Furthermore, the code features a well-designed graphical user interface (GUI) to facilitate the step by step process of going from an intermolecular potential to macroscopic transport coefficients such as viscosity and diffusion coefficients. The ethos of the project is to decrease the learning curve of going from quantum chemistry calculations of intermolecular potential energy surfaces to usable transport coefficients in CFD or PIC codes.  
 
-The paper briefly reviews the theory behind bimolecular scattering and how cross sections of elastic scattering events are used to calculate macroscopic transport properties. Then, four validation cases of the code are reviewed. RGTFun is validated across four levels of fidelity: (1) a single-collision analytic benchmark by comparing Coulomb scattering angles against the exact classical solution; (2) a standard screened-potential benchmark by comparing ZBL scattering angles to the Biersack “Magic Formula” [@biersack_monte_1980]; (3) a cross-tool benchmark by comparing ZBL-based nuclear stopping cross sections to SRIM results for H–H [@ziegler_treatise_1985] [@ziegler_srim_2010]; and (4) an end-to-end macroscopic benchmark by comparing predicted argon viscosity and self-diffusion coefficients to NIST reference data [@kestin_equilibrium_1984].
-
-This app has already been incorporated into the authors' computational workflow and has been used by our collaborators at ASML to generate coefficients for downstream modeling. 
+# Research Impact Statement
+RGTFun has been incorporated into the authors’ computational workflow and has been used by collaborators at ASML to generate coefficients for downstream modeling. By providing an end-to-end workflow from an intermolecular potential to macroscopic transport coefficients (e.g., viscosity and diffusion), RGTFun lowers the barrier for translating potential energy surfaces from quantum chemistry into inputs for CFD or PIC simulations. In addition to interactive GUI use, the modular scripts support batch execution for parameter sweeps and integration into existing pipelines. The validation cases in this paper provide a reference analysis spanning analytic scattering, screened-potential benchmarks, cross-tool comparison to SRIM, and comparison to NIST transport data.
 
 # Software Design 
 RGTFun was designed around three principles: (i) provide a user-friendly graphical interface that guides users through computing scattering quantities and transport coefficients from interatomic potentials, (ii) build on established formulations and numerical methods from the literature rather than introducing new theory, and (iii) support both interactive use and reproducible, scriptable workflows.
@@ -69,7 +68,7 @@ MATLAB was selected primarily for MATLAB App Designer’s extensive GUI toolbox 
 
 A second key decision was to keep the computational core modular and usable without the GUI. Each major calculation step is implemented as an independent script/function that takes only two inputs: (1) a user-specified input file and (2) an output directory. The GUI serves as a front-end that generates or selects inputs, runs these core routines, and forwards output paths to downstream steps. This design supports advanced users who prefer command line execution, makes batch runs straightforward, and simplifies validation: benchmark input files can be run through individual calculation steps and compared against expected outputs.
 
-Lastly, we built a rigorous testing suite that utilizes MATLAB's internal unit testing framework to test each script in RGTFun against reference data that is included with the app. 
+Lastly, we built a rigorous testing suite that utilizes MATLAB's internal unit testing framework to test each script in RGTFun against reference data that is included with the app. We welcome issues and pull requests, and we encourage users to extend the app to their applications.
 
 # Theory
 ## The Intermolecular Potential
@@ -156,12 +155,13 @@ $$d_{12} = \left(\frac{15\cdot \sqrt{mk_bT/\pi}}{2\cdot (5-2\omega)\cdot (7-2\om
 $$\mu = \mu_{ref} \cdot \left(\frac{T}{T_o}\right)^{\omega} \quad (16)$$
 
 # Validation of RGTFun
-Four main validation cases were used to verify the results obtained from RGTFun. These were: 
+RGTFun is validated across four levels of fidelity: (1) a single-collision analytic benchmark by comparing Coulomb scattering angles against the exact classical solution; (2) a screened-potential benchmark by comparing ZBL scattering angles to the Biersack “Magic Formula” [@biersack_monte_1980]; (3) a cross-tool benchmark by comparing ZBL-based nuclear stopping cross sections to SRIM results for H–H [@ziegler_treatise_1985] [@ziegler_srim_2010]; and (4) an end-to-end macroscopic benchmark by comparing predicted argon viscosity and self-diffusion coefficients to NIST reference data [@kestin_equilibrium_1984].
 
-- Comparison of RGTFun scattering angle obtained from Coulomb potential vs exact scattering Coulomb scattering angle.
-- Comparison of RGTFun scattering angle obtained from ZBL potential vs scattering angle from the Magic Formula [@biersack_monte_1980].
-- Comparison of RGTFun Nuclear Stopping Cross Section obtained from ZBL potential [@ziegler_treatise_1985] to SRIM [@ziegler_srim_2010] nuclear stopping cross section for H into H.
-- Comparison of RGTFun Viscosity Coefficient and Self-Diffusion Coefficient for Argon to NIST Argon data [@kestin_equilibrium_1984].
+The corresponding validation cases are:
+- Coulomb scattering angle: RGTFun vs exact classical solution.
+- ZBL scattering angle: RGTFun vs the Magic Formula [@biersack_monte_1980].
+- Nuclear stopping cross section (H in H): RGTFun (ZBL) vs SRIM [@ziegler_treatise_1985] [@ziegler_srim_2010].
+- Argon transport: viscosity and self-diffusion coefficients vs NIST reference data [@kestin_equilibrium_1984].
 
 ## Validation of Rutherford Scattering
 As a first step in validation, we compared the scattering angle data obtained from RGTFun for a H-H Coulomb potential to the exact scattering angles for a Coulomb potential [@goldstein_classical_2008]. This validation case was chosen because the Coulomb potential is one of the few potentials for which there exists an exact solution for the scattering angle (the other being the series solution for the inverse power law potential). This comparison is shown in \autoref{fig:coulcomp}. In the figure, it is clear that the RGTFun scattering angle calcuation is in agreement with the analytical calcuation of Rutherford scattering.

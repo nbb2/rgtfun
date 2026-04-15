@@ -12,6 +12,7 @@ classdef TestDSMCCoefs < matlab.unittest.TestCase
     methods (Test)
         % Test methods
         function test_VHSomega(testCase)
+            addpath('../src')
             N = 20;
             tol = 1e-20;
             visccoefdata = readmatrix('../testFiles/DSMCCoefs/numlj_viscositycoefdata.csv');

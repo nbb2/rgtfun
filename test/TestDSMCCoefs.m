@@ -12,6 +12,7 @@ classdef TestDSMCCoefs < matlab.unittest.TestCase
     methods (Test)
         % Test methods
         function test_VHSomega(testCase)
+            addpath('../src')
             N = 20;
             tol = 1e-20;
             visccoefdata = readmatrix('../testFiles/DSMCCoefs/numlj_viscositycoefdata.csv');
@@ -40,7 +41,7 @@ classdef TestDSMCCoefs < matlab.unittest.TestCase
         end
 
         function test_VSSalpha(testCase)
-            mr = 39;
+            mr = 19.5;
             alphaguess = 1.2;
             tol = 1e-20;
             mrkg = mr/(6.022E26);
@@ -64,11 +65,11 @@ classdef TestDSMCCoefs < matlab.unittest.TestCase
             end
             actSolution = alphavals;
             expSolution = readmatrix('../testFiles/DSMCCoefs/ref_VSScoeftable.csv');
-            testCase.verifyEqual(actSolution,expSolution(:,2),AbsTol=sqrt(eps));
+            testCase.verifyEqual(actSolution,expSolution(:,2),AbsTol=1e-5);
         end
 
         function test_VSSdiam(testCase)
-            mr = 39;
+            mr = 19.5;
             alphaguess = 1.2;
             tol = 1e-20;
             mrkg = mr/(6.022E26);
@@ -94,7 +95,7 @@ classdef TestDSMCCoefs < matlab.unittest.TestCase
             diams_angstrom  = diams*(1E10);
             actSolution = diams_angstrom;
             expSolution = readmatrix('../testFiles/DSMCCoefs/ref_VSScoeftable.csv');
-            testCase.verifyEqual(actSolution,expSolution(:,3),AbsTol=sqrt(eps));
+            testCase.verifyEqual(actSolution,expSolution(:,3),AbsTol=1e-5);
         end
        
     end

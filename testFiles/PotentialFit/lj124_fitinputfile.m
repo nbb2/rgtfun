@@ -1,5 +1,5 @@
 Potential_Type = "12-4 Lennard-Jones";
-minR = 1.000000;
+minR = 2.000000;
 maxR = 8.000000;
 tol = 1.000000e-12;
 min_eps = 0.100000;

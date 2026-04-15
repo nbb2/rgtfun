@@ -12,6 +12,7 @@ classdef TestCrossSections < matlab.unittest.TestCase
     methods (Test)
         % Test methods
         function test_diffusioncs(testCase)
+            addpath('../src')
             Evals = 0.01:0.01:100;
             well_depth = 0.010685;
             beta = well_depth./(2*Evals); 

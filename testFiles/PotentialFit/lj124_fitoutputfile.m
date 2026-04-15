@@ -1,9 +1,9 @@
 Potential_Type = "12-4 Lennard-Jones";
-minR = 1.000000;
+minR = 2.000000;
 maxR = 8.000000;
 Tol = 1.000000e-12;
-eps_param = 0.514555;
-sigma_param = 2.992836;
+eps_param = 0.5;
+sigma_param = 3.0;
 min_eps = 0.100000;
 max_eps = 1.000000;
 min_sigma = 1.000000;

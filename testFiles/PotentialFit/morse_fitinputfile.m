@@ -1,5 +1,5 @@
 Potential_Type = "Morse";
-minR = 1.000000;
+minR = 2.000000;
 maxR = 8.000000;
 tol = 1.000000e-12;
 min_eps = 0.100000;

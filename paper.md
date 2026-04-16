@@ -48,7 +48,7 @@ $P_{vap}$ - equilibrium vapor pressure (Pa)
 $k_B$ - Boltzmann's constant ($J \cdot K^{-1}$)  
 $T$ - temperature (K)  
 $d_{12}$ - collision diameter used in the VHS collision rule for DSMC simulations  
-$VHS$ - variablele hard sphere - the collision rule used for the DSMC
+$VHS$ - variable hard sphere - the collision rule used for the DSMC
 
 # Statement of Need
 RGTFun is a MATLAB app designed for the efficient calculation of scattering integrals and transport coefficients of elastic collisions. While the solution for classical scattering, as well as its application for determining gas transport coefficients, has been known for over approximately a century [@chapman_mathematical_1990], the numerical codes are usually kept as closed-source or are printed in textbooks in older programming languages such as FORTRAN [@maitland_intermolecular_1987]. To our knowledge, existing publicly available tools (e.g., MagnumPI for calculation of scattering angles and cross sections [@magnumpi]; SRIM for stopping power calculations [@ziegler_srim_2010]) offer limited support for user-adjustable interatomic potentials (especially across energy regimes) in end-to-end workflows that compute scattering integrals and the resulting transport coefficients.
@@ -169,7 +169,7 @@ The corresponding validation cases are:
 - Argon transport: viscosity and self-diffusion coefficients vs NIST reference data [@kestin_equilibrium_1984].
 
 ## Validation of Rutherford Scattering
-As a first step in validation, we compared the scattering angle data obtained from RGTFun for a H-H Coulomb potential to the exact scattering angles for a Coulomb potential [@goldstein_classical_2008]. This validation case was chosen because the Coulomb potential is one of the few potentials for which there exists an exact solution for the scattering angle (the other being the series solution for the inverse power law potential). This comparison is shown in \autoref{fig:coulcomp}. In the figure, it is clear that the RGTFun scattering angle calcuation is in agreement with the analytical calcuation of Rutherford scattering.
+As a first step in validation, we compared the scattering angle data obtained from RGTFun for a H-H Coulomb potential to the exact scattering angles for a Coulomb potential [@goldstein_classical_2008]. This validation case was chosen because the Coulomb potential is one of the few potentials for which there exists an exact solution for the scattering angle (the other being the series solution for the inverse power law potential). This comparison is shown in \autoref{fig:coulcomp}. In the figure, it is clear that the RGTFun scattering angle calculation is in agreement with the analytical calculation of Rutherford scattering.
 
 ![Comparison of scattering angle vs impact parameter curves for three different CM energies for a H-H Coulomb potential. The exact scattering angle curves are plotted as solid lines and the RGTFun scattering angle data are plotted as circles. \label{fig:coulcomp}](./figures/CoulComp.png){ width=60% }
 

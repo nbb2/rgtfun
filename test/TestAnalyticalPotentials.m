@@ -12,7 +12,7 @@ classdef TestAnalyticalPotentials < matlab.unittest.TestCase
     methods (Test)
         % Test methods
         function testrun_calcpotential(testCase)
-            %addpath('../test')
+            addpath('../src')
             run_calcpotential('../testFiles/AnalyticPotentials/potentialinputfile.m','../testFiles/AnalyticPotentials');
             actSolution = readmatrix("../testFiles/AnalyticPotentials/coulombdata.csv");
             expSolution = readmatrix("../testFiles/AnalyticPotentials/coulomb_testdata.csv");

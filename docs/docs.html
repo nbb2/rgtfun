@@ -68,24 +68,66 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 RGTFun, an example calculation using RGTFun that can be used as a
 tutorial for new users, and then discuss the included testing suite.
 Documentation for all functions can be found in the appendix.</p>
-<h1 id="accessing-rgtfun">Accessing RGTFun</h1>
+<h1 id="downloading-rgtfun">Downloading RGTFun</h1>
 <p>RGTFun can be downloaded from the public Github repository linked
 here:<br />
 https://github.com/nbb2/rgtfun/tree/paper<br />
-Please download all folders from the repository and ensure that they are
-all located within a <em>RGTFun</em> folder on your machine (it does not
-have to be called <em>RGTFun</em>). This is important because the app
-will ask you to select the RGTFun folder on your machine so it can
-establish the path to the <em>src</em> and <em>gui</em> folders. It does
-not matter where your <em>RGTFun</em> folder is located as long as it is
-a local folder, i.e. not in a cloud service. Once downloading the
-repository folders, you can start the app by opening the
-<em>gui.mlapp</em> file in the <em>gui</em> folder.</p>
+Please download all folders from the repository and ensure that they are 
+all located within a <em>RGTFun</em> folder on your machine (it does not 
+have to be called <em>RGTFun</em>). This is important because the app will 
+ask you to select the RGTFun folder on your machine so it can establish the 
+path to the <em>src</em> and <em>gui</em> folders. It does not matter where 
+your <em>RGTFun</em> folder is located as long as it is a local folder, i.e. 
+not in a cloud service. Once downloading the repository folders, you can start 
+the app by opening the <em>gui.mlapp</em> file in the <em>gui</em> folder. 
+Note that RGTFun must be run with MATLAB R2023b or newer. RGTFun is also 
+available as a standalone desktop app and can be downloaded 
+from the Releases page in the Github repository. Note that the standalone 
+deskop app requires MATLAB Runtime R2024a to be installed, which is free to 
+download from MathWorks (install instructions are located on the Release page 
+in the RGTFun repository).</p>
+<h1 id="downloading-chebfun">Downloading Chebfun</h1>
+<p>Chebfun must be downloaded locally in order to run RGTFun. Chebfun can be 
+downloaded from the Chebfun website linked here: <br />
+https://www.chebfun.org/download/ <br />
+Note that RGTFun requires Chebfun V5.7.0 or newer. Please download the Chebfun 
+.zip file and unzip on your machine. We recommend putting Chebfun in an 
+easy-to-find location since RGTFun will ask you to provide the path to the 
+Chebfun directory.</p>
 <h1 id="an-example-calculation-of-argon-argon-interaction">An Example
 Calculation of Argon-Argon Interaction</h1>
 <p>We will now present example calculations of transport quanitities and
 scattering integrals using RGTFun. The calculations will be performed
 for an Argon-Argon ZBL potential.</p>
+<h3>Timing (end-to-end tutorial)</h3>
+<p>
+  On a typical laptop, this end-to-end tutorial takes <strong>~5–10 minutes</strong> to complete
+  (including generating inputs, running each tab, and saving plots/files).
+</p>
+<p>
+  <strong>Timing reference:</strong> Apple Silicon laptop (macOS), MATLAB R2025b.
+</p>
+<p><strong>What affects runtime most</strong></p>
+<ul>
+  <li>
+    The numerical grids used in the scattering and cross-section steps:
+    <ul>
+      <li>
+        runtime increases roughly with <strong>(# energy points) × (# impact parameter points)</strong>
+        in the scattering-integrals step.
+      </li>
+    </ul>
+  </li>
+  <li>
+    The number of temperature points used in the transport-coefficient step.
+  </li>
+</ul>
+<p><strong>Speed-up for quick iteration</strong></p>
+<p>
+  If you want a faster “sanity check” run, reduce the grid sizes (e.g., fewer energy points or fewer
+  impact-parameter points) and then increase them for final-quality results.
+</p>
+
 <h2 id="calculatefit-potential-tab">Calculate/Fit Potential Tab</h2>
 <figure>
 <img src="./figures/potentialtab.png" style="width:80.0%"
@@ -93,19 +135,88 @@ alt="Screenshot of Calculate/Fit Potential tab for an Argon-Argon ZBL potential.
 <figcaption aria-hidden="true">Screenshot of <em>Calculate/Fit
 Potential</em> tab for an Argon-Argon ZBL potential. </figcaption>
 </figure>
-<p>The <em>Calculate/Fit Potential</em> tab allows you to either create
-your own potential data or fit one of the RGTFun-supported potentials to
-your own data. For this example, we wanted to calculate a ZBL potential
-for an Argon-Argon interaction. To begin, we selected “Calculate
-Potential” from the “Selected Action” drop-down menu. Then, we selected
-“ZBL” from the “Fit/Potential Type” drop-down menu. We then specified
-the distance values and potential parameters. Then we selected the
-folder where RGTFun will save the input/output files and data. We then
-clicked “Write Input File” to generate an input file with the potential
-parameters specified. This will auto populate the “Or Select Your Own
-Input File” box. Lastly, we selected “Execute” to generate potential
-data, plot the potential data, save the plot as an image, and save a fit
-output file for the data.</p>
+<p>The <em>Calculate/Fit Potential</em> tab allows you to either create 
+your own potential data or fit one of the RGTFun-supported potentials 
+to your own data.</p>
+<h3 id="inputs-used-in-this-tutorial">Inputs used in this tutorial</h3>
+
+<table>
+<thead>
+<tr>
+  <th>Setting / Parameter</th>
+  <th style="text-align:right;">Value</th>
+  <th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Selected Action</td>
+  <td style="text-align:right;">Calculate Potential</td>
+  <td>Creates user-specified potential data</td>
+</tr>
+<tr>
+  <td>Fit/Potential Type</td>
+  <td style="text-align:right;">ZBL</td>
+  <td>Universal screened potential</td>
+</tr>
+<tr>
+  <td>min r (Å)</td>
+  <td style="text-align:right;">0.1</td>
+  <td>Minimum interatomic distance</td>
+</tr>
+<tr>
+  <td>max r (Å)</td>
+  <td style="text-align:right;">10</td>
+  <td>Maximum interatomic distance</td>
+</tr>
+<tr>
+  <td>r step (Å)</td>
+  <td style="text-align:right;">0.1</td>
+  <td>Distance grid spacing</td>
+</tr>
+<tr>
+  <td>Z1</td>
+  <td style="text-align:right;">18</td>
+  <td>Argon atomic number</td>
+</tr>
+<tr>
+  <td>Z2</td>
+  <td style="text-align:right;">18</td>
+  <td>Argon atomic number</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="steps">Steps</h3>
+
+<ol>
+<li>Open the <strong>Calculate/Fit Potential</strong> tab.</li>
+<li>In <strong>Selected Action</strong>, choose <strong>Calculate Potential</strong>.</li>
+<li>In <strong>Fit/Potential Type</strong>, choose <strong>ZBL</strong>.</li>
+<li>Enter the values in the table above: <strong>min r</strong>, <strong>max r</strong>, <strong>r step</strong>, <strong>Z1</strong>, and <strong>Z2</strong>.</li>
+<li>Under <em>Specify folder to save input/output files and data for this study</em>, click <strong>Select Folder</strong> and choose an output directory.</li>
+<li>Click <strong>Write Input File</strong> to generate an input file with the parameters above.  
+<ul>
+<li>This will automatically populate the <em>Or Select Your Own Input File</em> field.</li>
+</ul></li>
+<li>Click <strong>Execute</strong> to:
+<ul>
+<li>generate the potential data,</li>
+<li>plot the potential,</li>
+<li>save the plot image, and</li>
+<li>write the output data and fit file to the selected directory.
+</ul>
+</ol>
+
+<h3 id="expected-output">Expected output</h3>
+<p>The resulting plot should match the linear plot in the figure above.</p>
+
+<h3 id="notes">Notes</h3>
+<ul>
+<li>Distances are specified in <strong>Å</strong>.</li>
+<li>For other species, set <strong>Z1</strong> and <strong>Z2</strong> to the corresponding atomic numbers.</li>
+</ul>
+
 <h2 id="calculate-scattering-integrals-tab">Calculate Scattering
 Integrals Tab</h2>
 <figure>
@@ -114,21 +225,128 @@ alt="Screenshot of Calculate Scattering Intergrals tab for an Argon-Argon ZBL po
 <figcaption aria-hidden="true">Screenshot of <em>Calculate Scattering
 Intergrals</em> tab for an Argon-Argon ZBL potential. </figcaption>
 </figure>
-<p>The <em>Calculate Scattering Integrals</em> tab allows you to
-calculate the distance of closest approach (DOCA) and scattering angle
-as a function of impact parameter. First, we chose “Numerical” from the
-“Integral Type” drop down menu becuase we wanted to use our potential
-data from the previous tab. We then specified the energy range for
-calculating the quantities. Since we wanted log spacing for the energy
-values, we clicked the “Log spacing” box and specifed the number of
-points. Note that our fit output file was autopopulated after we clicked
-“Execute” in the previous tab. We then specified the impact parameter
-range to integrate over and chose to use log spacing for these values.
-We then specified a range for the root solver used in the DOCA
-calculations. We then clicked “Write Scattering Input File” to write the
-input file and clicked “Execute” to generate datasets for the DOCA and
-scattering angle, save those data sets to our “study” folder, and save
-the figures as images.</p>
+<p>The <em>Calculate Scattering Integrals</em> tab allows you to 
+calculate the distance of closest approach (DOCA) and scattering 
+angle as a function of impact parameter. </p>
+
+<h3 id="inputs-used-in-this-tutorial-2">Inputs used in this tutorial</h3>
+
+<table>
+<thead>
+<tr>
+  <th>Setting / Parameter</th>
+  <th style="text-align:right;">Value</th>
+  <th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Integral Type</td>
+  <td style="text-align:right;">Numerical</td>
+  <td>Uses potential data generated in the previous tab</td>
+</tr>
+<tr>
+  <td>min E</td>
+  <td style="text-align:right;">0.01</td>
+  <td>Energy range lower bound</td>
+</tr>
+<tr>
+  <td>max E</td>
+  <td style="text-align:right;">10</td>
+  <td>Energy range upper bound</td>
+</tr>
+<tr>
+  <td>Energy spacing</td>
+  <td style="text-align:right;">Log</td>
+  <td>Check <strong>Log spacing</strong></td>
+</tr>
+<tr>
+  <td>number of pts (E)</td>
+  <td style="text-align:right;">50</td>
+  <td>Number of energies evaluated</td>
+</tr>
+<tr>
+  <td>Fit output file</td>
+  <td style="text-align:right;"><em>(auto-populated)</em></td>
+  <td>Populated after clicking <strong>Execute</strong> in the previous tab</td>
+</tr>
+<tr>
+  <td>b min</td>
+  <td style="text-align:right;">0.0001</td>
+  <td>Impact parameter range lower bound</td>
+</tr>
+<tr>
+  <td>b max</td>
+  <td style="text-align:right;">10</td>
+  <td>Impact parameter range upper bound</td>
+</tr>
+<tr>
+  <td>b spacing</td>
+  <td style="text-align:right;">Log</td>
+  <td>Use log spacing</td>
+</tr>
+<tr>
+  <td>number of pts (b)</td>
+  <td style="text-align:right;">200</td>
+  <td>Number of impact parameters evaluated</td>
+</tr>
+<tr>
+  <td>min Rmin</td>
+  <td style="text-align:right;">0.1</td>
+  <td>Root-solver bracket for DOCA</td>
+</tr>
+<tr>
+  <td>max Rmin</td>
+  <td style="text-align:right;">100</td>
+  <td>Root-solver bracket for DOCA</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="steps-2">Steps</h3>
+
+<ol>
+<li>Open the <strong>Calculate Scattering Integrals</strong> tab.</li>
+<li>Set <strong>Integral Type</strong> to <strong>Numerical</strong> (to use the potential data generated in the previous tab).</li>
+<li>Under the energy settings, enter:
+<ul>
+<li><strong>min E = 0.01</strong></li>
+<li><strong>max E = 10</strong></li>
+<li>check <strong>Log spacing</strong></li>
+<li>set <strong>number of pts = 6</strong></li>
+</ul></li>
+<li>Confirm that the <strong>fit output file</strong> field is populated (this should happen automatically after running <strong>Execute</strong> in the previous tab). If it is not populated, select the fit output file manually.</li>
+<li>Under the impact parameter settings, enter:
+<ul>
+<li><strong>b min = 0.0001</strong></li>
+<li><strong>b max = 10</strong></li>
+<li>select <strong>log spacing</strong></li>
+<li>set <strong>number of points = 200</strong></li>
+</ul></li>
+<li>Under the DOCA root-solver settings, set:
+<ul>
+<li><strong>min Rmin = 0.1</strong></li>
+<li><strong>max Rmin = 100</strong></li>
+</ul></li>
+<li>Click <strong>Write Scattering Input File</strong> to generate the input file for this tab.</li>
+<li>Click <strong>Execute</strong> to:
+<ul>
+<li>compute DOCA and scattering angle datasets,</li>
+<li>save the datasets to the selected study/output folder, and</li>
+<li>save the generated figures as image files.</li>
+</ul></li>
+</ol>
+
+<h3 id="expected-output-2">Expected output</h3>
+
+<p>After clicking <strong>Execute</strong>, you should see plots for the DOCA and scattering angle. The DOCA plot should have a similar overall shape to the figure above. Note that the figure above was generated using <strong>6 energy points</strong> to make individual curves easier to distinguish; for this tutorial we recommend using <strong>50 energy points</strong> to obtain a smoother, better-resolved energy dependence. The tab will also write the DOCA and scattering-angle data files into your study folder.</p>
+
+<h3 id="notes-2">Notes</h3>
+
+<ul>
+<li>If the DOCA solver fails or produces nonphysical values, adjust <strong>min Rmin</strong> and <strong>max Rmin</strong> to better bracket the turning point for your potential and energy range.</li>
+</ul>
+
 <h2 id="calculate-cross-sections-tab">Calculate Cross Sections Tab</h2>
 <figure>
 <img src="./figures/cstab.png" style="width:80.0%"
@@ -136,21 +354,90 @@ alt="Screenshot of Calculate Cross Sections tab for an Argon-Argon ZBL potential
 <figcaption aria-hidden="true">Screenshot of <em>Calculate Cross
 Sections</em> tab for an Argon-Argon ZBL potential. </figcaption>
 </figure>
-<p>The <em>Calculate Cross Sections</em> tab allows you to calculate
-total cross section, diffusion cross section, viscosity cross section,
-and stopping cross section. First, we selected “Numerical” from the
-“Integral Type” drop-down, which will use the scattering angle
-vs. impact parameter data from the previous tab. While the energy values
-from the previous tab autopopulate into this tab, we have increased the
-number of energy points from what was used in figure 7 to reduce error
-in the trapezoidal integrals used in this tab. We then specified the
-atomic mass of Argon in atomic units. Note that the file path of the
-scattering angle data was autopopulated when the previous tab was
-executed. Then we chose to use a quantum mechanical cutoff for the total
-cross section. Then, we clicked “Write CS Input File” to create the
-input file for the cross section calculations. Lastly, we clicked
-“Execute” to calculate the cross sections, save the data as csv files in
-our “study folder”, and save the figures as images.</p>
+<p>The <em>Calculate Cross Sections</em> tab allows you to calculate total cross 
+section, diffusion cross section, viscosity cross section, and stopping cross section. </p>
+
+<h3 id="inputs-used-in-this-tutorial-3">Inputs used in this tutorial</h3>
+
+<table>
+<thead>
+<tr>
+  <th>Setting / Parameter</th>
+  <th style="text-align:right;">Value</th>
+  <th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Integral Type</td>
+  <td style="text-align:right;">Numerical</td>
+  <td>Uses scattering angle vs. impact parameter from the previous tab</td>
+</tr>
+<tr>
+  <td>Energy grid (min E, max E, number of pts, spacing)</td>
+  <td style="text-align:right;"><em>(auto-populated)</em></td>
+  <td>Must match the scattering integrals tab parameters</td>
+</tr>
+<tr>
+  <td>m1 (amu)</td>
+  <td style="text-align:right;">39.95</td>
+  <td>Argon atomic mass</td>
+</tr>
+<tr>
+  <td>m2 (amu)</td>
+  <td style="text-align:right;">39.95</td>
+  <td>Argon atomic mass</td>
+</tr>
+<tr>
+  <td>Scattering-angle data file</td>
+  <td style="text-align:right;"><em>(auto-populated)</em></td>
+  <td>Populated after running the previous tab</td>
+</tr>
+<tr>
+  <td>Total cross section cutoff</td>
+  <td style="text-align:right;">Quantum mechanical cutoff</td>
+  <td>Used for the total cross section</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="steps-3">Steps</h3>
+
+<ol>
+<li>Open the <strong>Calculate Cross Sections</strong> tab.</li>
+<li>Set <strong>Integral Type</strong> to <strong>Numerical</strong> to use the scattering-angle data from the previous tab.</li>
+<li>Confirm the energy grid fields are auto-populated (min E, max E, number of points, and spacing).
+<ul>
+<li><strong>Do not change these values</strong> for this tutorial. They must match the energy grid used to generate the scattering angle data.</li>
+</ul></li>
+<li>Confirm the <strong>scattering angle data file path</strong> is populated. If it is not, select the file manually.</li>
+<li>Enter the species masses:
+<ul>
+<li><strong>m1 = 39.95 amu</strong></li>
+<li><strong>m2 = 39.95 amu</strong></li>
+</ul></li>
+<li>For the <strong>total cross section</strong>, select the <strong>quantum mechanical cutoff</strong> option.</li>
+<li>Click <strong>Write CS Input File</strong> to generate the cross-section input file.</li>
+<li>Click <strong>Execute</strong> to:
+<ul>
+<li>compute the requested cross sections,</li>
+<li>save the outputs as CSV files in your study/output folder, and</li>
+<li>save the generated figures as image files.</li>
+</ul></li>
+</ol>
+
+<h3 id="expected-output-3">Expected output</h3>
+
+<p>After clicking <strong>Execute</strong>, RGTFun will generate plots and CSV files for the selected cross sections (total, diffusion, viscosity, and/or stopping) as functions of center-of-mass energy. The diffusion cross section is the quantity shown in the figure above and should match your result.</p>
+
+<h3 id="notes-3">Notes</h3>
+
+<ul>
+<li>The <strong>energy grid must match</strong> the scattering angle dataset used as input. If you change the energy grid here without regenerating the scattering angle data, the results will be inconsistent and the code will fail.</li>
+<li>If you change the masses (m1/m2) to another species pair, ensure they are in <strong>atomic mass units (amu)</strong>.</li>
+</ul>
+
+
 <h2 id="calculate-transport-coefficients-tab">Calculate Transport
 Coefficients Tab</h2>
 <figure>
@@ -159,45 +446,261 @@ alt="Screenshot of Calculate Transport Coefficients tab for an Argon-Argon ZBL p
 <figcaption aria-hidden="true">Screenshot of <em>Calculate Transport
 Coefficients</em> tab for an Argon-Argon ZBL potential. </figcaption>
 </figure>
-<p>The tab allows you to calculate the self-diffusion coefficient and
-viscosity coefficient for user-specified temperatures. First, we
-selected “Numerical” from the “Integration Type” drop down, which allows
-us to use the cross section data from the previous tab. Next, we
-specified the temperature range (in Kelvin) that the code should use to
-calculate the transport coefficient data. Note that the atomic masses of
-the present species, as well as the locations of the cross section data
-files, were autopopulated from the previous tab. We then clicked “Write
-Transport Input File” to write the input file to our “study” folder.
-Lastly, we clicked “Execute” to calculate the self-diffusion and
-viscosity coefficient data, save the data as csv files in our “study”
-folder, plot the data, and save the plots as images.</p>
-<h2 id="calculate-dsmc-coefficients-tab">Calculate DSMC Coefficients
-Tab</h2>
+<p>The <em>Calculate Transport Coefficients</em> tab allows you to calculate the 
+self-diffusion coefficient and viscosity coefficient for user-specified 
+temperatures. </p>
+
+<h3 id="inputs-used-in-this-tutorial-4">Inputs used in this tutorial</h3>
+
+<table>
+<thead>
+<tr>
+  <th>Setting / Parameter</th>
+  <th style="text-align:right;">Value</th>
+  <th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Integration Type</td>
+  <td style="text-align:right;">Numerical</td>
+  <td>Uses cross section data from the previous tab</td>
+</tr>
+<tr>
+  <td>min T (K)</td>
+  <td style="text-align:right;">50</td>
+  <td>Lower temperature bound</td>
+</tr>
+<tr>
+  <td>max T (K)</td>
+  <td style="text-align:right;">1000</td>
+  <td>Upper temperature bound</td>
+</tr>
+<tr>
+  <td>T step (K)</td>
+  <td style="text-align:right;">1</td>
+  <td>Temperature increment</td>
+</tr>
+<tr>
+  <td>Species masses</td>
+  <td style="text-align:right;"><em>(auto-populated)</em></td>
+  <td>Populated from the previous tab</td>
+</tr>
+<tr>
+  <td>Cross section file paths</td>
+  <td style="text-align:right;"><em>(auto-populated)</em></td>
+  <td>Populated from the previous tab</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="steps-4">Steps</h3>
+
+<ol>
+<li>Open the <strong>Calculate Transport Coefficients</strong> tab.</li>
+<li>Set <strong>Integration Type</strong> to <strong>Numerical</strong> to use cross section data generated in the previous tab.</li>
+<li>Enter the temperature grid (Kelvin):
+<ul>
+<li><strong>min T = 50</strong></li>
+<li><strong>max T = 1000</strong></li>
+<li><strong>T step = 1</strong></li>
+</ul></li>
+<li>Confirm that the <strong>species masses</strong> and <strong>cross section file paths</strong> are populated (these should auto-populate from the previous tab). If they are not populated, return to the Cross Sections tab and re-run <strong>Execute</strong>, or select the files manually.</li>
+<li>Click <strong>Write Transport Input File</strong> to write the input file into your study/output folder.</li>
+<li>Click <strong>Execute</strong> to:
+<ul>
+<li>compute self-diffusion and viscosity coefficients over the temperature grid,</li>
+<li>save the results as CSV files in your study/output folder, and</li>
+<li>generate and save the corresponding plots as image files.</li>
+</ul></li>
+</ol>
+
+<h3 id="expected-output-4">Expected output</h3>
+
+<p>After clicking <strong>Execute</strong>, RGTFun will produce temperature-dependent plots for the self-diffusion and viscosity coefficients and write the corresponding CSV output files to the study folder. The plot for the self-diffusion coefficient is shown in the figure above and should match your result.</p>
+
+<h3 id="notes-4">Notes</h3>
+
+<ul>
+<li>Temperatures are specified in <strong>Kelvin</strong>.</li>
+</ul>
+
+<h2 id="calculate-vhs-parameters-tab">Calculate VHS Parameters Tab</h2>
 <figure>
-<img src="./figures/dsmctab.png" style="width:80.0%"
-alt="Screenshot of Calculate DSMC Coefficients tab for an Argon-Argon ZBL potential. " />
-<figcaption aria-hidden="true">Screenshot of <em>Calculate DSMC
-Coefficients</em> tab for an Argon-Argon ZBL potential. </figcaption>
+<img src="./figures/vhstab.png" style="width:80.0%"
+alt="Screenshot of Calculate VHS Parameters tab for an Argon-Argon ZBL potential. " />
+<figcaption aria-hidden="true">Screenshot of <em>Calculate VHS
+Parameters</em> tab for an Argon-Argon ZBL potential. </figcaption>
 </figure>
-<p>The <em>Calculate DSMC Coefficients</em> tab allows the user to
-calculate the <span class="math inline"><em>ω</em></span> parameter for
-the VHS DSMC model. This parameter is calculated by fitting the VHS
-diffusion coefficient expression to the user-provided viscosity
-coefficient data. Note that the location of our viscosity coefficient
-data file was autopopulated upon execution of the previous tab. Next, we
-specifed the number of subintervals to split the data into for fitting.
-An <span class="math inline"><em>ω</em></span> parameter will be
-calculated for each subinterval. We also specifed the tolerance for the
-fitting. A tolerance of 1e-12 or lower is suggested. Note that the
-atomic masses of the present species were autopopulated from the
-previous tab. We then clicked “Write DSMC Input File” to write the input
-file to our “study folder”. Lastly, we clicked “Execute” to calculate an
-<span class="math inline"><em>ω</em></span> parameter for each
-subinterval of our viscosity coefficient data, as well as a collision
-diameter for each subinterval. Our viscosity coefficient data from the
-previous tab and the fitted subintervals are plotted. All relevant
-quantities are visible in the tab’s table. This table is saved to our
-“study” folder.</p>
+<p>The <em>Calculate VHS Parameters</em> tab allows the user to calculate the 
+<span class="math inline"><em>ω</em></span> parameter for the VHS DSMC model. This parameter is calculated by fitting 
+the VHS diffusion coefficient expression to the user-provided viscosity coefficient data. </p>
+
+<h3 id="inputs-used-in-this-tutorial-5">Inputs used in this tutorial</h3>
+
+<table>
+<thead>
+<tr>
+  <th>Setting / Parameter</th>
+  <th style="text-align:right;">Value</th>
+  <th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Viscosity coefficient file</td>
+  <td style="text-align:right;"><em>(auto-populated)</em></td>
+  <td>Populated after executing the Transport Coefficients tab</td>
+</tr>
+<tr>
+  <td>N (subintervals)</td>
+  <td style="text-align:right;">12</td>
+  <td>Viscosity data are split into <em>N</em> subintervals; a fit is performed per subinterval</td>
+</tr>
+<tr>
+  <td>Fit tolerance (tol)</td>
+  <td style="text-align:right;">1e-12</td>
+  <td>Suggested: 1e-12 or smaller</td>
+</tr>
+<tr>
+  <td>Species masses</td>
+  <td style="text-align:right;"><em>(auto-populated)</em></td>
+  <td>Populated from previous tab</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="steps-5">Steps</h3>
+
+<ol>
+<li>Open the <strong>Calculate VHS Parameters</strong> tab.</li>
+<li>Confirm that the <strong>viscosity coefficient data file</strong> path is populated (this should auto-populate after running the previous tab). If it is not populated, select the viscosity CSV file manually.</li>
+<li>Set the number of fitting subintervals:
+<ul>
+<li><strong>N = 12</strong></li>
+</ul></li>
+<li>Set the fitting tolerance:
+<ul>
+<li><strong>tol = 1e-12</strong></li>
+</ul></li>
+<li>Confirm that the <strong>species masses</strong> are populated (they should carry over from the previous tab).</li>
+<li>Click <strong>Write VHS Input File</strong> to write the input file into your study/output folder.</li>
+<li>Click <strong>Execute</strong> to:
+<ul>
+<li>fit <span class="math inline"><em>ω</em></span> over each subinterval of the viscosity data,</li>
+<li>compute a collision diameter for each subinterval,</li>
+<li>plot the viscosity data and fitted subintervals, and</li>
+<li>populate the tab’s results table.</li>
+</ul></li>
+</ol>
+
+<h3 id="expected-output-5">Expected output</h3>
+
+<p>After clicking <strong>Execute</strong>, the tab will display a plot showing the input viscosity data and the fitted subintervals, and the results table will list <span class="math inline"><em>ω</em></span> and collision diameter values for each subinterval. The results table is also saved to the study/output folder. The figure above shows a plot of the fitted viscosity coefficient data and the fitted <span class="math inline"><em>ω</em></span> values.</p>
+
+<h3 id="notes-5">Notes</h3>
+
+<ul>
+<li>Increasing <strong>N</strong> increases the resolution of the fit (more subintervals), but may amplify noise in the fitted parameters if the viscosity data are not smooth.</li>
+<li>If the fit fails to converge, try relaxing the tolerance slightly (e.g., 1e-10) or reducing <strong>N</strong>.</li>
+</ul>
+
+<h2 id="calculate-vss-parameters-tab">Calculate VSS Parameters Tab</h2>
+<figure>
+<img src="./figures/vsstab.png" style="width:80.0%"
+alt="Screenshot of Calculate VSS Parameters tab for an Argon-Argon ZBL potential. " />
+<figcaption aria-hidden="true">Screenshot of <em>Calculate VSS
+Parameters</em> tab for an Argon-Argon ZBL potential. </figcaption>
+</figure>
+<p>The <em>Calculate VSS Parameters</em> tab computes Variable Soft Sphere (VSS) 
+DSMC parameters from previously generated transport data. Using (i) the reference 
+viscosity and diffusion coefficients and (ii) the VHS fit results (reference &omega; 
+values), this tab solves for the VSS parameters <strong>&alpha;</strong> and the 
+<strong>collision diameter</strong> as functions of the reference temperature.</p>
+
+<p>Given an initial guess for &alpha;, RGTFun iterates between:
+<ul>
+<li>computing the collision diameter from the viscosity data and current &alpha; and &omega;, and
+<li>updating &alpha; from the diffusion data and the updated collision diameter,</p>
+</ul>
+<p>until the user-specified least-squares tolerance is satisfied (or a maximum iteration count is reached). The outputs are saved to the study folder and include the reference temperature, fitted &alpha;, and collision diameter.</p>
+
+<h3 id="inputs-used-in-this-tutorial-6">Inputs used in this tutorial</h3>
+
+<table>
+<thead>
+<tr>
+  <th>Setting / Parameter</th>
+  <th style="text-align:right;">Value</th>
+  <th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Diffusion coefficient file</td>
+  <td style="text-align:right;"><em>(auto-populated)</em></td>
+  <td>From the <strong>Transport Coefficients</strong> tab</td>
+</tr>
+<tr>
+  <td>VHS coefficient table</td>
+  <td style="text-align:right;"><em>(auto-populated)</em></td>
+  <td>From the <strong>VHS Parameters</strong> tab</td>
+</tr>
+<tr>
+  <td>alpha guess</td>
+  <td style="text-align:right;">1.3</td>
+  <td>Recommended range: 1–2</td>
+</tr>
+<tr>
+  <td>least squares tol</td>
+  <td style="text-align:right;">1e-12</td>
+  <td>Suggested: 1e-12 or smaller</td>
+</tr>
+<tr>
+  <td>Species masses</td>
+  <td style="text-align:right;"><em>(auto-populated)</em></td>
+  <td>Carried over from previous tabs</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="steps-6">Steps</h3>
+
+<ol>
+<li>Open the <strong>Calculate VSS Parameters</strong> tab.</li>
+<li>Confirm that the <strong>diffusion coefficient data file</strong> path and <strong>VHS coefficient table</strong> path are populated.  
+<ul>
+<li>If not, select the diffusion CSV (from the Transport tab) and the VHS table CSV (from the VHS tab) manually.</li>
+</ul></li>
+<li>Enter an initial guess for &alpha; (recommended range 1–2):
+<ul>
+<li><strong>alpha guess = 1.3</strong></li>
+</ul></li>
+<li>Set the least squares tolerance:
+<ul>
+<li><strong>tol = 1e-12</strong></li>
+</ul></li>
+<li>Confirm that the <strong>species masses</strong> are populated.</li>
+<li>Click <strong>Write VSS Input File</strong> to write the input file into your study/output folder.</li>
+<li>Click <strong>Execute</strong> to:
+<ul>
+<li>compute &alpha; and collision diameter values at each reference temperature, and</li>
+<li>populate the tab’s results table.</li>
+</ul></li>
+</ol>
+
+<h3 id="expected-output-6">Expected output</h3>
+
+<p>After clicking <strong>Execute</strong>, the results table will list &alpha; and collision diameter values for each reference temperature. The table is also written to the study folder as. The figure above shows the calculated &alpha; and collision diameter values.</p>
+
+<h3 id="notes-6">Notes</h3>
+
+<ul>
+<li>If the iteration fails to converge, try adjusting <strong>alpha guess</strong> (e.g., 1.1–1.8) and/or relaxing <strong>tol</strong> (e.g., 1e-10).</li>
+<li>The VSS fit assumes the diffusion and viscosity data correspond to the same species pair and reference temperatures used in the earlier tabs.</li>
+</ul>
+
+
 <h1 id="rgtfun-test-suite">RGTFun Test Suite</h1>
 <p>A test suite has been included in the main RGTFun distribution so
 that users can verify their version is functioning correctly. Test
@@ -209,8 +712,10 @@ change directories to the <em>test</em> folder and load the test
 functions in the MATLAB Test Browser. Then run the current suite, and
 verify that all tests were executed successfully.</p>
 
-<h1 id="chebfun dependence">Chebfun Dependence</h1>
-<p>RGTFun utilized the advanced root-finding capabilities of the Chebfun matlab package. Thus, in order to run RGTFun, Chebfun must be installed.</p>
+<h1 id="community-guidelines">Community Guidelines</h1>
+<p>Please put all requests for code changes in the Github issue tracker at: <br />
+https://github.com/nbb2/rgtfun/issues </p>
+
 
 <h1 id="Appendix: Function Documentation">Appendix:Function Documentation</h1>
 <body><div class="content"><h1>Table of Contents</h1><ul><li><a href="#DOCAroot">DOCAroot</a></li><li><a href="#GMquadScatteringAngle">GMquadScatteringAngle</a></li><li><a href="#VHScoef">VHScoef</a></li><li><a href="#VHSviscosity">VHSviscosity</a></li><li><a href="#VSSalpha">VSSalpha</a></li><li><a href="#VSScoef">VSScoef</a></li><li><a href="#VSSconvergence">VSSconvergence</a></li><li><a href="#VSSdiameter">VSSdiameter</a></li><li><a href="#VSSdiffusion">VSSdiffusion</a></li><li><a href="#coulomb">coulomb</a></li><li><a href="#coulombchar">coulombchar</a></li><li><a href="#diffusion_coef">diffusion_coef</a></li><li><a href="#diffusioncs">diffusioncs</a></li><li><a href="#difscatter">difscatter</a></li><li><a href="#distclose">distclose</a></li><li><a href="#impact">impact</a></li><li><a href="#lj_124">lj_124</a></li><li><a href="#lj_126">lj_126</a></li><li><a href="#magicscatter">magicscatter</a></li><li><a href="#morse">morse</a></li><li><a href="#numdiffusioncoef">numdiffusioncoef</a></li><li><a href="#numdiffusioncs">numdiffusioncs</a></li><li><a href="#numstoppingcs">numstoppingcs</a></li><li><a href="#numtotalcs">numtotalcs</a></li><li><a href="#numtotalcscheb">numtotalcscheb</a></li><li><a href="#numvisccoef">numvisccoef</a></li><li><a href="#numvisccs">numvisccs</a></li><li><a href="#powerlaw">powerlaw</a></li><li><a href="#run_calcpotential">run_calcpotential</a></li><li><a href="#run_dsmccoef">run_dsmccoef</a></li><li><a href="#run_fitpotential">run_fitpotential</a></li><li><a href="#run_scatteringintegrals">run_scatteringintegrals</a></li><li><a href="#run_transportCS">run_transportCS</a></li><li><a href="#run_transportcoefs">run_transportcoefs</a></li><li><a href="#run_vhscoef">run_vhscoef</a></li><li><a href="#run_vsscoef">run_vsscoef</a></li><li><a href="#visc_coef">visc_coef</a></li><li><a href="#viscositycs">viscositycs</a></li><li><a href="#zbl">zbl</a></li><li><a href="#zblchar">zblchar</a></li><li><a href="#zblderivative">zblderivative</a></li></ul></div>

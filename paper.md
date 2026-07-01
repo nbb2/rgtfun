@@ -10,6 +10,7 @@ authors:
     orcid: "0000-0001-9355-849X"
   - name: David N. Ruzic
     affiliation: 1
+    orcid: "0000-0001-9501-1439"
 affiliations:
   - name: Department of Nuclear, Plasma, and Radiological Engineering, The University of Illinois at Urbana-Champaign, Urbana, Illinois
     index: 1

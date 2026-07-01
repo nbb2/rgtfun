@@ -7,6 +7,7 @@ authors:
     affiliation: 1 # (Multiple affiliations must be quoted)
   - name: Nathan Bartlett
     affiliation: 1
+    orcid: "0000-0001-9355-849X"
   - name: David N. Ruzic
     affiliation: 1
 affiliations:

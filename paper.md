@@ -5,6 +5,7 @@ tags:
 authors:
   - name: Jackson Granat
     affiliation: 1 # (Multiple affiliations must be quoted)
+    orcid: "0009-0007-0726-1552"
   - name: Nathan Bartlett
     affiliation: 1
     orcid: "0000-0001-9355-849X"

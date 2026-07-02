@@ -1,35 +1,37 @@
 ---
-title: 'RGTFun: An Open-Source MATLAB App for Rarefied Gas
-	Transport Coefficient Calculations'
+title: "RGTFun: An Open-Source MATLAB App for Rarefied Gas Transport Coefficient Calculations"
 tags:
   - MATLAB
 authors:
   - name: Jackson Granat
     affiliation: 1 # (Multiple affiliations must be quoted)
+    orcid: "0009-0007-0726-1552"
   - name: Nathan Bartlett
     affiliation: 1
+    orcid: "0000-0001-9355-849X"
   - name: David N. Ruzic
     affiliation: 1
+    orcid: "0000-0001-9501-1439"
 affiliations:
- - name: Department of Nuclear, Plasma, and Radiological Engineering, The University of Illinois at Urbana-Champaign, Urbana, Illinois
-   index: 1
-   ror: 047426m28
+  - name: Department of Nuclear, Plasma, and Radiological Engineering, The University of Illinois at Urbana-Champaign, Urbana, Illinois
+    index: 1
+    ror: 047426m28
 
 date: 3 March 2025
 bibliography: paper.bib
-
 ---
 
 # Key Definitions
+
 $b$ - impact parameter (Å)  
-$\theta_c$ - center of mass scattering angle (radians)  
-$r_o$  - distance of closest approach during a binary elastic collision (Å)  
-$r_m$  - location of the energy minimum of the intermolecular potential (Å)  
+$\theta_c$ - center-of-mass scattering angle (radians)  
+$r_o$ - distance of closest approach during a binary elastic collision (Å)  
+$r_m$ - location of the energy minimum of the intermolecular potential (Å)  
 $\epsilon$ - the depth of the attractive portion of the intermolecular potential (eV)  
 $D_{12}$ - the binary diffusion coefficient ($m^2\cdot s$)  
 $\mu$ - viscosity coefficient ($Pa \cdot s$)  
-$E_c$ - center of mass energy during a collision (eV)  
-$E_l$ - lab frame energy (eV)  
+$E_c$ - center-of-mass energy during a collision (eV)  
+$E_l$ - laboratory-frame energy (eV)  
 $\sigma(\theta_c)$ - the differential scattering cross section  
 $\sigma_T$ - total cross section ($m^2$)  
 $\sigma_D$ - the diffusion cross section, also called the momentum cross section ($m^2$)  
@@ -41,91 +43,99 @@ $\chi$ - $(\pi - \theta_c)/2$
 $Z_1$ - number of protons of the first colliding molecule  
 $Z_2$ - number of protons of the second colliding molecule  
 $q$ - elementary charge ($C$)  
-$d_{ref}$ - the reference diameter of the collision model used in the variable hard sphere model incorporated into the direct simulation Monte-Carlo method (Å)  
+$d_{ref}$ - the reference diameter of the collision model used in the variable hard sphere model incorporated into the direct simulation Monte Carlo method (Å)  
 $\omega$ - the DSMC viscosity temperature dependence parameter  
 $N_a$ - Avogadro's number (atoms / mol)  
 $P_{vap}$ - equilibrium vapor pressure (Pa)  
 $k_B$ - Boltzmann's constant ($J \cdot K^{-1}$)  
 $T$ - temperature (K)  
 $d_{12}$ - collision diameter used in the VHS collision rule for DSMC simulations  
-$VHS$ - variable hard sphere - the collision rule used for the DSMC
+$VHS$ - variable hard sphere, the collision rule used for the DSMC
 
 # Statement of Need
-RGTFun is a MATLAB app designed for the efficient calculation of scattering integrals and transport coefficients of elastic collisions. While the solution for classical scattering, as well as its application for determining gas transport coefficients, has been known for over approximately a century [@chapman_mathematical_1990], the numerical codes are usually kept as closed-source or are printed in textbooks in older programming languages such as FORTRAN [@maitland_intermolecular_1987]. To our knowledge, existing publicly available tools (e.g., MagnumPI for calculation of scattering angles and cross sections [@magnumpi]; SRIM for stopping power calculations [@ziegler_srim_2010]) offer limited support for user-adjustable interatomic potentials (especially across energy regimes) in end-to-end workflows that compute scattering integrals and the resulting transport coefficients.
 
-RGTFun is open-source and implemented in MATLAB, leveraging its numerical computing capabilities and App Designer for the graphical interface. Furthermore, the code features a well-designed graphical user interface (GUI) to facilitate the step by step process of going from an intermolecular potential to macroscopic transport coefficients such as viscosity and diffusion coefficients. The ethos of the project is to decrease the learning curve of going from quantum chemistry calculations of intermolecular potential energy surfaces to usable transport coefficients in CFD or PIC codes.  
+RGTFun is a MATLAB app designed for the efficient calculation of scattering integrals and transport coefficients of elastic collisions. While the solution for classical scattering, as well as its application for determining gas transport coefficients, has been known for over a century [@chapman_mathematical_1990], numerical codes are usually kept closed-source or are printed in textbooks in older programming languages such as Fortran [@maitland_intermolecular_1987]. To our knowledge, existing publicly available tools (e.g., MagnumPI for calculation of scattering angles and cross sections [@magnumpi]; SRIM for stopping power calculations [@ziegler_srim_2010]) offer limited support for user-adjustable interatomic potentials (especially across energy regimes) in end-to-end workflows that compute scattering integrals and the resulting transport coefficients.
+
+RGTFun is open-source and implemented in MATLAB, leveraging its numerical computing capabilities and App Designer for the graphical interface. Furthermore, the code features a well-designed graphical user interface (GUI) to facilitate the step-by-step process of going from an intermolecular potential to macroscopic transport coefficients such as viscosity and diffusion coefficients. The ethos of the project is to lower the barrier to going from quantum chemistry calculations of intermolecular potential energy surfaces to usable transport coefficients in CFD or PIC codes.
 
 # State of the Field
+
 The closest existing open-source tool to RGTFun is MagnumPI, which focuses on computing scattering angles, cross sections, and collision integrals for several (but not all) intermolecular potentials [@magnumpi]. SRIM is widely used for stopping power calculations, but it is not designed to calculate transport coefficients and does not support user-adjustable interatomic potentials in the manner required here [@ziegler_srim_2010].
 
 We chose to develop RGTFun rather than contribute to existing tools because our target use case requires capabilities beyond collision-scale quantities: RGTFun computes macroscopic transport coefficients (e.g., viscosity and diffusion) and also provides simplified collision-model parameters for variable hard sphere (VHS) and variable soft sphere (VSS) models. In addition, RGTFun is organized as an end-to-end, user-guided workflow with intermediate diagnostics (e.g., distance of closest approach) to help users verify expected behavior at each stage. This combination of user-adjustable potentials across energy regimes, end-to-end transport outputs, and a validation-oriented GUI fills a gap not addressed by existing open-source tools.
 
 # Research Impact Statement
+
 RGTFun has been incorporated into the authors’ computational workflow to generate coefficients for downstream modeling. By providing an end-to-end workflow from an intermolecular potential to macroscopic transport coefficients (e.g., viscosity and diffusion), RGTFun lowers the barrier for translating potential energy surfaces from quantum chemistry into inputs for CFD or PIC simulations. In addition to interactive GUI use, the modular scripts support batch execution for parameter sweeps and integration into existing pipelines. The validation cases in this paper provide a reference analysis spanning analytic scattering, screened-potential benchmarks, cross-tool comparison to SRIM, and comparison to NIST transport data.
 
-# Software Design 
+# Software Design
+
 RGTFun was designed around three principles: (i) provide a user-friendly graphical interface that guides users through computing scattering quantities and transport coefficients from interatomic potentials, (ii) build on established formulations and numerical methods from the literature rather than introducing new theory, and (iii) support both interactive use and reproducible, scriptable workflows.
 
 A central architectural decision was to implement RGTFun as a multi-tab MATLAB App Designer application, where each tab corresponds to a major stage of the workflow (e.g., defining the interatomic potential, computing cross sections, evaluating scattering integrals, and computing transport coefficients). This structure mirrors how users validate these calculations in practice: each stage produces intermediate plots and diagnostics so the user can verify expected behavior before proceeding. The trade-off is that the GUI adds some maintenance overhead compared to a single end-to-end script, but it reduces user error and lowers the barrier to entry for new users.
 
 MATLAB was selected primarily for MATLAB App Designer’s extensive GUI toolbox and for performance in vectorized numerical computing. Choosing MATLAB also enabled direct reuse of the open-source Chebfun library for numerically robust and efficient root-finding when solving for the distance of closest approach, avoiding the need to reimplement specialized numerical routines and improving runtime performance.
 
-A second key decision was to keep the computational core modular and usable without the GUI. Each major calculation step is implemented as an independent script/function that takes only two inputs: (1) a user-specified input file and (2) an output directory. The GUI serves as a front-end that generates or selects inputs, runs these core routines, and forwards output paths to downstream steps. This design supports advanced users who prefer command line execution, makes batch runs straightforward, and simplifies validation: benchmark input files can be run through individual calculation steps and compared against expected outputs.
+A second key decision was to keep the computational core modular and usable without the GUI. Each major calculation step is implemented as an independent script/function that takes only two inputs: (1) a user-specified input file and (2) an output directory. The GUI serves as a front-end that generates or selects inputs, runs these core routines, and forwards output paths to downstream steps. This design supports advanced users who prefer command-line execution, makes batch runs straightforward, and simplifies validation: benchmark input files can be run through individual calculation steps and compared against expected outputs.
 
 Lastly, we built a rigorous testing suite that utilizes MATLAB's internal unit testing framework to test each script in RGTFun against reference data that is included with the app. We welcome issues and pull requests, and we encourage users to extend the app to their applications.
 
 # Theory
+
 ## The Intermolecular Potential
 
-The intermolecular potential describes the potential energy between two atoms or molecules and is a function of their distance $r$. The actual shape of the potential energy surface of two molecules is unique to the pair and determined using quantum chemistry software [@valiev_nwchem_2010] or experiments [@amdur_experimental_1961;@amdur_repulsive_1949; @amdur_scattering_1954;@ruzic_total_1984]. RGTFun currently supports the following intermolecular potential models:
-	
-- Coulomb Potential  
+The intermolecular potential describes the potential energy between two atoms or molecules and is a function of their distance $r$. The actual shape of the potential energy surface of two molecules is unique to the pair and determined using quantum chemistry software [@valiev_nwchem_2010] or experiments [@amdur_experimental_1961; @amdur_repulsive_1949; @amdur_scattering_1954; @ruzic_total_1984]. RGTFun currently supports the following intermolecular potential models:
 
-$$U(r) = \frac{Z_1 Z_2 e^2}{ 4 \pi \epsilon_0 r}$$  
+- Coulomb Potential
 
-- 12-6 Lennard-Jones Potential [@lennard1931cohesion]  
+$$U(r) = \frac{Z_1 Z_2 e^2}{ 4 \pi \epsilon_0 r}$$
+
+- 12-6 Lennard-Jones Potential [@lennard1931cohesion]
 
 $$U(r) = 4 \epsilon \left[\left(\frac{\sigma}{r}\right)^{12} - \left(\frac{\sigma}{r}\right)^6\right]$$
-where $$\sigma  = 2^{-1/6} r_{m} $$  
+where $$\sigma  = 2^{-1/6} r_{m} $$
 
-- 12-4 Lennard-Jones Potential [@zhen1983calculation]  
+- 12-4 Lennard-Jones Potential [@zhen1983calculation]
 
 $$U(r) = \frac{3^{3/2}}{2} \epsilon \left[\left(\frac{\sigma}{r}\right)^{12} - \left(\frac{\sigma}{r}\right)^4\right]$$
-where $$\sigma  = 3^{-1/8} r_{m} $$  
+where $$\sigma  = 3^{-1/8} r_{m} $$
 
-- ZBL Potential [@Ziegler19831861]  
+- ZBL Potential [@Ziegler19831861]
 
 $$U(r) = \frac{1}{4 \pi \epsilon_0} \frac{Z_2 Z_2 e^2}{r} \phi(r/a)$$
-where 
+where
 $$a = \frac{0.46850}{Z_1 ^{0.23} + Z_2 ^{0.23}}$$
-and 
-$$\phi(x) = 0.18175 e^{-3.19980 x} + 0.50986 e^{-0.94229 x} + 0.28022 e^{-0.40290 x} + 0.02817 e^{-0.20162 x}$$  
+and
+$$\phi(x) = 0.18175 e^{-3.19980 x} + 0.50986 e^{-0.94229 x} + 0.28022 e^{-0.40290 x} + 0.02817 e^{-0.20162 x}$$
 
-- Morse Potential [@morse1929diatomic]  
+- Morse Potential [@morse1929diatomic]
 
-$$U(r) = \epsilon \left( e^{-2 a (r-r_m)} -2 e^{- a (r-r_m)}\right)$$ 
-where $$a  = \sqrt{\frac{k}{2 \epsilon}}$$  
+$$U(r) = \epsilon \left( e^{-2 a (r-r_m)} -2 e^{- a (r-r_m)}\right)$$
+where $$a  = \sqrt{\frac{k}{2 \epsilon}}$$
 
-- Power Law Potential  
+- Power Law Potential
 
-$$U(r) = a r^{-k}$$ 
-	
+$$U(r) = a r^{-k}$$
+
 ## Bimolecular Scattering
-Once an intermolecular potential is known, the scattering angle can be determined as a function of impact energy and impact parameter. First, the distance of closest approach $r_o$ must be solved by finding the root of equation (1), where $E_c$ is the center of mass energy. Next, the scattering angle $\theta_c$ is solved by integrating equation (2).
+
+Once an intermolecular potential is known, the scattering angle can be determined as a function of impact energy and impact parameter. First, the distance of closest approach $r_o$ must be solved by finding the root of equation (1), where $E_c$ is the center-of-mass energy. Next, the scattering angle $\theta_c$ is solved by integrating equation (2).
 
 $$ 1 - \frac{V(r_o)}{E_c} - \frac{b^2}{r_o^2} = 0 \quad (1) $$
 
 $$\theta_c = \pi - 2 \int_{r_o}^{\infty} \frac{bdr}{r^2 \sqrt{1 - \frac{V(r)}{E_c} - \frac{b^2}{r^2}}} \quad (2)$$
 
 ## Cross Sections
-With a relationship between the impact parameter and scattering angle, cross section quantities can be defined. The differential cross section is defined by equation (3). The total cross section is defined by equation (4). It is important to note that the classical cross section is infinite. If a quantum mechanical approach is taken, then the total cross section becomes finite again. Instead of doing a quantum mechanical calculation, we can instead define a cutoff angle, $\theta_{cutoff}$, which has a corresponding cutoff impact parameter which makes a finite cross section according to equation (5). The cutoff angle can be chosen to either be the smallest measurable angle or when the classical scattering is no longer valid. The condition for the cutoff angle becoming invalid is given by equation (6) [@lane_calculations_1960]. Solving equation (6) requires a numerical root finding procedure. The momentum cross section is given by equation (7) and the viscosity cross section is given by equation (8). These last two cross sections are needed to calculate continuum transport coefficients using Chapman-Enskog theory. The final cross section of importance is the stopping cross section, given by equation (9), which tells us how much energy is lost per unit travel per unit density.
-	
-$$\sigma(\theta_c,E) = \left|\frac{b}{sin(\theta_c)} \frac{db}{d\theta}\right| \quad (3) $$
 
-$$\sigma_T(E) = \int_{0}^{\pi} \sigma(\theta_c,E) 2\pi \sin(\theta_c) d \theta_c = 2\pi \int_{0}^{\infty}bdb  = \infty \quad (4)$$  
-  
-$$\sigma_T(E)_{classical} = \int _{\theta _{cutoff}}^{\pi} \sigma(\theta_c,E) 2\pi \sin(\theta_c) d \theta_c = \int _{0}^{b _{cutoff}}bdb =
-2 \pi b _{cutoff}^2 \quad (5)$$
+With a relationship between the impact parameter and scattering angle, cross section quantities can be defined. The differential cross section is defined by equation (3). The total cross section is defined by equation (4). It is important to note that the classical cross section is infinite. If a quantum mechanical approach is taken, then the total cross section becomes finite again. Instead of doing a quantum mechanical calculation, we can define a cutoff angle, $\theta_{cutoff}$, which has a corresponding cutoff impact parameter that makes a finite cross section according to equation (5). The cutoff angle can be chosen to either be the smallest measurable angle or the point at which classical scattering is no longer valid. The condition for the cutoff angle becoming invalid is given by equation (6) [@lane_calculations_1960]. Solving equation (6) requires a numerical root-finding procedure. The momentum cross section is given by equation (7) and the viscosity cross section is given by equation (8). These last two cross sections are needed to calculate continuum transport coefficients using Chapman-Enskog theory. The final cross section of importance is the stopping cross section, given by equation (9), which tells us how much energy is lost per unit travel per unit density.
+$$\sigma(\theta_c,E) = \left|\frac{b}{\sin(\theta_c)} \frac{db}{d\theta}\right| \quad (3) $$
+
+$$\sigma_T(E) = \int_{0}^{\pi} \sigma(\theta_c,E) 2\pi \sin(\theta_c) d \theta_c = 2\pi \int_{0}^{\infty}bdb  = \infty \quad (4)$$
+
+$$
+\sigma_T(E)_{classical} = \int _{\theta _{cutoff}}^{\pi} \sigma(\theta_c,E) 2\pi \sin(\theta_c) d \theta_c = \int _{0}^{b _{cutoff}}bdb =
+2 \pi b _{cutoff}^2 \quad (5)
+$$
 
 $$\theta_c(b_{cutoff}) - \frac{\hbar}{2\sqrt{2 E_c / m_r}\cdot  r_o(b_{cutoff},E_c)} = 0 \quad (6)$$
 
@@ -133,14 +143,13 @@ $$\sigma_D(E) = \int_{0}^{\pi} (1 - \cos(\theta_c))\cdot \sigma(\theta_c,E) 2\pi
 
 $$\sigma_{\mu}(E) = \int_{0}^{\pi} (1 - \cos^2(\theta_c))\cdot \sigma(\theta_c,E) 2\pi \sin(\theta_c) d \theta_c = 2\pi \int_{0}^{\infty}(1 - \cos^2(\theta_c))\cdot bdb \quad (8) $$
 
-
 $$S_n = \frac{1}{n} \frac{dE}{dx}= \gamma E \sigma_D \quad (9) $$
-where 
-$$\gamma  = \frac{2 M_1 M_2}{(M_1 + M_2)^2}$$
+where
+$$\gamma = \frac{2 M_1 M_2}{(M_1 + M_2)^2}$$
 
 ## Continuum Transport Coefficients
-The binary diffusion and single species viscosity coefficient can be determined by using the results of Chapman-Enskog theory [@chapman_mathematical_1990;@maitland_intermolecular_1987]. The binary diffusion coefficient is given by equation (10) and the single species viscosity is given by equation (11). The collision integrals are calculated using the results of the cross sections discussed in the previous section.
-	
+
+The binary diffusion and single-species viscosity coefficient can be determined by using the results of Chapman-Enskog theory [@chapman_mathematical_1990; @maitland_intermolecular_1987]. The binary diffusion coefficient is given by equation (10) and the single-species viscosity is given by equation (11). The collision integrals are calculated using the results of the cross sections discussed in the previous section.
 $$D_{12} = \frac{3}{16} \cdot \left(\frac{2 \pi k_B T (m_1 + m_2)}{m_1 m_2}\right)^{1/2} \frac{1}{n \overline{\Omega_{12}^{(1,1)}}} \quad (10) $$
 
 $$\mu = \frac{5}{8} \cdot \left(\frac{2 \pi k_B T (m_1 m_2)}{(m_1 + m_2)}\right)^{1/2} \frac{1}{ \overline{\Omega^{(2,2)}}} \quad (11)$$
@@ -150,8 +159,8 @@ $$\overline{\Omega_{12}^{(1,1)}} = \frac{1}{2} (k_B T)^{-3} \int_{0}^{\infty} \s
 $$\overline{\Omega^{(2,2)}} =  \frac{1}{2} (k_B T)^{-4} \int_{0}^{\infty} \sigma_{\mu} E^3 e^{-\frac{E}{k_BT}}dE \quad (13) $$
 
 ## DSMC Coefficients
-The most common DSMC collision rule is called the variable hard sphere (VHS) model. In this model, the relative velocity of two colliding particles determines an effective hard sphere potential and the particles collide according to the classic hard sphere scattering rule [@bird_dsmc_2013]. This rule is given by equation (14) where $d_{12}$ is the average of the two particles' diameters and is a function of the relative velocity according to equation (15). The value of $\omega$ in equation (15) is determined by fitting viscosity data over a limited range of temperatures which passes through a reference viscosity, $\mu_{ref}$, at a chosen reference temperature, $T_{ref}$, according to equation (16). Note that equation (14), the hard shell scattering rule, is undefined at impact parameters larger than $d_{12}$ which defines its total cross section [@fratus_scattering_2015].
-	
+
+The most common DSMC collision rule is called the variable hard sphere (VHS) model. In this model, the relative velocity of two colliding particles determines an effective hard sphere potential and the particles collide according to the classical hard sphere scattering rule [@bird_dsmc_2013]. This rule is given by equation (14), where $d_{12}$ is the average of the two particles' diameters and is a function of the relative velocity according to equation (15). The value of $\omega$ in equation (15) is determined by fitting viscosity data over a limited range of temperatures that passes through a reference viscosity, $\mu_{ref}$, at a chosen reference temperature, $T_{ref}$, according to equation (16). Note that equation (14), the hard sphere scattering rule, is undefined at impact parameters larger than $d_{12}$, which defines its total cross section [@fratus_scattering_2015].
 $$b  = d_{12} \cdot \cos (\theta_c / 2) \quad (14)$$
 
 $$d_{12} = \left(\frac{15\cdot \sqrt{mk_bT/\pi}}{2\cdot (5-2\omega)\cdot (7-2\omega )\mu}\right)^{1/2} \quad (15)$$
@@ -159,44 +168,50 @@ $$d_{12} = \left(\frac{15\cdot \sqrt{mk_bT/\pi}}{2\cdot (5-2\omega)\cdot (7-2\om
 $$\mu = \mu_{ref} \cdot \left(\frac{T}{T_o}\right)^{\omega} \quad (16)$$
 
 # Validation of RGTFun
-RGTFun is validated across four levels of fidelity: (1) a single-collision analytic benchmark by comparing Coulomb scattering angles against the exact classical solution; (2) a screened-potential benchmark by comparing ZBL scattering angles to the Biersack “Magic Formula” [@biersack_monte_1980]; (3) a cross-tool benchmark by comparing ZBL-based nuclear stopping cross sections to SRIM results for H–H [@ziegler_treatise_1985] [@ziegler_srim_2010]; and (4) an end-to-end macroscopic benchmark by comparing predicted argon viscosity and self-diffusion coefficients to NIST reference data [@kestin_equilibrium_1984].
+
+RGTFun is validated across four levels of fidelity: (1) a single-collision analytic benchmark by comparing Coulomb scattering angles against the exact classical solution; (2) a screened-potential benchmark by comparing ZBL scattering angles to the Biersack “Magic Formula” [@biersack_monte_1980]; (3) a cross-tool benchmark by comparing ZBL-based nuclear stopping cross sections to SRIM results for H–H [@ziegler_treatise_1985; @ziegler_srim_2010]; and (4) an end-to-end macroscopic benchmark by comparing predicted argon viscosity and self-diffusion coefficients to NIST reference data [@kestin_equilibrium_1984].
 
 The corresponding validation cases are:
 
 - Coulomb scattering angle: RGTFun vs exact classical solution.
 - ZBL scattering angle: RGTFun vs the Magic Formula [@biersack_monte_1980].
-- Nuclear stopping cross section (H in H): RGTFun (ZBL) vs SRIM [@ziegler_treatise_1985] [@ziegler_srim_2010].
+- Nuclear stopping cross section (H in H): RGTFun (ZBL) vs SRIM [@ziegler_treatise_1985; @ziegler_srim_2010].
 - Argon transport: viscosity and self-diffusion coefficients vs NIST reference data [@kestin_equilibrium_1984].
 
 ## Validation of Rutherford Scattering
+
 As a first step in validation, we compared the scattering angle data obtained from RGTFun for a H-H Coulomb potential to the exact scattering angles for a Coulomb potential [@goldstein_classical_2008]. This validation case was chosen because the Coulomb potential is one of the few potentials for which there exists an exact solution for the scattering angle (the other being the series solution for the inverse power law potential). This comparison is shown in \autoref{fig:coulcomp}. In the figure, it is clear that the RGTFun scattering angle calculation is in agreement with the analytical calculation of Rutherford scattering.
 
 ![Comparison of scattering angle vs impact parameter curves for three different CM energies for a H-H Coulomb potential. The exact scattering angle curves are plotted as solid lines and the RGTFun scattering angle data are plotted as circles. \label{fig:coulcomp}](./figures/CoulComp.png){ width=60% }
 
-
 ## Validation Against Magic Formula Scattering
-Next, we compared the scattering angle data obtained from RGTFun for a H-H ZBL potential to the scattering angle data obtained from the Magic Formula [@biersack_monte_1980]. This comparison is shown in \autoref{fig:magiccomp}. In the figure, it is clear that the RGTFun scattering angle calculations are in agreement with the Magic formula. However, RGTfun is slightly more accurate than the Magic Formula because it calculates the full scattering integral. RGTfun can also handle a wider range of intermolecular potentials as well as help calculate transport properties. 
 
-![Comparison of scattering angle vs impact parameter curves for three different CM energies for a H-H ZBL potential. The Magic Formula scattering angle curves are plotted as solid lines and the RGTFun scattering angle data are plotted as circles. RGTfun has the advantage of being slightly more accurate than the Magic algorithm as well as being able to handle a wider range of intermolecular potential types. \label{fig:magiccomp}](./figures/MagicComp.png){ width=60% }
+Next, we compared the scattering angle data obtained from RGTFun for a H-H ZBL potential to the scattering angle data obtained from the Magic Formula [@biersack_monte_1980]. This comparison is shown in \autoref{fig:magiccomp}. In the figure, it is clear that the RGTFun scattering angle calculations are in agreement with the Magic Formula. However, RGTFun is slightly more accurate than the Magic Formula because it calculates the full scattering integral. RGTFun can also handle a wider range of intermolecular potentials as well as help calculate transport properties.
+
+![Comparison of scattering angle vs impact parameter curves for three different CM energies for a H-H ZBL potential. The Magic Formula scattering angle curves are plotted as solid lines and the RGTFun scattering angle data are plotted as circles. RGTFun has the advantage of being slightly more accurate than the Magic algorithm as well as being able to handle a wider range of intermolecular potential types. \label{fig:magiccomp}](./figures/MagicComp.png){ width=60% }
 
 ## Validation Against SRIM Nuclear Stopping Cross Section
-Next, we compared the nuclear stopping cross section data obtained from RGTFun for a H-H ZBL potential to the nuclear stopping cross section data obtained from SRIM [@ziegler_srim_2010]. This comparison is shown in \autoref{fig:NSPcomp}. In the figure, it is clear that the RGTFun nuclear stopping cross sections  are in excellent agreement with the SRIM nuclear stopping cross sections. 
 
-![Comparison of RTGFun nuclear stopping cross section data to SRIM nuclear stopping cross section data for H into H. The SRIM data are plotted as solid lines and the RGTFun data are plotted as circles. \label{fig:NSPcomp}](./figures/NSPComp.png){ width=60% }
+Next, we compared the nuclear stopping cross section data obtained from RGTFun for a H-H ZBL potential to the nuclear stopping cross section data obtained from SRIM [@ziegler_srim_2010]. This comparison is shown in \autoref{fig:NSPcomp}. In the figure, it is clear that the RGTFun nuclear stopping cross sections are in excellent agreement with the SRIM nuclear stopping cross sections.
+
+![Comparison of RGTFun nuclear stopping cross section data to SRIM nuclear stopping cross section data for H into H. The SRIM data are plotted as solid lines and the RGTFun data are plotted as circles. \label{fig:NSPcomp}](./figures/NSPComp.png){ width=60% }
 
 ## Validation Against NIST Transport Coefficient Data
-Lastly, we compared the viscosity and self-diffusion coefficient data obtained from RGTFun for a 12-6 LJ potential of Ar to NIST transport coefficient data [@kestin_equilibrium_1984]. This comparison is shown in \autoref{fig:ViscosityComp} and \autoref{fig:DiffusionComp}. From the figures we see excellent agreement between the RGTFun and NIST data for low temperatures, with the curves slightly diverting in both cases for high temperatures. This diversion is not an error in the calculation, but instead due to the limitation of the Lennard-Jones potential. This is deduced as the code calculated the same numerical result as the work of [@khrapak_accurate_2014].
 
-![Comparison of RTGFun viscosity coefficient data to NIST viscosity coefficient data for Argon. The NIST data are plotted as a solid line and the RGTFun data are plotted as a dashed line. \label{fig:ViscosityComp}](./figures/ViscosityComp.png){ width=60% }
+Lastly, we compared the viscosity and self-diffusion coefficient data obtained from RGTFun for a 12-6 LJ potential of Ar to NIST transport coefficient data [@kestin_equilibrium_1984]. This comparison is shown in \autoref{fig:ViscosityComp} and \autoref{fig:DiffusionComp}. From the figures, we see excellent agreement between the RGTFun and NIST data at low temperatures, with the curves slightly deviating in both cases at high temperatures. This deviation is not an error in the calculation, but instead due to the limitation of the Lennard-Jones potential. This is deduced from the fact that the code calculated the same numerical result as the work of [@khrapak_accurate_2014].
 
-![Comparison of RTGFun self-diffusion coefficient data to NIST self-diffusion coeficient data for Argon. The NIST data are plotted as a solid line and the RGTFun data are plotted as a dashed line. \label{fig:DiffusionComp}](./figures/DiffusionComp.png){ width=60% }
+![Comparison of RGTFun viscosity coefficient data to NIST viscosity coefficient data for argon. The NIST data are plotted as a solid line and the RGTFun data are plotted as a dashed line. \label{fig:ViscosityComp}](./figures/ViscosityComp.png){ width=60% }
+
+![Comparison of RGTFun self-diffusion coefficient data to NIST self-diffusion coefficient data for argon. The NIST data are plotted as a solid line and the RGTFun data are plotted as a dashed line. \label{fig:DiffusionComp}](./figures/DiffusionComp.png){ width=60% }
 
 # Accessing RGTFun
- RGTFun can be downloaded from the public Github repository linked here:  
-https://github.com/nbb2/rgtfun/tree/paper  
- Please download all folders from the repository and ensure that they are all located within a *RGTFun* folder on your machine (it does not have to be called *RGTFun*). This is important because the app will ask you to select the RGTFun folder on your machine so it can establish the path to the *src* and *gui* folders. It does not matter where your *RGTFun* folder is located as long as it is a local folder, i.e. not in a cloud service. Once downloading the repository folders, you can start the app by opening the *gui.mlapp* file in the *gui* folder. 
+
+RGTFun can be downloaded from the public GitHub repository:  
+[https://github.com/nbb2/rgtfun](https://github.com/nbb2/rgtfun).
+Please download all folders from the repository and ensure that they are all located within an *RGTFun* folder on your machine (it does not have to be called *RGTFun*). This is important because the app will ask you to select the RGTFun folder on your machine so it can establish the path to the *src* and *gui* folders. It does not matter where your *RGTFun* folder is located as long as it is a local folder, i.e., not in a cloud service. After downloading the repository folders, you can start the app by opening the *gui.mlapp* file in the *gui* folder.
 
 # AI Usage Disclosure
+
 ChatGPT (OpenAI; model: GPT-5.2 Thinking) was used to assist with paper text (wording, structure, clarity) during drafting. Assistance was limited to editorial support: suggesting alternative phrasing and tightening paragraphs. We did not use AI to generate the core scientific/technical claims, results, or validation data. All AI-assisted suggestions were reviewed, edited, and validated by the authors. The authors made all core design decisions, verified technical accuracy, and take full responsibility for the content, originality, and correctness of the manuscript and associated software.
 
 # References

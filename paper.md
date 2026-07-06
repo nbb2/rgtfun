@@ -28,7 +28,7 @@ $\theta_c$ - center-of-mass scattering angle (radians)
 $r_o$ - distance of closest approach during a binary elastic collision (Å)  
 $r_m$ - location of the energy minimum of the intermolecular potential (Å)  
 $\epsilon$ - the depth of the attractive portion of the intermolecular potential (eV)  
-$D_{12}$ - the binary diffusion coefficient ($m^2\cdot s$)  
+$D_{12}$ - the binary diffusion coefficient ($m^2\cdot s^{-1}$)  
 $\mu$ - viscosity coefficient ($Pa \cdot s$)  
 $E_c$ - center-of-mass energy during a collision (eV)  
 $E_l$ - laboratory-frame energy (eV)  
@@ -88,7 +88,7 @@ The intermolecular potential describes the potential energy between two atoms or
 
 - Coulomb Potential
 
-$$U(r) = \frac{Z_1 Z_2 e^2}{ 4 \pi \epsilon_0 r}$$
+$$U(r) = \frac{Z_1 Z_2 q^2}{ 4 \pi \epsilon_0 r}$$
 
 - 12-6 Lennard-Jones Potential [@lennard1931cohesion]
 
@@ -102,7 +102,7 @@ where $$\sigma  = 3^{-1/8} r_{m} $$
 
 - ZBL Potential [@Ziegler19831861]
 
-$$U(r) = \frac{1}{4 \pi \epsilon_0} \frac{Z_2 Z_2 e^2}{r} \phi(r/a)$$
+$$U(r) = \frac{1}{4 \pi \epsilon_0} \frac{Z_1 Z_2 q^2}{r} \phi(r/a)$$
 where
 $$a = \frac{0.46850}{Z_1 ^{0.23} + Z_2 ^{0.23}}$$
 and
@@ -121,9 +121,9 @@ $$U(r) = a r^{-k}$$
 
 Once an intermolecular potential is known, the scattering angle can be determined as a function of impact energy and impact parameter. First, the distance of closest approach $r_o$ must be solved by finding the root of equation (1), where $E_c$ is the center-of-mass energy. Next, the scattering angle $\theta_c$ is solved by integrating equation (2).
 
-$$ 1 - \frac{V(r_o)}{E_c} - \frac{b^2}{r_o^2} = 0 \quad (1) $$
+$$ 1 - \frac{U(r_o)}{E_c} - \frac{b^2}{r_o^2} = 0 \quad (1) $$
 
-$$\theta_c = \pi - 2 \int_{r_o}^{\infty} \frac{bdr}{r^2 \sqrt{1 - \frac{V(r)}{E_c} - \frac{b^2}{r^2}}} \quad (2)$$
+$$\theta_c = \pi - 2 \int_{r_o}^{\infty} \frac{b \,d r}{r^2 \sqrt{1 - \frac{U(r)}{E_c} - \frac{b^2}{r^2}}} \quad (2)$$
 
 ## Cross Sections
 

@@ -123,7 +123,7 @@ Once an intermolecular potential is known, the scattering angle can be determine
 
 $$ 1 - \frac{U(r_o)}{E_c} - \frac{b^2}{r_o^2} = 0 \quad (1) $$
 
-$$\theta_c = \pi - 2 \int_{r_o}^{\infty} \frac{b \,d r}{r^2 \sqrt{1 - \frac{U(r)}{E_c} - \frac{b^2}{r^2}}} \quad (2)$$
+$$\theta_c = \pi - 2 \int_{r_o}^{\infty} \frac{b \, dr}{r^2 \sqrt{1 - \frac{U(r)}{E_c} - \frac{b^2}{r^2}}} \quad (2)$$
 
 ## Cross Sections
 

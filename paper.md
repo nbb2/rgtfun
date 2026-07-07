@@ -123,25 +123,26 @@ Once an intermolecular potential is known, the scattering angle can be determine
 
 $$ 1 - \frac{U(r_o)}{E_c} - \frac{b^2}{r_o^2} = 0 \quad (1) $$
 
-$$\theta_c = \pi - 2 \int_{r_o}^{\infty} \frac{b \, dr}{r^2 \sqrt{1 - \frac{U(r)}{E_c} - \frac{b^2}{r^2}}} \quad (2)$$
+$$\theta_c = \pi - 2 \int_{r_o}^{\infty} \frac{b \ dr}{r^2 \sqrt{1 - \frac{U(r)}{E_c} - \frac{b^2}{r^2}}} \quad (2)$$
 
 ## Cross Sections
 
 With a relationship between the impact parameter and scattering angle, cross section quantities can be defined. The differential cross section is defined by equation (3). The total cross section is defined by equation (4). It is important to note that the classical cross section is infinite. If a quantum mechanical approach is taken, then the total cross section becomes finite again. Instead of doing a quantum mechanical calculation, we can define a cutoff angle, $\theta_{cutoff}$, which has a corresponding cutoff impact parameter that makes a finite cross section according to equation (5). The cutoff angle can be chosen to either be the smallest measurable angle or the point at which classical scattering is no longer valid. The condition for the cutoff angle becoming invalid is given by equation (6) [@lane_calculations_1960]. Solving equation (6) requires a numerical root-finding procedure. The momentum cross section is given by equation (7) and the viscosity cross section is given by equation (8). These last two cross sections are needed to calculate continuum transport coefficients using Chapman-Enskog theory. The final cross section of importance is the stopping cross section, given by equation (9), which tells us how much energy is lost per unit travel per unit density.
+
 $$\sigma(\theta_c,E) = \left|\frac{b}{\sin(\theta_c)} \frac{db}{d\theta}\right| \quad (3) $$
 
-$$\sigma_T(E) = \int_{0}^{\pi} \sigma(\theta_c,E) 2\pi \sin(\theta_c) d \theta_c = 2\pi \int_{0}^{\infty}bdb  = \infty \quad (4)$$
+$$\sigma_T(E) = \int_{0}^{\pi} \sigma(\theta_c,E) 2\pi \sin(\theta_c) \ d \theta_c = 2\pi \int_{0}^{\infty} b \ db  = \infty \quad (4)$$
 
 $$
-\sigma_T(E)_{classical} = \int _{\theta _{cutoff}}^{\pi} \sigma(\theta_c,E) 2\pi \sin(\theta_c) d \theta_c = \int _{0}^{b _{cutoff}}bdb =
+\sigma_T(E)_{classical} = \int _{\theta _{cutoff}}^{\pi} \sigma(\theta_c,E) 2\pi \sin(\theta_c) \ d \theta_c = \int _{0}^{b _{cutoff}}b \ db =
 2 \pi b _{cutoff}^2 \quad (5)
 $$
 
 $$\theta_c(b_{cutoff}) - \frac{\hbar}{2\sqrt{2 E_c / m_r}\cdot  r_o(b_{cutoff},E_c)} = 0 \quad (6)$$
 
-$$\sigma_D(E) = \int_{0}^{\pi} (1 - \cos(\theta_c))\cdot \sigma(\theta_c,E) 2\pi \sin(\theta_c) d \theta_c = 2\pi \int_{0}^{\infty}(1 - \cos(\theta_c))\cdot bdb \quad (7) $$
+$$\sigma_D(E) = \int_{0}^{\pi} (1 - \cos(\theta_c))\cdot \sigma(\theta_c,E) 2\pi \sin(\theta_c) \ d \theta_c = 2\pi \int_{0}^{\infty}(1 - \cos(\theta_c))\cdot b \ db \quad (7) $$
 
-$$\sigma_{\mu}(E) = \int_{0}^{\pi} (1 - \cos^2(\theta_c))\cdot \sigma(\theta_c,E) 2\pi \sin(\theta_c) d \theta_c = 2\pi \int_{0}^{\infty}(1 - \cos^2(\theta_c))\cdot bdb \quad (8) $$
+$$\sigma_{\mu}(E) = \int_{0}^{\pi} (1 - \cos^2(\theta_c))\cdot \sigma(\theta_c,E) 2\pi \sin(\theta_c) \ d \theta_c = 2\pi \int_{0}^{\infty}(1 - \cos^2(\theta_c))\cdot b \ db \quad (8) $$
 
 $$S_n = \frac{1}{n} \frac{dE}{dx}= \gamma E \sigma_D \quad (9) $$
 where
@@ -154,18 +155,18 @@ $$D_{12} = \frac{3}{16} \cdot \left(\frac{2 \pi k_B T (m_1 + m_2)}{m_1 m_2}\righ
 
 $$\mu = \frac{5}{8} \cdot \left(\frac{2 \pi k_B T (m_1 m_2)}{(m_1 + m_2)}\right)^{1/2} \frac{1}{ \overline{\Omega^{(2,2)}}} \quad (11)$$
 
-$$\overline{\Omega_{12}^{(1,1)}} = \frac{1}{2} (k_B T)^{-3} \int_{0}^{\infty} \sigma_D E^2 e^{-\frac{E}{k_BT}}dE \quad (12) $$
+$$\overline{\Omega_{12}^{(1,1)}} = \frac{1}{2} (k_B T)^{-3} \int_{0}^{\infty} \sigma_D E^2 e^{-\frac{E}{k_BT}} \ dE \quad (12) $$
 
-$$\overline{\Omega^{(2,2)}} =  \frac{1}{2} (k_B T)^{-4} \int_{0}^{\infty} \sigma_{\mu} E^3 e^{-\frac{E}{k_BT}}dE \quad (13) $$
+$$\overline{\Omega^{(2,2)}} =  \frac{1}{2} (k_B T)^{-4} \int_{0}^{\infty} \sigma_{\mu} E^3 e^{-\frac{E}{k_BT}} \ dE \quad (13) $$
 
 ## DSMC Coefficients
 
 The most common DSMC collision rule is called the variable hard sphere (VHS) model. In this model, the relative velocity of two colliding particles determines an effective hard sphere potential and the particles collide according to the classical hard sphere scattering rule [@bird_dsmc_2013]. This rule is given by equation (14), where $d_{12}$ is the average of the two particles' diameters and is a function of the relative velocity according to equation (15). The value of $\omega$ in equation (15) is determined by fitting viscosity data over a limited range of temperatures that passes through a reference viscosity, $\mu_{ref}$, at a chosen reference temperature, $T_{ref}$, according to equation (16). Note that equation (14), the hard sphere scattering rule, is undefined at impact parameters larger than $d_{12}$, which defines its total cross section [@fratus_scattering_2015].
 $$b  = d_{12} \cdot \cos (\theta_c / 2) \quad (14)$$
 
-$$d_{12} = \left(\frac{15\cdot \sqrt{mk_bT/\pi}}{2\cdot (5-2\omega)\cdot (7-2\omega )\mu}\right)^{1/2} \quad (15)$$
+$$d_{12} = \left(\frac{15\cdot \sqrt{mk_BT/\pi}}{2\cdot (5-2\omega)\cdot (7-2\omega )\mu}\right)^{1/2} \quad (15)$$
 
-$$\mu = \mu_{ref} \cdot \left(\frac{T}{T_o}\right)^{\omega} \quad (16)$$
+$$\mu = \mu_{ref} \cdot \left(\frac{T}{T_{ref}}\right)^{\omega} \quad (16)$$
 
 # Validation of RGTFun
 
@@ -180,19 +181,19 @@ The corresponding validation cases are:
 
 ## Validation of Rutherford Scattering
 
-As a first step in validation, we compared the scattering angle data obtained from RGTFun for a H-H Coulomb potential to the exact scattering angles for a Coulomb potential [@goldstein_classical_2008]. This validation case was chosen because the Coulomb potential is one of the few potentials for which there exists an exact solution for the scattering angle (the other being the series solution for the inverse power law potential). This comparison is shown in \autoref{fig:coulcomp}. In the figure, it is clear that the RGTFun scattering angle calculation is in agreement with the analytical calculation of Rutherford scattering.
+As a first step in validation, we compared the scattering angle data obtained from RGTFun for an H-H Coulomb potential to the exact scattering angles for a Coulomb potential [@goldstein_classical_2008]. This validation case was chosen because the Coulomb potential is one of the few potentials for which there exists an exact solution for the scattering angle (the other being the series solution for the inverse power law potential). This comparison is shown in \autoref{fig:coulcomp}. In the figure, it is clear that the RGTFun scattering angle calculation is in agreement with the analytical calculation of Rutherford scattering.
 
-![Comparison of scattering angle vs impact parameter curves for three different CM energies for a H-H Coulomb potential. The exact scattering angle curves are plotted as solid lines and the RGTFun scattering angle data are plotted as circles. \label{fig:coulcomp}](./figures/CoulComp.png){ width=60% }
+![Comparison of scattering angle vs impact parameter curves for three different center-of-mass energies for an H-H Coulomb potential. The exact scattering angle curves are plotted as solid lines and the RGTFun scattering angle data are plotted as circles. \label{fig:coulcomp}](./figures/CoulComp.png){ width=60% }
 
 ## Validation Against Magic Formula Scattering
 
-Next, we compared the scattering angle data obtained from RGTFun for a H-H ZBL potential to the scattering angle data obtained from the Magic Formula [@biersack_monte_1980]. This comparison is shown in \autoref{fig:magiccomp}. In the figure, it is clear that the RGTFun scattering angle calculations are in agreement with the Magic Formula. However, RGTFun is slightly more accurate than the Magic Formula because it calculates the full scattering integral. RGTFun can also handle a wider range of intermolecular potentials as well as help calculate transport properties.
+Next, we compared the scattering angle data obtained from RGTFun for an H-H ZBL potential to the scattering angle data obtained from the Magic Formula [@biersack_monte_1980]. This comparison is shown in \autoref{fig:magiccomp}. In the figure, it is clear that the RGTFun scattering angle calculations are in agreement with the Magic Formula. However, RGTFun is slightly more accurate than the Magic Formula because it calculates the full scattering integral. RGTFun can also handle a wider range of intermolecular potentials as well as help calculate transport properties.
 
-![Comparison of scattering angle vs impact parameter curves for three different CM energies for a H-H ZBL potential. The Magic Formula scattering angle curves are plotted as solid lines and the RGTFun scattering angle data are plotted as circles. RGTFun has the advantage of being slightly more accurate than the Magic algorithm as well as being able to handle a wider range of intermolecular potential types. \label{fig:magiccomp}](./figures/MagicComp.png){ width=60% }
+![Comparison of scattering angle vs impact parameter curves for three different center-of-mass energies for an H-H ZBL potential. The Magic Formula scattering angle curves are plotted as solid lines and the RGTFun scattering angle data are plotted as circles. RGTFun has the advantage of being slightly more accurate than the Magic Formula as well as being able to handle a wider range of intermolecular potential types. \label{fig:magiccomp}](./figures/MagicComp.png){ width=60% }
 
 ## Validation Against SRIM Nuclear Stopping Cross Section
 
-Next, we compared the nuclear stopping cross section data obtained from RGTFun for a H-H ZBL potential to the nuclear stopping cross section data obtained from SRIM [@ziegler_srim_2010]. This comparison is shown in \autoref{fig:NSPcomp}. In the figure, it is clear that the RGTFun nuclear stopping cross sections are in excellent agreement with the SRIM nuclear stopping cross sections.
+Next, we compared the nuclear stopping cross section data obtained from RGTFun for an H-H ZBL potential to the nuclear stopping cross section data obtained from SRIM [@ziegler_srim_2010]. This comparison is shown in \autoref{fig:NSPcomp}. In the figure, it is clear that the RGTFun nuclear stopping cross sections are in excellent agreement with the SRIM nuclear stopping cross sections.
 
 ![Comparison of RGTFun nuclear stopping cross section data to SRIM nuclear stopping cross section data for H into H. The SRIM data are plotted as solid lines and the RGTFun data are plotted as circles. \label{fig:NSPcomp}](./figures/NSPComp.png){ width=60% }
 

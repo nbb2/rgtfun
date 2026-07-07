@@ -49,7 +49,7 @@ $N_a$ - Avogadro's number (atoms / mol)
 $P_{vap}$ - equilibrium vapor pressure (Pa)  
 $k_B$ - Boltzmann's constant ($J \cdot K^{-1}$)  
 $T$ - temperature (K)  
-$d_{12}$ - collision diameter used in the VHS collision rule for DSMC simulations  
+$d_{12}$ - collision diameter used in the VHS collision rule for DSMC simulations (Å) 
 $VHS$ - variable hard sphere, the collision rule used for the DSMC
 
 # Statement of Need

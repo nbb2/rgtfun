@@ -53,46 +53,7 @@ Lastly, we built a rigorous testing suite that utilizes MATLAB's internal unit t
 
 ## The Intermolecular Potential
 
-The intermolecular potential describes the potential energy between two atoms or molecules and is a function of their distance $r$. The actual shape of the potential energy surface of two molecules is unique to the pair and determined using quantum chemistry software [@valiev_nwchem_2010] or experiments [@amdur_experimental_1961; @amdur_repulsive_1949; @amdur_scattering_1954; @ruzic_total_1984]. RGTFun currently supports the following intermolecular potential models:
-
-- Coulomb Potential
-
-$$U(r) = \frac{Z_1 Z_2 q^2}{ 4 \pi \epsilon_0 r}$$
-
-- 12-6 Lennard-Jones Potential [@lennard1931cohesion]
-
-$$U(r) = 4 \epsilon \left[\left(\frac{\sigma}{r}\right)^{12} - \left(\frac{\sigma}{r}\right)^6\right]$$
-where $$\sigma  = 2^{-1/6} r_{m} $$
-
-- 12-4 Lennard-Jones Potential [@zhen1983calculation]
-
-$$U(r) = \frac{3^{3/2}}{2} \epsilon \left[\left(\frac{\sigma}{r}\right)^{12} - \left(\frac{\sigma}{r}\right)^4\right]$$
-where $$\sigma  = 3^{-1/8} r_{m} $$
-
-- ZBL Potential [@Ziegler19831861]
-
-$$U(r) = \frac{1}{4 \pi \epsilon_0} \frac{Z_1 Z_2 q^2}{r} \phi(r/a)$$
-where
-$$a = \frac{0.46850}{Z_1 ^{0.23} + Z_2 ^{0.23}}$$
-and
-$$\phi(x) = 0.18175 e^{-3.19980 x} + 0.50986 e^{-0.94229 x} + 0.28022 e^{-0.40290 x} + 0.02817 e^{-0.20162 x}$$
-
-- Morse Potential [@morse1929diatomic]
-
-$$U(r) = \epsilon \left( e^{-2 a (r-r_m)} -2 e^{- a (r-r_m)}\right)$$
-where $$a  = \sqrt{\frac{k}{2 \epsilon}}$$
-
-- Power Law Potential
-
-$$U(r) = a r^{-k}$$
-
-## Bimolecular Scattering
-
-Once an intermolecular potential is known, the scattering angle can be determined as a function of impact energy and impact parameter. First, the distance of closest approach $r_o$ must be solved by finding the root of equation (1), where $E_c$ is the center-of-mass energy. Next, the scattering angle $\theta_c$ is solved by integrating equation (2).
-
-$$ 1 - \frac{U(r_o)}{E_c} - \frac{b^2}{r_o^2} = 0 \quad (1) $$
-
-$$\theta_c = \pi - 2 \int_{r_o}^{\infty} \frac{b \ dr}{r^2 \sqrt{1 - \frac{U(r)}{E_c} - \frac{b^2}{r^2}}} \quad (2)$$
+The intermolecular potential $U(r)$ describes the potential energy between two atoms or molecules and is a function of their distance $r$. The actual shape of the potential energy surface of two molecules is unique to the pair and determined using quantum chemistry software [@valiev_nwchem_2010] or experiments [@amdur_experimental_1961; @amdur_repulsive_1949; @amdur_scattering_1954; @ruzic_total_1984]. 
 
 ## Cross Sections
 

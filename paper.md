@@ -21,37 +21,6 @@ date: 3 March 2025
 bibliography: paper.bib
 ---
 
-# Key Definitions
-
-$b$ - impact parameter (Å)  
-$\theta_c$ - center-of-mass scattering angle (radians)  
-$r_o$ - distance of closest approach during a binary elastic collision (Å)  
-$r_m$ - location of the energy minimum of the intermolecular potential (Å)  
-$\epsilon$ - the depth of the attractive portion of the intermolecular potential (eV)  
-$D_{12}$ - the binary diffusion coefficient ($m^2\cdot s^{-1}$)  
-$\mu$ - viscosity coefficient ($Pa \cdot s$)  
-$E_c$ - center-of-mass energy during a collision (eV)  
-$E_l$ - laboratory-frame energy (eV)  
-$\sigma(\theta_c)$ - the differential scattering cross section  
-$\sigma_T$ - total cross section ($m^2$)  
-$\sigma_D$ - the diffusion cross section, also called the momentum cross section ($m^2$)  
-$\sigma_\mu$ - the viscosity cross section ($m^2$)  
-$r$ - distance between the centers of two molecules (Å)  
-$U(r)$ - the intermolecular potential energy function of two molecules (eV)  
-$S$ - the stopping cross section ($eV\cdot m^2 \cdot molecule^{-1}$)  
-$\chi$ - $(\pi - \theta_c)/2$  
-$Z_1$ - number of protons of the first colliding molecule  
-$Z_2$ - number of protons of the second colliding molecule  
-$q$ - elementary charge ($C$)  
-$d_{ref}$ - the reference diameter of the collision model used in the variable hard sphere model incorporated into the direct simulation Monte Carlo method (Å)  
-$\omega$ - the DSMC viscosity temperature dependence parameter  
-$N_a$ - Avogadro's number (atoms / mol)  
-$P_{vap}$ - equilibrium vapor pressure (Pa)  
-$k_B$ - Boltzmann's constant ($J \cdot K^{-1}$)  
-$T$ - temperature (K)  
-$d_{12}$ - collision diameter used in the VHS collision rule for DSMC simulations (Å)  
-$VHS$ - variable hard sphere, the collision rule used for the DSMC
-
 # Statement of Need
 
 RGTFun is a MATLAB app designed for the efficient calculation of scattering integrals and transport coefficients of elastic collisions. While the solution for classical scattering, as well as its application for determining gas transport coefficients, has been known for over a century [@chapman_mathematical_1990], numerical codes are usually kept closed-source or are printed in textbooks in older programming languages such as Fortran [@maitland_intermolecular_1987]. To our knowledge, existing publicly available tools (e.g., MagnumPI for calculation of scattering angles and cross sections [@magnumpi]; SRIM for stopping power calculations [@ziegler_srim_2010]) offer limited support for user-adjustable interatomic potentials (especially across energy regimes) in end-to-end workflows that compute scattering integrals and the resulting transport coefficients.

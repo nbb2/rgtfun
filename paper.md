@@ -205,11 +205,6 @@ Lastly, we compared the viscosity and self-diffusion coefficient data obtained f
 
 ![Comparison of RGTFun self-diffusion coefficient data to NIST self-diffusion coefficient data for argon. The NIST data are plotted as a solid line and the RGTFun data are plotted as a dashed line. \label{fig:DiffusionComp}](./figures/DiffusionComp.png){ width=60% }
 
-# Accessing RGTFun
-
-RGTFun can be downloaded from the public GitHub repository:  
-[https://github.com/nbb2/rgtfun](https://github.com/nbb2/rgtfun).
-Please download all folders from the repository and ensure that they are all located within an *RGTFun* folder on your machine (it does not have to be called *RGTFun*). This is important because the app will ask you to select the RGTFun folder on your machine so it can establish the path to the *src* and *gui* folders. It does not matter where your *RGTFun* folder is located as long as it is a local folder, i.e., not in a cloud service. After downloading the repository folders, you can start the app by opening the *gui.mlapp* file in the *gui* folder.
 
 # AI Usage Disclosure
 

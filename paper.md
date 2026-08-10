@@ -170,14 +170,7 @@ $$\mu = \mu_{ref} \cdot \left(\frac{T}{T_{ref}}\right)^{\omega} \quad (16)$$
 
 # Validation of RGTFun
 
-RGTFun is validated across four levels of fidelity: (1) a single-collision analytic benchmark by comparing Coulomb scattering angles against the exact classical solution; (2) a screened-potential benchmark by comparing ZBL scattering angles to the Biersack “Magic Formula” [@biersack_monte_1980]; (3) a cross-tool benchmark by comparing ZBL-based nuclear stopping cross sections to SRIM results for H–H [@ziegler_treatise_1985; @ziegler_srim_2010]; and (4) an end-to-end macroscopic benchmark by comparing predicted argon viscosity and self-diffusion coefficients to NIST reference data [@kestin_equilibrium_1984].
-
-The corresponding validation cases are:
-
-- Coulomb scattering angle: RGTFun vs exact classical solution.
-- ZBL scattering angle: RGTFun vs the Magic Formula [@biersack_monte_1980].
-- Nuclear stopping cross section (H in H): RGTFun (ZBL) vs SRIM [@ziegler_treatise_1985; @ziegler_srim_2010].
-- Argon transport: viscosity and self-diffusion coefficients vs NIST reference data [@kestin_equilibrium_1984].
+RGTFun is validated across four levels of fidelity: (1) a single-collision analytic benchmark by comparing Coulomb scattering angles against the exact classical solution; (2) a screened-potential benchmark by comparing ZBL scattering angles to the Biersack “Magic Formula” [@biersack_monte_1980]; (3) a cross-tool benchmark by comparing ZBL-based nuclear stopping cross sections to SRIM results for H–H [@ziegler_treatise_1985; @ziegler_srim_2010]; and (4) an end-to-end macroscopic benchmark by comparing predicted argon viscosity and self-diffusion coefficients to NIST reference data [@kestin_equilibrium_1984]. SHown below are only two fo the four cases. The other two can be found in the Github repository. 
 
 ## Validation of Rutherford Scattering
 
@@ -185,21 +178,10 @@ As a first step in validation, we compared the scattering angle data obtained fr
 
 ![Comparison of scattering angle vs impact parameter curves for three different center-of-mass energies for an H-H Coulomb potential. The exact scattering angle curves are plotted as solid lines and the RGTFun scattering angle data are plotted as circles. \label{fig:coulcomp}](./figures/CoulComp.png){ width=60% }
 
-## Validation Against Magic Formula Scattering
-
-Next, we compared the scattering angle data obtained from RGTFun for an H-H ZBL potential to the scattering angle data obtained from the Magic Formula [@biersack_monte_1980]. This comparison is shown in \autoref{fig:magiccomp}. In the figure, it is clear that the RGTFun scattering angle calculations are in agreement with the Magic Formula. However, RGTFun is slightly more accurate than the Magic Formula because it calculates the full scattering integral. RGTFun can also handle a wider range of intermolecular potentials as well as help calculate transport properties.
-
-![Comparison of scattering angle vs impact parameter curves for three different center-of-mass energies for an H-H ZBL potential. The Magic Formula scattering angle curves are plotted as solid lines and the RGTFun scattering angle data are plotted as circles. RGTFun has the advantage of being slightly more accurate than the Magic Formula as well as being able to handle a wider range of intermolecular potential types. \label{fig:magiccomp}](./figures/MagicComp.png){ width=60% }
-
-## Validation Against SRIM Nuclear Stopping Cross Section
-
-Next, we compared the nuclear stopping cross section data obtained from RGTFun for an H-H ZBL potential to the nuclear stopping cross section data obtained from SRIM [@ziegler_srim_2010]. This comparison is shown in \autoref{fig:NSPcomp}. In the figure, it is clear that the RGTFun nuclear stopping cross sections are in excellent agreement with the SRIM nuclear stopping cross sections.
-
-![Comparison of RGTFun nuclear stopping cross section data to SRIM nuclear stopping cross section data for H into H. The SRIM data are plotted as solid lines and the RGTFun data are plotted as circles. \label{fig:NSPcomp}](./figures/NSPComp.png){ width=60% }
 
 ## Validation Against NIST Transport Coefficient Data
 
-Lastly, we compared the viscosity and self-diffusion coefficient data obtained from RGTFun for a 12-6 LJ potential of Ar to NIST transport coefficient data [@kestin_equilibrium_1984]. This comparison is shown in \autoref{fig:ViscosityComp} and \autoref{fig:DiffusionComp}. From the figures, we see excellent agreement between the RGTFun and NIST data at low temperatures, with the curves slightly deviating in both cases at high temperatures. This deviation is not an error in the calculation, but instead due to the limitation of the Lennard-Jones potential. This is deduced from the fact that the code calculated the same numerical result as the work of [@khrapak_accurate_2014].
+We compared the viscosity and self-diffusion coefficient data obtained from RGTFun for a 12-6 LJ potential of Ar to NIST transport coefficient data [@kestin_equilibrium_1984]. This comparison is shown in \autoref{fig:ViscosityComp} and \autoref{fig:DiffusionComp}. From the figures, we see excellent agreement between the RGTFun and NIST data at low temperatures, with the curves slightly deviating in both cases at high temperatures. This deviation is not an error in the calculation, but instead due to the limitation of the Lennard-Jones potential. This is deduced from the fact that the code calculated the same numerical result as the work of [@khrapak_accurate_2014].
 
 ![Comparison of RGTFun viscosity coefficient data to NIST viscosity coefficient data for argon. The NIST data are plotted as a solid line and the RGTFun data are plotted as a dashed line. \label{fig:ViscosityComp}](./figures/ViscosityComp.png){ width=60% }
 

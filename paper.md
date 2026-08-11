@@ -21,37 +21,6 @@ date: 3 March 2025
 bibliography: paper.bib
 ---
 
-# Key Definitions
-
-$b$ - impact parameter (Å)  
-$\theta_c$ - center-of-mass scattering angle (radians)  
-$r_o$ - distance of closest approach during a binary elastic collision (Å)  
-$r_m$ - location of the energy minimum of the intermolecular potential (Å)  
-$\epsilon$ - the depth of the attractive portion of the intermolecular potential (eV)  
-$D_{12}$ - the binary diffusion coefficient ($m^2\cdot s^{-1}$)  
-$\mu$ - viscosity coefficient ($Pa \cdot s$)  
-$E_c$ - center-of-mass energy during a collision (eV)  
-$E_l$ - laboratory-frame energy (eV)  
-$\sigma(\theta_c)$ - the differential scattering cross section  
-$\sigma_T$ - total cross section ($m^2$)  
-$\sigma_D$ - the diffusion cross section, also called the momentum cross section ($m^2$)  
-$\sigma_\mu$ - the viscosity cross section ($m^2$)  
-$r$ - distance between the centers of two molecules (Å)  
-$U(r)$ - the intermolecular potential energy function of two molecules (eV)  
-$S$ - the stopping cross section ($eV\cdot m^2 \cdot molecule^{-1}$)  
-$\chi$ - $(\pi - \theta_c)/2$  
-$Z_1$ - number of protons of the first colliding molecule  
-$Z_2$ - number of protons of the second colliding molecule  
-$q$ - elementary charge ($C$)  
-$d_{ref}$ - the reference diameter of the collision model used in the variable hard sphere model incorporated into the direct simulation Monte Carlo method (Å)  
-$\omega$ - the DSMC viscosity temperature dependence parameter  
-$N_a$ - Avogadro's number (atoms / mol)  
-$P_{vap}$ - equilibrium vapor pressure (Pa)  
-$k_B$ - Boltzmann's constant ($J \cdot K^{-1}$)  
-$T$ - temperature (K)  
-$d_{12}$ - collision diameter used in the VHS collision rule for DSMC simulations (Å)  
-$VHS$ - variable hard sphere, the collision rule used for the DSMC
-
 # Statement of Need
 
 RGTFun is a MATLAB app designed for the efficient calculation of scattering integrals and transport coefficients of elastic collisions. While the solution for classical scattering, as well as its application for determining gas transport coefficients, has been known for over a century [@chapman_mathematical_1990], numerical codes are usually kept closed-source or are printed in textbooks in older programming languages such as Fortran [@maitland_intermolecular_1987]. To our knowledge, existing publicly available tools (e.g., MagnumPI for calculation of scattering angles and cross sections [@magnumpi]; SRIM for stopping power calculations [@ziegler_srim_2010]) offer limited support for user-adjustable interatomic potentials (especially across energy regimes) in end-to-end workflows that compute scattering integrals and the resulting transport coefficients.
@@ -84,46 +53,7 @@ Lastly, we built a rigorous testing suite that utilizes MATLAB's internal unit t
 
 ## The Intermolecular Potential
 
-The intermolecular potential describes the potential energy between two atoms or molecules and is a function of their distance $r$. The actual shape of the potential energy surface of two molecules is unique to the pair and determined using quantum chemistry software [@valiev_nwchem_2010] or experiments [@amdur_experimental_1961; @amdur_repulsive_1949; @amdur_scattering_1954; @ruzic_total_1984]. RGTFun currently supports the following intermolecular potential models:
-
-- Coulomb Potential
-
-$$U(r) = \frac{Z_1 Z_2 q^2}{ 4 \pi \epsilon_0 r}$$
-
-- 12-6 Lennard-Jones Potential [@lennard1931cohesion]
-
-$$U(r) = 4 \epsilon \left[\left(\frac{\sigma}{r}\right)^{12} - \left(\frac{\sigma}{r}\right)^6\right]$$
-where $$\sigma  = 2^{-1/6} r_{m} $$
-
-- 12-4 Lennard-Jones Potential [@zhen1983calculation]
-
-$$U(r) = \frac{3^{3/2}}{2} \epsilon \left[\left(\frac{\sigma}{r}\right)^{12} - \left(\frac{\sigma}{r}\right)^4\right]$$
-where $$\sigma  = 3^{-1/8} r_{m} $$
-
-- ZBL Potential [@Ziegler19831861]
-
-$$U(r) = \frac{1}{4 \pi \epsilon_0} \frac{Z_1 Z_2 q^2}{r} \phi(r/a)$$
-where
-$$a = \frac{0.46850}{Z_1 ^{0.23} + Z_2 ^{0.23}}$$
-and
-$$\phi(x) = 0.18175 e^{-3.19980 x} + 0.50986 e^{-0.94229 x} + 0.28022 e^{-0.40290 x} + 0.02817 e^{-0.20162 x}$$
-
-- Morse Potential [@morse1929diatomic]
-
-$$U(r) = \epsilon \left( e^{-2 a (r-r_m)} -2 e^{- a (r-r_m)}\right)$$
-where $$a  = \sqrt{\frac{k}{2 \epsilon}}$$
-
-- Power Law Potential
-
-$$U(r) = a r^{-k}$$
-
-## Bimolecular Scattering
-
-Once an intermolecular potential is known, the scattering angle can be determined as a function of impact energy and impact parameter. First, the distance of closest approach $r_o$ must be solved by finding the root of equation (1), where $E_c$ is the center-of-mass energy. Next, the scattering angle $\theta_c$ is solved by integrating equation (2).
-
-$$ 1 - \frac{U(r_o)}{E_c} - \frac{b^2}{r_o^2} = 0 \quad (1) $$
-
-$$\theta_c = \pi - 2 \int_{r_o}^{\infty} \frac{b \ dr}{r^2 \sqrt{1 - \frac{U(r)}{E_c} - \frac{b^2}{r^2}}} \quad (2)$$
+The intermolecular potential $U(r)$ describes the potential energy between two atoms or molecules and is a function of their distance $r$. The actual shape of the potential energy surface of two molecules is unique to the pair and determined using quantum chemistry software [@valiev_nwchem_2010] or experiments [@amdur_experimental_1961; @amdur_repulsive_1949; @amdur_scattering_1954; @ruzic_total_1984]. 
 
 ## Cross Sections
 
@@ -170,7 +100,7 @@ $$\mu = \mu_{ref} \cdot \left(\frac{T}{T_{ref}}\right)^{\omega} \quad (16)$$
 
 # Validation of RGTFun
 
-RGTFun is validated across four levels of fidelity: (1) a single-collision analytic benchmark by comparing Coulomb scattering angles against the exact classical solution; (2) a screened-potential benchmark by comparing ZBL scattering angles to the Biersack “Magic Formula” [@biersack_monte_1980]; (3) a cross-tool benchmark by comparing ZBL-based nuclear stopping cross sections to SRIM results for H–H [@ziegler_treatise_1985; @ziegler_srim_2010]; and (4) an end-to-end macroscopic benchmark by comparing predicted argon viscosity and self-diffusion coefficients to NIST reference data [@kestin_equilibrium_1984]. SHown below are only two fo the four cases. The other two can be found in the Github repository. 
+RGTFun is validated across four levels of fidelity: (1) a single-collision analytic benchmark by comparing Coulomb scattering angles against the exact classical solution; (2) a screened-potential benchmark by comparing ZBL scattering angles to the Biersack “Magic Formula” [@biersack_monte_1980]; (3) a cross-tool benchmark by comparing ZBL-based nuclear stopping cross sections to SRIM results for H–H [@ziegler_treatise_1985; @ziegler_srim_2010]; and (4) an end-to-end macroscopic benchmark by comparing predicted argon viscosity and self-diffusion coefficients to NIST reference data [@kestin_equilibrium_1984]. SHown below are only two fo the four cases. The other two can be found in the GitHub repository. 
 
 ## Validation of Rutherford Scattering
 
@@ -181,7 +111,7 @@ As a first step in validation, we compared the scattering angle data obtained fr
 
 ## Validation Against NIST Transport Coefficient Data
 
-We compared the viscosity and self-diffusion coefficient data obtained from RGTFun for a 12-6 LJ potential of Ar to NIST transport coefficient data [@kestin_equilibrium_1984]. This comparison is shown in \autoref{fig:ViscosityComp} and \autoref{fig:DiffusionComp}. From the figures, we see excellent agreement between the RGTFun and NIST data at low temperatures, with the curves slightly deviating in both cases at high temperatures. This deviation is not an error in the calculation, but instead due to the limitation of the Lennard-Jones potential. This is deduced from the fact that the code calculated the same numerical result as the work of [@khrapak_accurate_2014].
+We compared the viscosity and self-diffusion coefficient data obtained from RGTFun for a 12-6 LJ potential of Ar to NIST transport coefficient data [@kestin_equilibrium_1984]. This comparison is shown in \autoref{fig:ViscosityComp} and \autoref{fig:DiffusionComp}. From the figures, we see excellent agreement between the RGTFun and NIST data at low temperatures, with the curves slightly deviating in both cases at high temperatures. This deviation is not an error in the calculation, but instead due to the limitation of the Lennard-Jones potential. This is deduced from the fact that the code calculated the same numerical result as the work of @khrapak_accurate_2014.
 
 ![Comparison of RGTFun viscosity coefficient data to NIST viscosity coefficient data for argon. The NIST data are plotted as a solid line and the RGTFun data are plotted as a dashed line. \label{fig:ViscosityComp}](./figures/ViscosityComp.png){ width=60% }
 

@@ -111,7 +111,7 @@ As a first step in validation, we compared the scattering angle data obtained fr
 
 ## Validation Against NIST Transport Coefficient Data
 
-We compared the viscosity and self-diffusion coefficient data obtained from RGTFun for a 12-6 LJ potential of Ar to NIST transport coefficient data [@kestin_equilibrium_1984]. This comparison is shown in \autoref{fig:ViscosityComp} and \autoref{fig:DiffusionComp}. From the figures, we see excellent agreement between the RGTFun and NIST data at low temperatures, with the curves slightly deviating in both cases at high temperatures. This deviation is not an error in the calculation, but instead due to the limitation of the Lennard-Jones potential. This is deduced from the fact that the code calculated the same numerical result as the work of [@khrapak_accurate_2014].
+We compared the viscosity and self-diffusion coefficient data obtained from RGTFun for a 12-6 LJ potential of Ar to NIST transport coefficient data [@kestin_equilibrium_1984]. This comparison is shown in \autoref{fig:ViscosityComp} and \autoref{fig:DiffusionComp}. From the figures, we see excellent agreement between the RGTFun and NIST data at low temperatures, with the curves slightly deviating in both cases at high temperatures. This deviation is not an error in the calculation, but instead due to the limitation of the Lennard-Jones potential. This is deduced from the fact that the code calculated the same numerical result as the work of @khrapak_accurate_2014.
 
 ![Comparison of RGTFun viscosity coefficient data to NIST viscosity coefficient data for argon. The NIST data are plotted as a solid line and the RGTFun data are plotted as a dashed line. \label{fig:ViscosityComp}](./figures/ViscosityComp.png){ width=60% }
 
